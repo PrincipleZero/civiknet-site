@@ -1,0 +1,20 @@
+section.first {
+  padding-top: 10rem;
+}
+
+.solutions-grid {
+  display: grid;
+  --cols: 3;
+  grid-template-columns: repeat(var(--cols), calc((100% - ((var(--cols) - 1) * 2rem)) / var(--cols)));
+  gap: 3.6rem 2rem;
+}
+
+@media all and (max-width: 950px) {
+  .solutions-grid {
+    --cols: 2;
+  }
+}
+
+.solutions-grid .media {
+  margin-bottom: 1rem;
+}
