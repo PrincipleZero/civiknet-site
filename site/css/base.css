@@ -1,3 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@400..700&display=swap');
+
+/* CivikNet typography scale — Geist weight hierarchy + Geist Mono for data/eyebrows */
+h1, .display, .home-hero-h1,
+.page-hero h1, .first h1 { font-weight: 550 !important; font-variation-settings: "wght" 550 !important; letter-spacing: -0.02em; }
+h2, h3, .h2, .h3 { font-weight: 500 !important; font-variation-settings: "wght" 500 !important; letter-spacing: -0.01em; }
+.btn { font-weight: 500 !important; font-variation-settings: "wght" 500 !important; }
+header nav a, .site-header-wordmark { font-weight: 450; }
+.site-header-wordmark { width: auto !important; height: auto !important; }
+.site-header-wordmark img { height: 2.8rem !important; width: auto !important; max-width: none !important; display: block !important; }
+
+/* Scrolled state — solid blurred bar */
+.site-header.scrolled {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: saturate(160%) blur(12px);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+}
+.site-header:not(.scrolled) {
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+}
+.site-header { transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
+
+/* Center the main nav in the header */
+@media (min-width: 951px) {
+  .site-header-inner {
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr !important;
+    align-items: center !important;
+    gap: 2rem;
+  }
+  .site-header-inner > .site-header-wordmark { grid-column: 1; justify-self: start; }
+  .site-header-inner > nav { grid-column: 2; justify-self: center; }
+  .site-header-inner > .header-right { grid-column: 3; justify-self: end; }
+}
+
+/* Geist Mono for data, stats, technical labels */
+.eyebrow,
+.eyebrow strong,
+.roi-stat .h2,
+.flex-col p strong,
+.stat-card .h1,
+code, .mono { font-family: "Geist Mono", ui-monospace, monospace !important; }
+.eyebrow,
+.eyebrow strong { font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; font-size: 1.3rem; }
+.roi-stat .h2 { font-weight: 500; font-feature-settings: "tnum" 1, "lnum" 1; letter-spacing: -0.01em; }
+.flex-col p strong { font-weight: 500; font-feature-settings: "tnum" 1, "lnum" 1; }
+
 html {
   font-size: 10px;
   margin: 0;
@@ -9,7 +59,7 @@ body {
     "opsz" 18,
     "wght" 400;
   line-height: 1.4em;
-  font-family: "Sana Sans", sans-serif;
+  font-family: "Geist", sans-serif;
   margin: 0;
   width: 100%;
   min-height: 100%;
@@ -43,18 +93,18 @@ body.noscroll {
 }
 
 @font-face {
-  font-family: "Sana Sans";
+  font-family: "Geist";
   src: url("../fonts/SanaSans-Variable.woff2") format("woff2-variations");
   font-weight: 400 700;
   /* ascent-override: 100%; */
 }
 @font-face {
-  font-family: "SanaSerif";
+  font-family: "Geist";
   src: url("../fonts/SanaSerifTestligatur-Regular.woff2") format("woff2");
   font-weight: 400;
 }
 @font-face {
-  font-family: "SanaSerif";
+  font-family: "Geist";
   src: url("../fonts/SanaSerif05-Italic.woff2") format("woff2");
   font-weight: 400;
   font-style: italic;
@@ -298,7 +348,7 @@ a {
   margin: 0;
 }
 .serif {
-  font-family: "SanaSerif";
+  font-family: "Geist";
 }
 .serif i {
   font-style: italic;
@@ -309,7 +359,7 @@ img,
 }
 
 body {
-  font-family: "Sana Sans", sans-serif;
+  font-family: "Geist", sans-serif;
 }
 
 .flow > * + * {
@@ -363,7 +413,7 @@ body {
 
 h1,
 .h1 {
-  font-family: "SanaSerif", serif;
+  font-family: "Geist", serif;
   font-size: 7.2rem;
   font-weight: 400;
   line-height: 100%;
@@ -373,7 +423,7 @@ h1,
 h1.alt,
 .h1-alt {
   font-size: 4.8rem;
-  font-family: "Sana Sans", sans-serif;
+  font-family: "Geist", sans-serif;
   letter-spacing: 0;
   font-variation-settings:
     "opsz" 24,
@@ -389,7 +439,7 @@ h1.alt,
 
 h2,
 .h2 {
-  font-family: "SanaSerif", serif;
+  font-family: "Geist", serif;
   font-size: 4rem;
   line-height: 107%;
   letter-spacing: -0.005em;
@@ -404,7 +454,7 @@ h2,
     letter-spacing: -0.01em;
   }
   .small-h2 {
-    font-family: "SanaSerif", serif;
+    font-family: "Geist", serif;
     font-size: 3.4rem;
     line-height: 100%;
     letter-spacing: -0.01em;
@@ -414,7 +464,7 @@ h2,
 
 h3,
 .h3 {
-  font-family: "Sana Sans", sans-serif;
+  font-family: "Geist", sans-serif;
   font-size: 2.2rem;
   line-height: 120%;
   letter-spacing: 0;
@@ -429,7 +479,7 @@ a.h3 {
 
 h4,
 .h4 {
-  font-family: "SanaSerif", serif;
+  font-family: "Geist", serif;
   font-size: 2.8rem;
   line-height: 115%;
   letter-spacing: 0;
@@ -499,7 +549,7 @@ p,
 ul:not(.detail):not(.type-small) li,
 ol:not(.detail) li,
 body {
-  font-family: "Sana Sans", sans-serif;
+  font-family: "Geist", sans-serif;
   font-size: 1.6rem;
   line-height: 140%;
   letter-spacing: -0.01em;
@@ -523,12 +573,12 @@ body {
 }
 
 .type-serif {
-  font-family: "SanaSerif", serif;
+  font-family: "Geist", serif;
 }
 
 .detail,
 details p {
-  font-family: "Sana Sans", sans-serif;
+  font-family: "Geist", sans-serif;
   font-size: 1.4rem;
   line-height: 140%;
   letter-spacing: -0.01em;
@@ -2066,7 +2116,7 @@ section:has(.quote-slider) {
 /* NEW TYPE */
 
 .type-headline-01 {
-  font-family: "Sana Sans";
+  font-family: "Geist";
   font-style: normal;
   font-size: 5.6rem;
   font-variation-settings:
@@ -2077,7 +2127,7 @@ section:has(.quote-slider) {
 }
 
 .type-heading-medium {
-  font-family: "SanaSerif", serif;
+  font-family: "Geist", serif;
   font-style: normal;
   font-weight: 400;
   font-size: 5.6rem;
@@ -2086,7 +2136,7 @@ section:has(.quote-slider) {
 }
 
 .type-heading-small {
-  font-family: "Sana Sans";
+  font-family: "Geist";
   font-style: normal;
   font-weight: 450;
   font-size: 3.2rem;
@@ -2098,7 +2148,7 @@ section:has(.quote-slider) {
 }
 
 .type-headline-02 {
-  font-family: "Sana Sans";
+  font-family: "Geist";
   font-style: normal;
   font-size: 3.2rem;
   font-variation-settings:
@@ -2127,7 +2177,7 @@ section:has(.quote-slider) {
 }
 
 .type-body-01 {
-  font-family: "Sana Sans";
+  font-family: "Geist";
   font-style: normal;
   font-size: 1.6rem;
   font-variation-settings:
@@ -2143,7 +2193,7 @@ section:has(.quote-slider) {
 }
 
 .type-body-big {
-  font-family: "Sana Sans";
+  font-family: "Geist";
   font-style: normal;
   font-size: 1.8rem;
   font-variation-settings:
@@ -2163,7 +2213,7 @@ section:has(.quote-slider) {
 }
 
 .type-body-small {
-  font-family: "Sana Sans";
+  font-family: "Geist";
   font-style: normal;
   font-size: 1.6rem;
   font-variation-settings:
@@ -2173,7 +2223,7 @@ section:has(.quote-slider) {
 }
 
 .type-subhead-01 {
-  font-family: "Sana Sans";
+  font-family: "Geist";
   font-style: normal;
   font-size: 1.6rem;
   font-variation-settings:
@@ -2183,7 +2233,7 @@ section:has(.quote-slider) {
 }
 
 .case-study-content p strong {
-  font-family: "Sana Sans";
+  font-family: "Geist";
   font-style: normal;
   font-size: 1.6rem;
   font-variation-settings:
@@ -2193,7 +2243,7 @@ section:has(.quote-slider) {
 }
 
 .type-subheading-large {
-  font-family: "Sana Sans";
+  font-family: "Geist";
   font-weight: 450;
   font-size: 24px;
   line-height: 117%;
@@ -2203,7 +2253,7 @@ section:has(.quote-slider) {
     "wght" 450;
 }
 .type-subheading-big {
-  font-family: "Sana Sans";
+  font-family: "Geist";
   font-weight: 500;
   font-size: 18px;
   line-height: 133%;
@@ -2223,7 +2273,7 @@ section:has(.quote-slider) {
 }
 
 .type-subhead-02 {
-  font-family: "Sana Sans";
+  font-family: "Geist";
   font-style: normal;
   font-weight: 400;
   font-size: 24px;
@@ -2232,7 +2282,7 @@ section:has(.quote-slider) {
 }
 
 .type-quote-01 {
-  font-family: "SanaSerif";
+  font-family: "Geist";
   font-style: normal;
   font-weight: 400;
   font-size: 4rem;
@@ -2247,7 +2297,7 @@ section:has(.quote-slider) {
 }
 
 .type-detail-01 {
-  font-family: "Sana Sans";
+  font-family: "Geist";
   font-style: normal;
   font-size: 1.4rem;
   font-variation-settings:

@@ -2,8 +2,8 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "sanalabs-serve",
-      "runtimeExecutable": "/Users/rbii/.bun/bin/bun",
+      "name": "civiknet",
+      "runtimeExecutable": "node",
       "runtimeArgs": ["serve.js"],
       "port": 4173
     }
