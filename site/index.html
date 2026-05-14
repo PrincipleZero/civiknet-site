@@ -707,15 +707,18 @@
 
     let saveScrollPos = 0;
 
-    if (isTouch) {
-      document.querySelector(".book-intro-dropdown .top a").addEventListener("click", (e) => {
-        document.querySelector(".book-intro-dropdown .bottom").classList.toggle("show");
-        e.preventDefault();
-      });
-    } else {
-      document.querySelector(".book-intro-dropdown .top a").addEventListener("click", (e) => {
-        e.preventDefault();
-      });
+    const bookIntroTopLink = document.querySelector(".book-intro-dropdown .top a");
+    if (bookIntroTopLink) {
+      if (isTouch) {
+        bookIntroTopLink.addEventListener("click", (e) => {
+          document.querySelector(".book-intro-dropdown .bottom").classList.toggle("show");
+          e.preventDefault();
+        });
+      } else {
+        bookIntroTopLink.addEventListener("click", (e) => {
+          e.preventDefault();
+        });
+      }
     }
     document.querySelectorAll("li.has-sub-menu > a").forEach((hasSubMenuLink) => {
       hasSubMenuLink.addEventListener("click", (e) => {
@@ -850,20 +853,15 @@
         <span class="fade-8">Privacy by architecture — coordination without identification</span>
       </div>
     </div>
-    <div class="home-product-card-devices">
-      <div class="device device-1 trigger-animation">
-        <img src="https://sana-labs.b-cdn.net/home/sana-learn-home-01.webp" alt="Device 01" width="2226" height="1720">
-      </div>
-      <div class="device device-2 trigger-animation">
-        <img src="https://sana-labs.b-cdn.net/home/sana-learn-home-02.webp" alt="Device 02" width="2214" height="1558">
-      </div>
+    <div class="home-product-card-display" style="margin: 6.4rem -4.3rem 6.4rem;">
+      <img src="/img/home/civikaccess-mockup.png" alt="CivikAccess display" width="1460" height="1078" style="display: block; width: 100%; height: auto; border-radius: 2.4rem;">
     </div>
   </div>
   <div class="home-product-card white" style="background: #141414; padding-bottom: 0">
     <div class="home-product-card-content flow center">
-      <p class="h2">The Access Reliability Sprint</p>
-      <p class="fade-8" style="max-width: 42rem">90 days. Fixed scope. Fixed price. We map your pathways with your team and your partners. We define who owns each handoff. We turn on the monitoring before we leave. By day 90, your team is working a new way — not just looking at a new tool.</p>
-      <a href="/civikaccess/pricing" class="btn bg-orange black">Explore the Sprint</a>
+      <p class="h2">Reliable Access, designed for intelligence.</p>
+      <p class="fade-8" style="max-width: 48rem">AI is already making decisions about families in public services — working from fragmented records no one fully sees. Reliable Access is the infrastructure that has to exist first. A verifiable, human-accountable picture of every pathway. The layer the system &#8212; and the AI built on top of it &#8212; can be trusted to operate on.</p>
+      <a href="/civikaccess" class="btn bg-orange black">Learn more</a>
     </div>
     <div class="home-product-card-icons type-small">
       <div class="home-product-card-icon">
@@ -871,15 +869,15 @@
           <path d="M16.665 15.9165C17.0791 15.9165 17.4149 16.2525 17.415 16.6665C17.415 17.0807 17.0792 17.4165 16.665 17.4165H3.33203C2.91782 17.4165 2.58203 17.0807 2.58203 16.6665C2.5822 16.2524 2.91792 15.9165 3.33203 15.9165H16.665Z" fill="white"></path>
           <path fill-rule="evenodd" clip-rule="evenodd" d="M9.83789 3.41846C10.7657 2.49073 12.2695 2.49072 13.1973 3.41846C14.125 4.34627 14.125 5.85003 13.1973 6.77783L7.07812 12.8979C6.86163 13.1144 6.58656 13.264 6.28711 13.3276L3.61133 13.894C3.3631 13.9466 3.10426 13.8703 2.9248 13.6909C2.74539 13.5115 2.66908 13.2526 2.72168 13.0044L3.28809 10.3286C3.35168 10.0291 3.5013 9.75411 3.71777 9.5376L9.83789 3.41846ZM12.1367 4.479C11.7947 4.13705 11.2405 4.13707 10.8984 4.479L4.82129 10.5542L6.06055 11.7935L12.1367 5.71729C12.4786 5.37527 12.4786 4.82104 12.1367 4.479Z" fill="white"></path>
         </svg>
-        <strong>Map</strong>
-        <span class="fade-8">Pathways defined, partner network aligned</span>
+        <strong>Pathway</strong>
+        <span class="fade-8">One shared object the whole network works from</span>
       </div>
       <div class="home-product-card-icon">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M10 4.46309C12.225 2.86833 15.2106 2.73355 17.585 4.17403L17.8887 4.35762C18.1127 4.49354 18.2499 4.73722 18.25 4.99923V15.8322C18.25 16.1008 18.1059 16.3489 17.873 16.4826C17.6402 16.6162 17.3539 16.6159 17.1221 16.4807L16.5898 16.1701C14.6398 15.0318 12.1769 15.2886 10.5039 16.8049C10.4327 16.8694 10.3503 16.9158 10.2637 16.9484C10.1824 16.9792 10.0984 16.9966 10.0137 16.9983C10.0036 16.9984 9.99352 16.9975 9.9834 16.9973C9.95857 16.9967 9.93381 16.9963 9.90918 16.9934C9.90095 16.9924 9.89297 16.9898 9.88477 16.9885C9.82115 16.9786 9.75878 16.9618 9.69922 16.9358L9.69629 16.9348C9.68989 16.9319 9.68403 16.928 9.67773 16.925C9.6261 16.9004 9.57608 16.8709 9.53027 16.8342L9.48633 16.799C7.59486 15.2813 4.94368 15.1453 2.90723 16.4621C2.67658 16.6113 2.38289 16.6227 2.1416 16.4914C1.90037 16.3601 1.75 16.1069 1.75 15.8322V4.99923C1.75011 4.73722 1.88731 4.49354 2.11133 4.35762L2.41504 4.17403C4.78936 2.73355 7.77499 2.86833 10 4.46309ZM9.25 5.77364C7.51508 4.45393 5.14246 4.30538 3.25 5.42208V14.5969C5.19036 13.7975 7.3906 13.8953 9.25 14.8615V5.77364ZM16.75 5.42208C14.8575 4.30538 12.4849 4.45393 10.75 5.77364V14.7971C12.5844 13.7827 14.8135 13.6825 16.75 14.5666V5.42208Z" fill="white"></path>
         </svg>
-        <strong>Own</strong>
-        <span class="fade-8">Clear ownership and handoff at every step</span>
+        <strong>Ownership</strong>
+        <span class="fade-8">A named human accountable at every handoff</span>
       </div>
       <div class="home-product-card-icon">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -901,15 +899,15 @@
             </clipPath>
           </defs>
         </svg>
-        <strong>Measure</strong>
-        <span class="fade-8">Reliability tracked by population, not throughput</span>
+        <strong>Record</strong>
+        <span class="fade-8">Every step traceable. Every decision examinable.</span>
       </div>
       <div class="home-product-card-icon">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M3.33203 2.58301C3.74624 2.58301 4.08203 2.91879 4.08203 3.33301V11.2871L7.12988 8.34277C7.73531 7.75794 8.69242 7.7497 9.30859 8.32324L11.7354 10.5811C11.7677 10.611 11.8178 10.6105 11.8496 10.5801L14.9258 7.62988H13.582C13.1679 7.62986 12.8322 7.29397 12.832 6.87988C12.832 6.46568 13.1678 6.1299 13.582 6.12988H17.4258V9.97363C17.4256 10.3876 17.0898 10.7236 16.6758 10.7236C16.2617 10.7236 15.926 10.3877 15.9258 9.97363V8.74805L12.8877 11.6631C12.2818 12.2439 11.3274 12.2506 10.7129 11.6787L8.28711 9.4209C8.25468 9.39071 8.20374 9.39109 8.17188 9.42188L4.08203 13.373V15.916H16.665C17.0791 15.916 17.4149 16.252 17.415 16.666C17.415 17.0802 17.0793 17.416 16.665 17.416H2.58203V3.33301C2.58203 2.91879 2.91782 2.58301 3.33203 2.58301Z" fill="white"></path>
         </svg>
-        <strong>Sustain</strong>
-        <span class="fade-8">Operating model that lasts beyond the engagement</span>
+        <strong>Foundation</strong>
+        <span class="fade-8">The verifiable layer responsible AI can be built on</span>
       </div>
     </div>
     <div class="sana-device trigger-animation">
