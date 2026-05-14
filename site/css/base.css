@@ -23,6 +23,8 @@ header nav a, .site-header-wordmark { font-weight: 450; }
 }
 .site-header { transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease; }
 
+/* Default section padding overrides applied via body.page selector for sufficient specificity — see line ~4750 */
+
 /* Center the main nav in the header */
 @media (min-width: 951px) {
   .site-header-inner {
@@ -4745,8 +4747,13 @@ body.careers-page.modal-open {
 }
 
 .page section {
-  padding-block: 4rem;
+  padding-block: 6.4rem;
 }
+body.page section { padding-block: 6.4rem; }
+body.page section.reduced-padding { padding-block: 3.2rem; }
+body.page section.no-padding { padding-block: 0; }
+body.page section.extra-padding { padding-block: 14rem; }
+body.page section.first { padding-top: 10rem; }
 .page section.no-padding {
   padding-block: 0;
 }
@@ -4772,7 +4779,7 @@ body.careers-page.modal-open {
 }
 @media all and (max-width: 950px) {
   .page section {
-    padding-block: 2.4rem;
+    padding-block: 4rem;
   }
   .page section.extra-padding {
     padding-block: 8rem;
