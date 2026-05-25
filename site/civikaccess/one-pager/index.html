@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CivikAccess — Briefing for state, local, and institutional leadership</title>
+<meta name="description" content="A one-page briefing on CivikAccess: coordination infrastructure for public services, designed for the AI already operating on them.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;450;500;550;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0A0A0A;
+    --ink-fade: #4A4A4A;
+    --ink-soft: #8A8A8A;
+    --rule: #D4D4D4;
+    --accent: #0a3aff;
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 13.5px; }
+  body {
+    margin: 0;
+    background: #f4f4f2;
+    color: var(--ink);
+    font-family: "Geist", -apple-system, system-ui, sans-serif;
+    font-weight: 400;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .sheet {
+    width: 8.5in;
+    min-height: 11in;
+    margin: 0.4in auto;
+    padding: 0.55in 0.6in 0.5in;
+    background: #ffffff;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.08);
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 0;
+  }
+  .mono {
+    font-family: "Geist Mono", ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 9px;
+    color: var(--ink-soft);
+  }
+  .star { display: inline-block; vertical-align: middle; width: 14px; height: 14px; margin-right: 6px; }
+  /* HEADER */
+  header.top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--ink);
+    margin-bottom: 18px;
+  }
+  .wordmark {
+    font-weight: 600;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+  }
+  .wordmark .accent { color: var(--ink); }
+  .wordmark .star-inline {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: var(--ink);
+    clip-path: polygon(50% 0, 53% 47%, 100% 50%, 53% 53%, 50% 100%, 47% 53%, 0 50%, 47% 47%);
+    vertical-align: -1px;
+    margin: 0 1px;
+  }
+  /* LEAD */
+  .lead {
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-size: 22px;
+    font-weight: 550;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin: 0 0 8px;
+  }
+  .lead p {
+    margin: 0;
+    color: var(--ink-fade);
+    max-width: 6.4in;
+  }
+  /* BODY GRID */
+  .body {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    column-gap: 0.35in;
+    row-gap: 0.16in;
+    margin-bottom: 14px;
+  }
+  .block { break-inside: avoid; }
+  .block h2 {
+    font-size: 9px;
+    font-family: "Geist Mono", ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-soft);
+    margin: 0 0 6px;
+    font-weight: 500;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .block p { margin: 0 0 8px; font-size: 11px; line-height: 1.5; }
+  .block p:last-child { margin-bottom: 0; }
+  .block.span-2 { grid-column: 1 / span 2; }
+  /* PILLARS */
+  .pillars { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.16in; }
+  .pillar {
+    border-top: 1px solid var(--ink);
+    padding-top: 8px;
+  }
+  .pillar .label {
+    font-family: "Geist Mono", ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 0 0 4px;
+  }
+  .pillar .desc { font-size: 10.5px; line-height: 1.45; color: var(--ink-fade); margin: 0; }
+  /* STEPS */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.18in; }
+  .step .num {
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 9px;
+    color: var(--ink-soft);
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+  .step .title { font-weight: 550; font-size: 12px; margin: 0 0 4px; }
+  .step .desc { font-size: 10.5px; line-height: 1.45; color: var(--ink-fade); margin: 0; }
+  /* INLINE LIST */
+  .audiences {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .audiences strong { font-weight: 550; }
+  /* FOOTER */
+  footer.bottom {
+    border-top: 1px solid var(--ink);
+    padding-top: 12px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 16px;
+  }
+  .cta-line {
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 0 4px;
+  }
+  .cta-sub {
+    font-size: 10.5px;
+    color: var(--ink-fade);
+    margin: 0;
+  }
+  .meta {
+    text-align: right;
+    font-family: "Geist Mono", ui-monospace, monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 8.5px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .meta a { color: var(--ink); text-decoration: none; }
+  /* Action bar (screen-only) */
+  .actions {
+    max-width: 8.5in;
+    margin: 12px auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.6in 16px;
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+  }
+  .actions button {
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  /* PRINT */
+  @page {
+    size: letter;
+    margin: 0.5in;
+  }
+  @media print {
+    body { background: #fff; }
+    .sheet {
+      margin: 0;
+      box-shadow: none;
+      width: auto;
+      min-height: auto;
+      padding: 0;
+    }
+    .actions { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <header class="top">
+    <div class="wordmark">Civik<span class="star-inline"></span>Access</div>
+    <div class="mono">A briefing &middot; State, local, and institutional leadership</div>
+  </header>
+
+  <section class="lead">
+    <h1>Coordination infrastructure for public&nbsp;services. Designed for the intelligence already operating on&nbsp;them.</h1>
+    <p>CivikAccess is a service coordination design platform for frontline public services. It creates a verifiable, human-accountable picture of every family's pathway across the agencies that serve them &mdash; without their personal identifying information ever entering the platform.</p>
+  </section>
+
+  <section class="body">
+
+    <div class="block">
+      <h2>The problem you're already managing</h2>
+      <p>Public services were built one program at a time. Each program has its own forms, its own intake, its own data system. A family touching five agencies gets described five different ways &mdash; a participant here, a patient there, a client elsewhere. Frontline workers patch the gaps with sticky notes and personal phone calls. The coordination work holding the system together is invisible to leadership, and so is where it breaks.</p>
+      <p>AI is already making decisions in your jurisdiction about who gets help, who gets flagged, who gets prioritized &mdash; working from the same fragmented records the case manager already couldn't make sense of.</p>
+    </div>
+
+    <div class="block">
+      <h2>Why this is an infrastructure problem, not a tool problem</h2>
+      <p>Referral platforms track whether help was offered, not whether it arrived. Case management systems organize records by program, so the same family looks completely different depending on which agency you ask. Consultants map the process and leave a slide deck.</p>
+      <p>None of them name the pathway as the thing the whole network works from. CivikAccess does &mdash; and that's the layer responsible AI in public services can be built on.</p>
+    </div>
+
+    <div class="block span-2" style="margin-top: 4px">
+      <h2>Four structural pieces</h2>
+      <div class="pillars">
+        <div class="pillar">
+          <p class="label">Pathway</p>
+          <p class="desc">One shared object the whole network works from.</p>
+        </div>
+        <div class="pillar">
+          <p class="label">Ownership</p>
+          <p class="desc">A named human accountable at every handoff.</p>
+        </div>
+        <div class="pillar">
+          <p class="label">Record</p>
+          <p class="desc">Every step traceable. Every decision examinable.</p>
+        </div>
+        <div class="pillar">
+          <p class="label">Foundation</p>
+          <p class="desc">The verifiable layer responsible AI can be built on.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block span-2" style="margin-top: 4px">
+      <h2>How it works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="num">01 &middot; Build</div>
+          <p class="title">Design pathway coordination.</p>
+          <p class="desc">Map the operating model with your network. Define who owns each step. Set what closes a handoff.</p>
+        </div>
+        <div class="step">
+          <div class="num">02 &middot; Publish</div>
+          <p class="title">Make the pathway live.</p>
+          <p class="desc">The working pathway becomes visible across the network. See where families are stuck. See where the system is reliable &mdash; and where it isn't.</p>
+        </div>
+        <div class="step">
+          <div class="num">03 &middot; Update</div>
+          <p class="title">Improve from the field.</p>
+          <p class="desc">Case managers propose changes when reality shifts. Recurring updates become the standard. The workers who proposed them get credit.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <h2>Privacy by architecture</h2>
+      <p>A family can be supported through an entire pathway, across multiple agencies, without their personal identifying information ever entering CivikAccess in a form that can be surfaced, queried, or extracted. Personal data stays inside the agency that already holds it. The platform routes the work, not the person.</p>
+    </div>
+
+    <div class="block">
+      <h2>Designed for</h2>
+      <p class="audiences"><strong>Agencies</strong> &middot; <strong>State &amp; local government</strong> &middot; <strong>Head Start networks</strong> &middot; <strong>FQHCs &amp; clinical partners</strong> &middot; <strong>Workforce programs</strong> &middot; <strong>Healthcare navigators</strong> &middot; <strong>Coalitions &amp; intermediaries</strong> &middot; <strong>Education providers</strong></p>
+    </div>
+
+  </section>
+
+  <footer class="bottom">
+    <div>
+      <p class="cta-line">Book an alignment conversation.</p>
+      <p class="cta-sub">A 45-minute call. No commitment required. Bring your coordination challenges &mdash; we'll identify whether CivikAccess fits your jurisdiction.</p>
+    </div>
+    <div class="meta">
+      civiknet.com/civikaccess<br>
+      book-intro &rarr; civiknet.com/civikaccess/book-intro<br>
+      CivikNet PBC &middot; Trust &middot; Cooperative
+    </div>
+  </footer>
+
+</div>
+
+<div class="actions">
+  <span>One-pager &middot; CivikAccess briefing</span>
+  <button onclick="window.print()">Save as PDF</button>
+</div>
+
+</body>
+</html>

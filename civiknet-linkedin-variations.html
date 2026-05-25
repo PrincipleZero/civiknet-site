@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CivikNet — LinkedIn Post Variations · Photo Edition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ─── BRAND TOKENS ─────────────────────────────────── */
+    :root {
+      --paper:         #ffffff;
+      --ink:           #0a0a0a;
+      --deep-blue:     #09102b;
+      --civiknet-blue: #0057f3;
+      --sans:  'Geist', system-ui, sans-serif;
+      --mono:  'Geist Mono', 'Courier New', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─── PAGE ─────────────────────────────────────────── */
+    body {
+      background: #0a0a0a;
+      font-family: var(--sans);
+      padding: 56px 40px 100px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .page-header .eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      margin-bottom: 10px;
+    }
+    .page-header h1 {
+      font-size: 26px;
+      font-weight: 300;
+      letter-spacing: -0.03em;
+      color: white;
+      margin-bottom: 6px;
+    }
+    .page-header .sub {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.2);
+      text-transform: uppercase;
+    }
+
+    /* ─── GALLERY ──────────────────────────────────────── */
+    .gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .variation-wrap {
+      width: 100%;
+      max-width: 860px;
+    }
+
+    .variation-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.22);
+      margin-bottom: 10px;
+      padding-left: 1px;
+    }
+
+    /* Responsive viewport: scales 1200×628 to fit column */
+    .viewport {
+      width: 100%;
+      max-width: 860px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.07),
+        0 24px 64px rgba(0,0,0,0.65);
+    }
+
+    /* Inner is always 1200×628, scaled down via JS */
+    .inner {
+      width: 1200px;
+      height: 628px;
+      transform-origin: top left;
+      display: flex;
+      position: relative;
+    }
+
+    /* ─── LEFT ZONE (photo side) ───────────────────────── */
+    .left-zone {
+      width: 580px;
+      height: 628px;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* The actual photo */
+    .left-zone .photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      z-index: 0;
+    }
+
+    /* Light brand tint — keeps logo legible without hiding the photo */
+    .left-zone .photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 30, 80, 0.28);
+      z-index: 1;
+    }
+
+    /* Subtle right-edge fade into the white divider */
+    .left-zone .photo-edge {
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 80px;
+      background: linear-gradient(to right, transparent, rgba(9,16,43,0.4));
+      z-index: 2;
+    }
+
+    /* Very faint mesh grid (matches original template) */
+    .left-zone .grid-lines {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* All left-zone content sits above overlays */
+    .left-zone .lz-content {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    /* Logo pill — matches original template exactly */
+    .t-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: white;
+      border: 1.5px solid rgba(255,255,255,0.85);
+      border-radius: 5px;
+      padding: 4px 9px 3px;
+      white-space: nowrap;
+      width: fit-content;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.15);
+    }
+    .t-logo.dark {
+      color: var(--ink);
+      border-color: rgba(10,10,10,0.45);
+    }
+    .t-logo .star { font-size: 13px; line-height: 1; }
+
+    /* CN watermark — matches original */
+    .watermark {
+      position: absolute;
+      bottom: 36px;
+      right: 36px;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 120px;
+      color: rgba(255,255,255,0.045);
+      letter-spacing: -0.06em;
+      line-height: 1;
+      z-index: 4;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Kicker text on left zone */
+    .t-kicker {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.4;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+    }
+    .t-kicker.dark { color: rgba(10,10,10,0.42); }
+
+    /* ─── RIGHT ZONE (paper content) ──────────────────── */
+    .right-zone {
+      flex: 1;
+      background: var(--paper);
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-left: 3px solid var(--civiknet-blue);
+      position: relative;
+    }
+
+    .right-headline {
+      font-family: var(--sans);
+      font-size: 48px;
+      font-weight: 300;
+      color: var(--ink);
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-top: 16px;
+    }
+
+    .right-body {
+      font-family: var(--sans);
+      font-size: 16px;
+      color: rgba(10,10,10,0.52);
+      line-height: 1.5;
+      margin-top: 16px;
+    }
+
+    .right-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .dark-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(10,10,10,0.5);
+      border: 1px solid rgba(10,10,10,0.12);
+      border-radius: 999px;
+      padding: 4px 12px;
+    }
+    .dark-pill .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--civiknet-blue);
+      display: inline-block;
+    }
+
+    .url-tag {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: rgba(10,10,10,0.28);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ─── BRAND RULES FOOTER ─────────────────────────── */
+    .rules-section {
+      max-width: 860px;
+      margin: 72px auto 0;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding-top: 40px;
+    }
+    .rules-eyebrow {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.22);
+      margin-bottom: 24px;
+    }
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .rule-block h3 {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--civiknet-blue);
+      margin-bottom: 10px;
+    }
+    .rule-block li {
+      font-size: 12px;
+      color: rgba(255,255,255,0.36);
+      line-height: 1.7;
+      list-style: none;
+    }
+    .rule-block li::before { content: '— '; color: rgba(255,255,255,0.15); }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <div class="eyebrow">CivikNet · Brand System · V1.1</div>
+    <h1>LinkedIn Post — Photo Variations</h1>
+    <p class="sub">1200 × 628 px · 4 Compositions · Photo replaces gradient on left zone</p>
+  </div>
+
+  <div class="gallery">
+
+    <!-- ══════════════════════════════════════════════════
+         VARIATION 1 — Megaphone / Community Voice
+    ══════════════════════════════════════════════════ -->
+    <div class="variation-wrap">
+      <div class="variation-label">01 — Community Voice · Photo: Kaden Taylor / Unsplash (Free)</div>
+      <div class="viewport">
+        <div class="inner">
+
+          <div class="left-zone">
+            <img class="photo" src="img/linkedin-variations/v1-megaphone.jpg" alt="Man with megaphone speaking to a crowd">
+            <div class="photo-overlay"></div>
+            <div class="photo-edge"></div>
+            <div class="grid-lines"></div>
+            <div class="watermark">CN</div>
+            <div class="lz-content">
+              <div class="t-logo">CivikNet<span class="star">✦</span></div>
+              <div>
+                <div class="t-kicker">Community Voice</div>
+                <div style="margin-top:10px;" class="t-kicker">May 2026</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="right-zone">
+            <div>
+              <div class="t-kicker dark">Civic Engagement · LinkedIn</div>
+              <div class="right-headline">For communities that<br>deserve to be heard.</div>
+              <div class="right-body">Giving every resident a digital channel to participate in the decisions that shape their city — transparently and accountably.</div>
+              <div class="pill-row">
+                <div class="dark-pill"><span class="dot"></span> Civic participation</div>
+                <div class="dark-pill">Community tools</div>
+              </div>
+            </div>
+            <div class="right-bottom">
+              <div class="t-logo dark">CivikNet<span class="star" style="color:var(--ink);">✦</span></div>
+              <div class="url-tag">civiknet.com</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         VARIATION 2 — City Hall / Civic Infrastructure
+    ══════════════════════════════════════════════════ -->
+    <div class="variation-wrap">
+      <div class="variation-label">02 — Civic Infrastructure · Photo: Skyler Smith / Unsplash (Free)</div>
+      <div class="viewport">
+        <div class="inner">
+
+          <div class="left-zone">
+            <img class="photo" src="img/linkedin-variations/v2-cityhall.jpg" alt="City hall building with wide stairs and flags">
+            <div class="photo-overlay"></div>
+            <div class="photo-edge"></div>
+            <div class="grid-lines"></div>
+            <div class="watermark">CN</div>
+            <div class="lz-content">
+              <div class="t-logo">CivikNet<span class="star">✦</span></div>
+              <div>
+                <div class="t-kicker">Public-Service OS</div>
+                <div style="margin-top:10px;" class="t-kicker">May 2026</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="right-zone">
+            <div>
+              <div class="t-kicker dark">Access Reliability · LinkedIn</div>
+              <div class="right-headline">For agencies that have<br>to be right.</div>
+              <div class="right-body">A practical, governable way to bring AI into your agency's workflows and operating structure.</div>
+              <div class="pill-row">
+                <div class="dark-pill"><span class="dot"></span> Operations design</div>
+                <div class="dark-pill">Workflow generation</div>
+              </div>
+            </div>
+            <div class="right-bottom">
+              <div class="t-logo dark">CivikNet<span class="star" style="color:var(--ink);">✦</span></div>
+              <div class="url-tag">civiknet.com</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         VARIATION 3 — People Walking / Digital Access
+    ══════════════════════════════════════════════════ -->
+    <div class="variation-wrap">
+      <div class="variation-label">03 — Digital Access · Photo: Corbin Bell / Unsplash (Free)</div>
+      <div class="viewport">
+        <div class="inner">
+
+          <div class="left-zone">
+            <img class="photo" src="img/linkedin-variations/v3-walking.jpg" alt="People walking near a civic building">
+            <div class="photo-overlay"></div>
+            <div class="photo-edge"></div>
+            <div class="grid-lines"></div>
+            <div class="watermark">CN</div>
+            <div class="lz-content">
+              <div class="t-logo">CivikNet<span class="star">✦</span></div>
+              <div>
+                <div class="t-kicker">Digital Equity</div>
+                <div style="margin-top:10px;" class="t-kicker">May 2026</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="right-zone">
+            <div>
+              <div class="t-kicker dark">Civic Access · LinkedIn</div>
+              <div class="right-headline">Every community<br>deserves a digital<br>front door.</div>
+              <div class="right-body">CivikNet removes barriers between residents and public services — making participation the default, not the exception.</div>
+              <div class="pill-row">
+                <div class="dark-pill"><span class="dot"></span> Digital equity</div>
+                <div class="dark-pill">Open government</div>
+              </div>
+            </div>
+            <div class="right-bottom">
+              <div class="t-logo dark">CivikNet<span class="star" style="color:var(--ink);">✦</span></div>
+              <div class="url-tag">civiknet.com</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         VARIATION 4 — Building / Civic Architecture
+    ══════════════════════════════════════════════════ -->
+    <div class="variation-wrap">
+      <div class="variation-label">04 — Civic Architecture · Photo: Josh Marty / Unsplash (Free)</div>
+      <div class="viewport">
+        <div class="inner">
+
+          <div class="left-zone">
+            <img class="photo" src="img/linkedin-variations/v4-building.jpg" alt="Tall building with flags and trees">
+            <div class="photo-overlay"></div>
+            <div class="photo-edge"></div>
+            <div class="grid-lines"></div>
+            <div class="watermark">CN</div>
+            <div class="lz-content">
+              <div class="t-logo">CivikNet<span class="star">✦</span></div>
+              <div>
+                <div class="t-kicker">Governance Layer</div>
+                <div style="margin-top:10px;" class="t-kicker">May 2026</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="right-zone">
+            <div>
+              <div class="t-kicker dark">Digital Governance · LinkedIn</div>
+              <div class="right-headline">Build trust into<br>the infrastructure<br>itself.</div>
+              <div class="right-body">Transparent systems for modern governance. CivikNet makes accountability the architecture — not an afterthought.</div>
+              <div class="pill-row">
+                <div class="dark-pill"><span class="dot"></span> Civic innovation</div>
+                <div class="dark-pill">Smart city</div>
+              </div>
+            </div>
+            <div class="right-bottom">
+              <div class="t-logo dark">CivikNet<span class="star" style="color:var(--ink);">✦</span></div>
+              <div class="url-tag">civiknet.com</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /gallery -->
+
+  <!-- ─── BRAND RULES ─────────────────────────────────── -->
+  <div class="rules-section">
+    <div class="rules-eyebrow">Photo Variation System — Layout Rules</div>
+    <div class="rules-grid">
+      <div class="rule-block">
+        <h3>Photo Treatment</h3>
+        <ul>
+          <li>Dark overlay: rgba(9,16,43,0.78) → rgba(0,57,180,0.35)</li>
+          <li>Right-edge fade to match paper divider</li>
+          <li>Grid lines at 3% white opacity over photo</li>
+          <li>CN watermark preserved at 4.5% opacity</li>
+        </ul>
+      </div>
+      <div class="rule-block">
+        <h3>Photo Selection</h3>
+        <ul>
+          <li>Civic, community, or urban subjects only</li>
+          <li>High contrast — no flat or low-light images</li>
+          <li>Portrait or centered subjects work best</li>
+          <li>Source: Unsplash free license</li>
+        </ul>
+      </div>
+      <div class="rule-block">
+        <h3>Right Zone</h3>
+        <ul>
+          <li>Always white (#ffffff) — never gradient</li>
+          <li>3px CivikNet blue (#0057f3) left divider</li>
+          <li>Headline: Geist 48px weight 300</li>
+          <li>Padding: 52px all sides</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scale each .inner to fit its .viewport -->
+  <script>
+    function scaleAll() {
+      document.querySelectorAll('.viewport').forEach(vp => {
+        const inner = vp.querySelector('.inner');
+        if (!inner) return;
+        const scale = vp.offsetWidth / 1200;
+        inner.style.transform = `scale(${scale})`;
+        vp.style.height = (628 * scale) + 'px';
+      });
+    }
+    scaleAll();
+    window.addEventListener('resize', scaleAll);
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CivikNet — Social Media Template System · V1.0</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* ─── BRAND TOKENS ─────────────────────────────────── */
+    :root {
+      --paper:        #ffffff;
+      --sand:         #f6f5f4;
+      --ink:          #0a0a0a;
+      --deep-blue:    #09102b;
+      --civiknet-blue:#0057f3;
+      --warm:         #ff5102;
+      --ice-blue:     #e4eff7;
+      --neon:         #cdfe00;
+      --sunflower:    #ffeb00;
+      --sky:          #6acde3;
+
+      --sans:  'Geist', system-ui, sans-serif;
+      --serif: 'Geist', system-ui, sans-serif;
+      --mono:  'Geist Mono', 'Courier New', monospace;
+    }
+
+    /* ─── SHARED HERO BACKGROUND ───────────────────────── */
+    /* This is the ONE consistent "image asset" used across all 8 templates */
+    .hero-bg {
+      color: white;
+      background:
+        radial-gradient(ellipse 90% 70% at 72% 20%, rgba(0,87,243,0.55) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 18% 68%, rgba(0,87,243,0.28) 0%, transparent 55%),
+        radial-gradient(ellipse 45% 40% at 88% 80%, rgba(26,122,255,0.22) 0%, transparent 50%),
+        radial-gradient(ellipse 35% 35% at 50% 50%, rgba(0,87,243,0.1) 0%, transparent 70%),
+        linear-gradient(158deg, #09102b 0%, #0d1c47 52%, #09102b 100%);
+    }
+
+    /* Noise/grain texture overlay applied via SVG filter */
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    /* Subtle mesh grid lines */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── SHARED TEMPLATE ELEMENTS ─────────────────────── */
+    .t-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      color: white;
+      border: 1.5px solid rgba(255,255,255,0.7);
+      border-radius: 5px;
+      padding: 4px 8px 3px;
+      position: relative;
+      z-index: 1;
+      white-space: nowrap;
+    }
+    .t-logo.dark {
+      color: var(--ink);
+      border-color: rgba(10,10,10,0.5);
+    }
+    .t-logo .star { font-size: 13px; line-height: 1; }
+
+    .t-kicker {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      position: relative;
+      z-index: 1;
+    }
+    .t-kicker.dark { color: rgba(10,10,10,0.45); }
+
+    .t-headline {
+      font-family: 'Geist', system-ui, sans-serif;
+      font-weight: 300;
+      color: white;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      position: relative;
+      z-index: 1;
+    }
+    .t-headline strong { font-weight: 700; }
+    .t-headline.dark { color: var(--ink); }
+
+    .t-display {
+      font-family: var(--sans);
+      font-weight: 700;
+      color: white;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .t-body {
+      font-family: var(--sans);
+      font-weight: 400;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+      position: relative;
+      z-index: 1;
+    }
+    .t-body.dark { color: rgba(10,10,10,0.55); }
+
+    .t-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      padding: 4px 12px;
+      position: relative;
+      z-index: 1;
+    }
+    .t-pill .dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--civiknet-blue);
+      display: inline-block;
+    }
+    .t-pill.accent {
+      background: var(--civiknet-blue);
+      border-color: var(--civiknet-blue);
+      color: white;
+    }
+    .t-pill.warm-pill {
+      background: var(--warm);
+      border-color: var(--warm);
+      color: white;
+    }
+
+    .t-hairline {
+      height: 1px;
+      background: rgba(255,255,255,0.12);
+      position: relative;
+      z-index: 1;
+    }
+    .t-hairline.dark { background: rgba(10,10,10,0.08); }
+
+    .t-tag {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── GALLERY PAGE ──────────────────────────────────── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--sand);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page-header {
+      padding: 64px 80px 48px;
+      border-bottom: 1px solid rgba(10,10,10,0.08);
+    }
+    .page-header .brand-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(10,10,10,0.4);
+      margin-bottom: 20px;
+    }
+    .page-header h1 {
+      font-family: 'Geist', system-ui, sans-serif;
+      font-size: 52px;
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      max-width: 640px;
+    }
+    .page-header h1 em { font-style: normal; font-family: 'Geist', system-ui, sans-serif; font-weight: 700; }
+    .page-header .meta {
+      display: flex;
+      gap: 40px;
+      margin-top: 32px;
+    }
+    .page-header .meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .page-header .meta-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(10,10,10,0.35);
+    }
+    .page-header .meta-value {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .gallery {
+      padding: 64px 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 96px;
+    }
+
+    .template-section {}
+
+    .template-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .template-meta .t-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: rgba(10,10,10,0.3);
+    }
+    .template-meta .t-name {
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .template-meta .t-dims {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: rgba(10,10,10,0.4);
+    }
+
+    .template-viewport {
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06), 0 16px 48px rgba(0,0,0,0.1);
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .template-grid-rules {
+      margin-top: 20px;
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .grid-rule {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .grid-rule .rule-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(10,10,10,0.35);
+    }
+    .grid-rule .rule-value {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(10,10,10,0.7);
+    }
+
+    /* ─── TEMPLATE BASE ─────────────────────────────────── */
+    .template {
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       TEMPLATE 1 — INSTAGRAM POST  1080 × 1080
+    ══════════════════════════════════════════════════════ */
+    #tmpl-ig-post {
+      width: 480px;
+      height: 480px;
+    }
+    #tmpl-ig-post .inner {
+      width: 1080px;
+      height: 1080px;
+      transform: scale(0.4444);
+      transform-origin: top left;
+      position: relative;
+      padding: 56px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    #tmpl-ig-post .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    #tmpl-ig-post .content-zone {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 820px;
+    }
+    #tmpl-ig-post .headline { font-size: 86px; }
+    #tmpl-ig-post .bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: column;
+      gap: 20px;
+    }
+    #tmpl-ig-post .bottom-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       TEMPLATE 2 — INSTAGRAM STORY  1080 × 1920
+    ══════════════════════════════════════════════════════ */
+    #tmpl-ig-story .viewport {
+      width: 270px;
+      height: 480px;
+    }
+    #tmpl-ig-story .inner {
+      width: 1080px;
+      height: 1920px;
+      transform: scale(0.25);
+      transform-origin: top left;
+      position: relative;
+      padding: 80px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    #tmpl-ig-story .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    #tmpl-ig-story .center-zone {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      flex: 1;
+      justify-content: center;
+      padding: 80px 0;
+    }
+    #tmpl-ig-story .titan { font-family: var(--sans); font-weight: 700; font-size: 220px; color: white; line-height: 0.88; letter-spacing: -0.05em; position: relative; z-index: 1; }
+    #tmpl-ig-story .sub-headline { font-family: 'Geist', system-ui, sans-serif; font-size: 72px; font-weight: 300; color: rgba(255,255,255,0.75); line-height: 1.05; letter-spacing: -0.02em; position: relative; z-index: 1; }
+    #tmpl-ig-story .bottom-zone {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* ══════════════════════════════════════════════════════
+       TEMPLATE 3 — LINKEDIN POST  1200 × 628
+    ══════════════════════════════════════════════════════ */
+    #tmpl-li-post .viewport {
+      width: 600px;
+      height: 314px;
+    }
+    #tmpl-li-post .inner {
+      width: 1200px;
+      height: 628px;
+      transform: scale(0.5);
+      transform-origin: top left;
+      position: relative;
+      display: flex;
+    }
+    #tmpl-li-post .left-zone {
+      width: 580px;
+      height: 628px;
+      position: relative;
+      flex-shrink: 0;
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    #tmpl-li-post .right-zone {
+      flex: 1;
+      background: var(--paper);
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-left: 3px solid var(--civiknet-blue);
+    }
+    #tmpl-li-post .watermark {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 120px;
+      color: rgba(255,255,255,0.04);
+      letter-spacing: -0.06em;
+      line-height: 1;
+      z-index: 0;
+      user-select: none;
+    }
+    #tmpl-li-post .right-headline { font-family: 'Geist', system-ui, sans-serif; font-size: 48px; font-weight: 300; color: var(--ink); letter-spacing: -0.03em; line-height: 1.05; }
+    #tmpl-li-post .right-body { font-family: var(--sans); font-size: 16px; color: rgba(10,10,10,0.55); line-height: 1.5; margin-top: 16px; }
+    #tmpl-li-post .right-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+    #tmpl-li-post .pill-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+    #tmpl-li-post .dark-pill { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(10,10,10,0.5); border: 1px solid rgba(10,10,10,0.12); border-radius: 999px; padding: 4px 12px; }
+
+    /* ══════════════════════════════════════════════════════
+       TEMPLATE 4 — LINKEDIN BANNER  1584 × 396
+    ══════════════════════════════════════════════════════ */
+    #tmpl-li-banner .viewport {
+      width: 600px;
+      height: 150px;
+    }
+    #tmpl-li-banner .inner {
+      width: 1584px;
+      height: 396px;
+      transform: scale(0.3788);
+      transform-origin: top left;
+      position: relative;
+      padding: 0 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    #tmpl-li-banner .accent-bar {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 6px;
+      background: var(--civiknet-blue);
+      z-index: 1;
+    }
+    #tmpl-li-banner .banner-left { display: flex; flex-direction: column; gap: 12px; }
+    #tmpl-li-banner .banner-headline { font-family: var(--sans); font-weight: 700; font-size: 48px; color: white; letter-spacing: -0.03em; line-height: 1; position: relative; z-index: 1; }
+    #tmpl-li-banner .banner-center { text-align: center; }
+    #tmpl-li-banner .banner-tagline { font-family: 'Geist', system-ui, sans-serif; font-size: 28px; font-weight: 300; color: rgba(255,255,255,0.65); position: relative; z-index: 1; }
+    #tmpl-li-banner .banner-right { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+
+    /* ══════════════════════════════════════════════════════
+       TEMPLATE 5 — FACEBOOK POST  1200 × 630
+    ══════════════════════════════════════════════════════ */
+    #tmpl-fb-post .viewport {
+      width: 600px;
+      height: 315px;
+    }
+    #tmpl-fb-post .inner {
+      width: 1200px;
+      height: 630px;
+      transform: scale(0.5);
+      transform-origin: top left;
+      position: relative;
+      padding: 56px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    #tmpl-fb-post .fb-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    #tmpl-fb-post .fb-center { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+    #tmpl-fb-post .fb-headline { font-family: 'Geist', system-ui, sans-serif; font-size: 72px; font-weight: 300; color: white; letter-spacing: -0.025em; line-height: 1.0; position: relative; z-index: 1; max-width: 900px; text-align: center; }
+    #tmpl-fb-post .fb-bottom { display: flex; justify-content: space-between; align-items: center; }
+    #tmpl-fb-post .horizontal-rule { width: 100%; height: 1px; background: rgba(255,255,255,0.1); margin: 0; position: relative; z-index: 1; }
+
+    /* ══════════════════════════════════════════════════════
+       TEMPLATE 6 — FACEBOOK COVER  820 × 462
+    ══════════════════════════════════════════════════════ */
+    #tmpl-fb-cover .viewport {
+      width: 600px;
+      height: 338px;
+    }
+    #tmpl-fb-cover .inner {
+      width: 820px;
+      height: 462px;
+      transform: scale(0.7317);
+      transform-origin: top left;
+      position: relative;
+      padding: 48px 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    #tmpl-fb-cover .cover-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    #tmpl-fb-cover .profile-hint {
+      position: absolute;
+      bottom: -30px;
+      left: 52px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 4px solid white;
+      background: linear-gradient(135deg, #1a3a7a 0%, var(--civiknet-blue) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    #tmpl-fb-cover .profile-hint .initial {
+      font-family: var(--sans);
+      font-size: 52px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.02em;
+    }
+    #tmpl-fb-cover .cover-center { display: flex; flex-direction: column; gap: 16px; padding-left: 180px; }
+    #tmpl-fb-cover .cover-headline { font-family: 'Geist', system-ui, sans-serif; font-size: 44px; font-weight: 300; color: white; letter-spacing: -0.02em; line-height: 1.08; position: relative; z-index: 1; }
+    #tmpl-fb-cover .cover-bottom { display: flex; justify-content: flex-end; align-items: center; gap: 16px; }
+
+    /* ══════════════════════════════════════════════════════
+       TEMPLATE 7 — TWITTER / X POST  1600 × 900
+    ══════════════════════════════════════════════════════ */
+    #tmpl-tw-post .viewport {
+      width: 600px;
+      height: 338px;
+    }
+    #tmpl-tw-post .inner {
+      width: 1600px;
+      height: 900px;
+      transform: scale(0.375);
+      transform-origin: top left;
+      position: relative;
+      padding: 72px 88px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    #tmpl-tw-post .tw-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    #tmpl-tw-post .quote-mark {
+      font-family: 'Geist', system-ui, sans-serif;
+      font-size: 280px;
+      color: rgba(0,87,243,0.25);
+      line-height: 0.75;
+      position: absolute;
+      top: 48px;
+      right: 80px;
+      z-index: 0;
+    }
+    #tmpl-tw-post .tw-headline { font-family: 'Geist', system-ui, sans-serif; font-size: 96px; font-weight: 300; color: white; letter-spacing: -0.025em; line-height: 1.0; position: relative; z-index: 1; max-width: 1100px; margin-top: 40px; }
+    #tmpl-tw-post .tw-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+    #tmpl-tw-post .tw-attribution { font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.65); position: relative; z-index: 1; }
+
+    /* ══════════════════════════════════════════════════════
+       TEMPLATE 8 — TWITTER / X HEADER  1500 × 500
+    ══════════════════════════════════════════════════════ */
+    #tmpl-tw-header .viewport {
+      width: 600px;
+      height: 200px;
+    }
+    #tmpl-tw-header .inner {
+      width: 1500px;
+      height: 500px;
+      transform: scale(0.4);
+      transform-origin: top left;
+      position: relative;
+      padding: 0 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    #tmpl-tw-header .header-left { display: flex; flex-direction: column; gap: 14px; }
+    #tmpl-tw-header .header-brand { font-family: var(--sans); font-weight: 700; font-size: 72px; color: white; letter-spacing: -0.04em; line-height: 0.95; position: relative; z-index: 1; }
+    #tmpl-tw-header .header-brand span { color: var(--civiknet-blue); }
+    #tmpl-tw-header .header-right { text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
+    #tmpl-tw-header .header-tagline { font-family: 'Geist', system-ui, sans-serif; font-size: 26px; font-weight: 300; color: rgba(255,255,255,0.6); position: relative; z-index: 1; max-width: 520px; text-align: right; line-height: 1.3; }
+    #tmpl-tw-header .center-accent {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    #tmpl-tw-header .center-divider {
+      width: 1px;
+      height: 120px;
+      background: rgba(255,255,255,0.12);
+    }
+
+    /* ─── BRAND RULES SECTION ───────────────────────────── */
+    .brand-rules {
+      margin: 0 80px;
+      padding: 64px 0;
+      border-top: 1px solid rgba(10,10,10,0.08);
+    }
+    .rules-header {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(10,10,10,0.35);
+      margin-bottom: 40px;
+    }
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px 48px;
+    }
+    .rule-block {}
+    .rule-block-title {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+    .rule-block ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .rule-block ul li {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: rgba(10,10,10,0.55);
+      line-height: 1.4;
+      padding-left: 12px;
+      position: relative;
+    }
+    .rule-block ul li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--civiknet-blue);
+    }
+
+    .color-swatches {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .swatch {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
+    }
+    .swatch-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(10,10,10,0.06);
+    }
+    .swatch-name {
+      font-family: var(--mono);
+      font-size: 8px;
+      letter-spacing: 0.04em;
+      color: rgba(10,10,10,0.35);
+      text-align: center;
+    }
+
+    .page-footer {
+      padding: 40px 80px;
+      border-top: 1px solid rgba(10,10,10,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .page-footer .footer-mono {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(10,10,10,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── PAGE HEADER ─────────────────────────────────── -->
+  <header class="page-header">
+    <p class="brand-label">CivikNet · Brand Kit · V1.0 · May 2026</p>
+    <h1>Social media<br><em>template system.</em></h1>
+    <div class="meta">
+      <div class="meta-item">
+        <span class="meta-label">Platforms</span>
+        <span class="meta-value">Instagram · LinkedIn · Facebook · Twitter/X</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Templates</span>
+        <span class="meta-value">8 formats</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Image asset</span>
+        <span class="meta-value">Consistent across all formats</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Typefaces</span>
+        <span class="meta-value">Geist · SanaSerif · Geist Mono</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── TEMPLATE GALLERY ────────────────────────────── -->
+  <main class="gallery">
+
+    <!-- ═══ 01 · INSTAGRAM POST ═══ -->
+    <section class="template-section">
+      <div class="template-meta">
+        <span class="t-num">01</span>
+        <span class="t-name">Instagram Post</span>
+        <span class="t-dims">1080 × 1080 px · Square · 1:1</span>
+      </div>
+
+      <div class="template-viewport" id="tmpl-ig-post" style="width:480px;height:480px;">
+        <div class="inner hero-bg">
+          <div class="top-row">
+            <div class="t-logo">CivikNet<span class="star">✦</span></div>
+            <div class="t-pill">
+              <span class="dot"></span>
+              Public-Service OS
+            </div>
+          </div>
+
+          <div class="content-zone">
+            <div class="t-kicker">Access reliability · 2026</div>
+            <div class="t-headline headline">For agencies<br>that have to<br>be right.</div>
+          </div>
+
+          <div class="bottom-row">
+            <div class="t-hairline" style="width:100%;"></div>
+            <div class="bottom-bar">
+              <div class="t-tag">civiknet.com</div>
+              <div class="t-kicker">ACCESS RELIABILITY · PUBLIC SERVICES</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="template-grid-rules">
+        <div class="grid-rule"><span class="rule-label">Margins</span><span class="rule-value">56px all sides</span></div>
+        <div class="grid-rule"><span class="rule-label">Logo zone</span><span class="rule-value">Top-left, 56px from edge</span></div>
+        <div class="grid-rule"><span class="rule-label">Headline</span><span class="rule-value">SanaSerif italic, 86px, -0.02em</span></div>
+        <div class="grid-rule"><span class="rule-label">Kicker</span><span class="rule-value">Geist Mono, 14px, +0.08em, uppercase</span></div>
+        <div class="grid-rule"><span class="rule-label">Bottom bar</span><span class="rule-value">Hairline + mono attribution</span></div>
+        <div class="grid-rule"><span class="rule-label">Safe zone</span><span class="rule-value">Keep content inside 968px inner box</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ 02 · INSTAGRAM STORY ═══ -->
+    <section class="template-section" id="tmpl-ig-story">
+      <div class="template-meta">
+        <span class="t-num">02</span>
+        <span class="t-name">Instagram Story / Reel Cover</span>
+        <span class="t-dims">1080 × 1920 px · Portrait · 9:16</span>
+      </div>
+
+      <div class="template-viewport" style="width:270px;height:480px;">
+        <div class="inner hero-bg">
+          <div class="top-row">
+            <div class="t-logo">CivikNet<span class="star">✦</span></div>
+            <div class="t-tag" style="padding-top:6px;">Story</div>
+          </div>
+
+          <div class="center-zone">
+            <div class="t-kicker">Access reliability</div>
+            <div class="titan">Access.</div>
+            <div class="sub-headline">reliability for<br>public services.</div>
+            <div class="t-body" style="font-size:28px; max-width:780px;">A practical, governable way to bring AI into your agency's workflows.</div>
+          </div>
+
+          <div class="bottom-zone">
+            <div class="t-hairline"></div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
+              <div class="t-pill accent">Start in Platform</div>
+              <div class="t-kicker">civiknet.com</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="template-grid-rules">
+        <div class="grid-rule"><span class="rule-label">Margins</span><span class="rule-value">80px top/bottom · 64px sides</span></div>
+        <div class="grid-rule"><span class="rule-label">Titan type</span><span class="rule-value">Geist Bold, 220px, -0.05em</span></div>
+        <div class="grid-rule"><span class="rule-label">Sub-headline</span><span class="rule-value">SanaSerif italic, 72px</span></div>
+        <div class="grid-rule"><span class="rule-label">Tap zone</span><span class="rule-value">Keep CTA above 1600px from top</span></div>
+        <div class="grid-rule"><span class="rule-label">Text safe area</span><span class="rule-value">No content above 100px or below 1820px</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ 03 · LINKEDIN POST ═══ -->
+    <section class="template-section" id="tmpl-li-post">
+      <div class="template-meta">
+        <span class="t-num">03</span>
+        <span class="t-name">LinkedIn Post</span>
+        <span class="t-dims">1200 × 628 px · Landscape · ~1.91:1</span>
+      </div>
+
+      <div class="template-viewport" style="width:600px;height:314px;">
+        <div class="inner">
+          <!-- Left: gradient image zone -->
+          <div class="left-zone hero-bg">
+            <div class="t-logo">CivikNet<span class="star">✦</span></div>
+            <div class="watermark">CN</div>
+            <div>
+              <div class="t-kicker">Public-Service OS</div>
+              <div style="margin-top:12px;" class="t-kicker">May 2026</div>
+            </div>
+          </div>
+          <!-- Right: paper content zone -->
+          <div class="right-zone">
+            <div>
+              <div class="t-kicker dark">Access reliability · LinkedIn</div>
+              <div class="right-headline" style="margin-top:16px;">For agencies that have<br>to be right.</div>
+              <div class="right-body">A practical, governable way to bring AI into your agency's workflows and operating structure.</div>
+              <div class="pill-row">
+                <div class="dark-pill"><span style="width:5px;height:5px;border-radius:50%;background:var(--civiknet-blue);display:inline-block;"></span> Operations design</div>
+                <div class="dark-pill">Workflow generation</div>
+              </div>
+            </div>
+            <div class="right-bottom">
+              <div class="t-logo dark">CivikNet<span class="star" style="color:var(--ink);">✦</span></div>
+              <div style="font-family:var(--mono);font-size:9px;color:rgba(10,10,10,0.3);letter-spacing:0.08em;text-transform:uppercase;">civiknet.com</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="template-grid-rules">
+        <div class="grid-rule"><span class="rule-label">Layout</span><span class="rule-value">48% gradient image · 52% paper content</span></div>
+        <div class="grid-rule"><span class="rule-label">Divider</span><span class="rule-value">3px CivikNet blue vertical line</span></div>
+        <div class="grid-rule"><span class="rule-label">Headline</span><span class="rule-value">SanaSerif italic, 48px, ink color</span></div>
+        <div class="grid-rule"><span class="rule-label">Padding</span><span class="rule-value">52px all zones</span></div>
+        <div class="grid-rule"><span class="rule-label">Tags</span><span class="rule-value">Hairline pill, mono 9px, dark</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ 04 · LINKEDIN BANNER ═══ -->
+    <section class="template-section" id="tmpl-li-banner">
+      <div class="template-meta">
+        <span class="t-num">04</span>
+        <span class="t-name">LinkedIn Banner</span>
+        <span class="t-dims">1584 × 396 px · Panoramic · 4:1</span>
+      </div>
+
+      <div class="template-viewport" style="width:600px;height:150px;">
+        <div class="inner hero-bg">
+          <div class="accent-bar"></div>
+          <div class="banner-left">
+            <div class="t-logo">CivikNet<span class="star">✦</span></div>
+            <div class="t-kicker" style="max-width:420px;">Access reliability for public services</div>
+          </div>
+          <div class="banner-center">
+            <div class="banner-headline">A reliable layer.</div>
+            <div class="banner-tagline">for agencies that have to be right.</div>
+          </div>
+          <div class="banner-right">
+            <div class="t-pill">
+              <span class="dot"></span>
+              Public-Service OS
+            </div>
+            <div class="t-kicker">civiknet.com</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="template-grid-rules">
+        <div class="grid-rule"><span class="rule-label">Margins</span><span class="rule-value">80px left/right · centered vertically</span></div>
+        <div class="grid-rule"><span class="rule-label">Accent bar</span><span class="rule-value">6px CivikNet blue left edge</span></div>
+        <div class="grid-rule"><span class="rule-label">Headline</span><span class="rule-value">Geist Bold, 48px, -0.03em</span></div>
+        <div class="grid-rule"><span class="rule-label">Safe zone</span><span class="rule-value">Center 1000px always visible on all devices</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ 05 · FACEBOOK POST ═══ -->
+    <section class="template-section" id="tmpl-fb-post">
+      <div class="template-meta">
+        <span class="t-num">05</span>
+        <span class="t-name">Facebook Post</span>
+        <span class="t-dims">1200 × 630 px · Landscape · ~1.91:1</span>
+      </div>
+
+      <div class="template-viewport" style="width:600px;height:315px;">
+        <div class="inner hero-bg">
+          <div class="fb-top">
+            <div class="t-logo">CivikNet<span class="star">✦</span></div>
+            <div class="t-kicker">Facebook · May 2026</div>
+          </div>
+          <div class="fb-center">
+            <div class="t-kicker">Access reliability · public services</div>
+            <div class="fb-headline">"Help your agency make<br>service delivery more reliable."</div>
+            <div class="t-pill warm-pill">Request a consultation</div>
+          </div>
+          <div>
+            <div class="horizontal-rule"></div>
+            <div class="fb-bottom" style="margin-top:16px;">
+              <div class="t-kicker">civiknet.com</div>
+              <div class="t-kicker">PUBLIC-SERVICE OS · 2026</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="template-grid-rules">
+        <div class="grid-rule"><span class="rule-label">Margins</span><span class="rule-value">56px top/bottom · 64px sides</span></div>
+        <div class="grid-rule"><span class="rule-label">Composition</span><span class="rule-value">Top logo · center headline · bottom strip</span></div>
+        <div class="grid-rule"><span class="rule-label">Headline</span><span class="rule-value">SanaSerif italic, 72px, centered</span></div>
+        <div class="grid-rule"><span class="rule-label">CTA</span><span class="rule-value">Warm orange pill button</span></div>
+        <div class="grid-rule"><span class="rule-label">Bottom strip</span><span class="rule-value">Hairline + dual mono attribution</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ 06 · FACEBOOK COVER ═══ -->
+    <section class="template-section" id="tmpl-fb-cover">
+      <div class="template-meta">
+        <span class="t-num">06</span>
+        <span class="t-name">Facebook Cover</span>
+        <span class="t-dims">820 × 462 px · Banner · ~1.77:1</span>
+      </div>
+
+      <div class="template-viewport" style="width:600px;height:338px;">
+        <div class="inner hero-bg">
+          <div class="cover-top">
+            <div class="t-logo">CivikNet<span class="star">✦</span></div>
+            <div class="t-pill">
+              <span class="dot"></span>
+              Live · May 2026
+            </div>
+          </div>
+          <div class="cover-center">
+            <div class="t-kicker" style="font-size:12px;">Access reliability for public services</div>
+            <div class="cover-headline">A reliable layer<br>for agencies<br>that have to be right.</div>
+          </div>
+          <div class="cover-bottom">
+            <div class="t-kicker">civiknet.com</div>
+          </div>
+          <!-- Profile picture placeholder -->
+          <div class="profile-hint">
+            <span class="initial">C</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="template-grid-rules">
+        <div class="grid-rule"><span class="rule-label">Margins</span><span class="rule-value">48px all sides</span></div>
+        <div class="grid-rule"><span class="rule-label">Profile circle</span><span class="rule-value">140px · left edge · overlaps bottom</span></div>
+        <div class="grid-rule"><span class="rule-label">Content offset</span><span class="rule-value">Shift right 180px to clear profile picture</span></div>
+        <div class="grid-rule"><span class="rule-label">Safe zone</span><span class="rule-value">On mobile, only center 640px visible</span></div>
+        <div class="grid-rule"><span class="rule-label">Headline</span><span class="rule-value">SanaSerif italic, 44px</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ 07 · TWITTER / X POST ═══ -->
+    <section class="template-section" id="tmpl-tw-post">
+      <div class="template-meta">
+        <span class="t-num">07</span>
+        <span class="t-name">Twitter / X Post</span>
+        <span class="t-dims">1600 × 900 px · Landscape · 16:9</span>
+      </div>
+
+      <div class="template-viewport" style="width:600px;height:338px;">
+        <div class="inner hero-bg">
+          <div class="tw-top">
+            <div class="t-logo">CivikNet<span class="star">✦</span></div>
+            <div class="t-kicker">Twitter · X · May 2026</div>
+          </div>
+          <div class="quote-mark">"</div>
+          <div class="tw-headline">Access reliability<br>for public services.</div>
+          <div class="tw-bottom">
+            <div class="tw-attribution">civiknet.com · public-service os · 2026</div>
+            <div class="t-pill">
+              <span class="dot"></span>
+              Operations design
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="template-grid-rules">
+        <div class="grid-rule"><span class="rule-label">Margins</span><span class="rule-value">72px top/bottom · 88px sides</span></div>
+        <div class="grid-rule"><span class="rule-label">Headline</span><span class="rule-value">SanaSerif italic, 96px, -0.025em</span></div>
+        <div class="grid-rule"><span class="rule-label">Pull-quote mark</span><span class="rule-value">SanaSerif, 280px, blue 25% opacity, bg layer</span></div>
+        <div class="grid-rule"><span class="rule-label">Attribution</span><span class="rule-value">Geist Mono, 13px, bottom-left</span></div>
+        <div class="grid-rule"><span class="rule-label">Composition</span><span class="rule-value">Editorial pull-quote treatment, left-aligned</span></div>
+      </div>
+    </section>
+
+    <!-- ═══ 08 · TWITTER / X HEADER ═══ -->
+    <section class="template-section" id="tmpl-tw-header">
+      <div class="template-meta">
+        <span class="t-num">08</span>
+        <span class="t-name">Twitter / X Header</span>
+        <span class="t-dims">1500 × 500 px · Panoramic · 3:1</span>
+      </div>
+
+      <div class="template-viewport" style="width:600px;height:200px;">
+        <div class="inner hero-bg">
+          <div class="header-left">
+            <div class="t-logo" style="font-size:16px;">CivikNet<span class="star">✦</span></div>
+            <div class="t-kicker">Public-Service OS</div>
+          </div>
+          <div class="center-accent">
+            <div class="center-divider"></div>
+            <div class="t-kicker" style="font-size:9px;">2026</div>
+            <div class="center-divider"></div>
+          </div>
+          <div class="header-right">
+            <div class="header-tagline">Access reliability<br>for public services.</div>
+            <div class="t-pill">
+              <span class="dot"></span>
+              civiknet.com
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="template-grid-rules">
+        <div class="grid-rule"><span class="rule-label">Margins</span><span class="rule-value">80px sides · vertically centered</span></div>
+        <div class="grid-rule"><span class="rule-label">Layout</span><span class="rule-value">Logo left · accent divider center · tagline right</span></div>
+        <div class="grid-rule"><span class="rule-label">Tagline</span><span class="rule-value">SanaSerif italic, 26px, right-aligned</span></div>
+        <div class="grid-rule"><span class="rule-label">Safe zone</span><span class="rule-value">Profile picture (400px circle) covers left edge on mobile</span></div>
+        <div class="grid-rule"><span class="rule-label">Center divider</span><span class="rule-value">1px hairline vertical rule, 120px tall</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── BRAND RULES ──────────────────────────────────── -->
+  <section class="brand-rules">
+    <p class="rules-header">Brand rules · Grid system · Continuity guide</p>
+    <div class="rules-grid">
+
+      <div class="rule-block">
+        <div class="rule-block-title">Color system</div>
+        <div class="color-swatches">
+          <div class="swatch"><div class="swatch-dot" style="background:#09102b;"></div><span class="swatch-name">Deep blue</span></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#0057f3;"></div><span class="swatch-name">CivikNet</span></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#e4eff7;"></div><span class="swatch-name">Ice blue</span></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#f6f5f4;border:1px solid rgba(0,0,0,0.1);"></div><span class="swatch-name">Sand</span></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#0a0a0a;"></div><span class="swatch-name">Ink</span></div>
+          <div class="swatch"><div class="swatch-dot" style="background:#ff5102;"></div><span class="swatch-name">Warm</span></div>
+        </div>
+      </div>
+
+      <div class="rule-block">
+        <div class="rule-block-title">Typography rules</div>
+        <ul>
+          <li>Headlines: SanaSerif italic, tight tracking -0.02em</li>
+          <li>Display: Geist Bold, -0.04em, 0.9 line-height</li>
+          <li>Body: Geist 400, 18–20px, 1.4 line-height</li>
+          <li>Kickers: Geist Mono, 14px, +0.08em, UPPERCASE only</li>
+          <li>Never: Title Case, emoji, exclamation points</li>
+        </ul>
+      </div>
+
+      <div class="rule-block">
+        <div class="rule-block-title">Image asset rule</div>
+        <ul>
+          <li>One shared hero gradient across all 8 formats</li>
+          <li>Deep blue → CivikNet blue radial glow, noise overlay</li>
+          <li>Subtle 64px mesh grid lines at 2.5% opacity</li>
+          <li>No photography replacements without matching tone</li>
+          <li>When using photos: cool-toned, abstract, tech infrastructure</li>
+          <li>Apply deep blue color grade at 40–60% overlay</li>
+        </ul>
+      </div>
+
+      <div class="rule-block">
+        <div class="rule-block-title">Logo rules</div>
+        <ul>
+          <li>White with white border on all dark/gradient surfaces</li>
+          <li>Ink black with ink border on paper/sand surfaces</li>
+          <li>Never tinted, recolored, scaled below minimum size</li>
+          <li>Always top-left corner, 48–80px from edge</li>
+          <li>Minimum clear space: 1× cap-height on all sides</li>
+          <li>The ✦ glyph is always present with the wordmark</li>
+        </ul>
+      </div>
+
+      <div class="rule-block">
+        <div class="rule-block-title">Grid · spacing</div>
+        <ul>
+          <li>Base unit: 8px</li>
+          <li>Small margins (banners/headers): 80px sides</li>
+          <li>Standard margins (posts): 56–64px all sides</li>
+          <li>Story margins: 80px top/bottom, 64px sides</li>
+          <li>Content safe zone: 90% of canvas dimensions</li>
+          <li>Hairline borders: rgba(255,255,255,0.12) on dark</li>
+        </ul>
+      </div>
+
+      <div class="rule-block">
+        <div class="rule-block-title">Voice · copy rules</div>
+        <ul>
+          <li>Sentence case for headlines (not Title Case)</li>
+          <li>Specific verbs: Generate. Automate. Govern. Act.</li>
+          <li>Em-dashes for editorial rhythm — like this</li>
+          <li>Numerals stay numerals: 98%, 1,500, 3 hours</li>
+          <li>No first-person singular ("I") in marketing copy</li>
+          <li>Kicker text: UPPERCASE · dot-separated · concise</li>
+        </ul>
+      </div>
+
+      <div class="rule-block">
+        <div class="rule-block-title">Platform dimensions</div>
+        <ul>
+          <li>Instagram Post: 1080 × 1080 px (1:1)</li>
+          <li>Instagram Story: 1080 × 1920 px (9:16)</li>
+          <li>LinkedIn Post: 1200 × 628 px</li>
+          <li>LinkedIn Banner: 1584 × 396 px</li>
+          <li>Facebook Post: 1200 × 630 px</li>
+          <li>Facebook Cover: 820 × 462 px</li>
+          <li>Twitter/X Post: 1600 × 900 px (16:9)</li>
+          <li>Twitter/X Header: 1500 × 500 px (3:1)</li>
+        </ul>
+      </div>
+
+      <div class="rule-block">
+        <div class="rule-block-title">Component rules</div>
+        <ul>
+          <li>Pill tags: 999rem radius, hairline border, mono 9–10px</li>
+          <li>CTA buttons: pill shape, CivikNet blue or Warm orange</li>
+          <li>Cards: 1.6rem radius, hairline shadow</li>
+          <li>Hover state: opacity 0.6 only — no color shift or scale</li>
+          <li>Accent bar (banners): 6px CivikNet blue, flush left edge</li>
+          <li>Dividers: 1px hairline, never solid opaque lines</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ───────────────────────────────────────── -->
+  <footer class="page-footer">
+    <span class="footer-mono">CivikNet · Social Media System · V1.0 · May 2026</span>
+    <span class="footer-mono">Access reliability for public services.</span>
+  </footer>
+
+</body>
+</html>

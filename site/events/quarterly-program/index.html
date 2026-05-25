@@ -188,15 +188,27 @@
             <div class="sub-menu-menu">
               <ul>
                 <li><a href="/civikaccess">Overview</a></li>
-                <li><a href="/civikaccess/security">Privacy architecture</a></li>
-                <li><a href="/civikaccess/integrations">Integrations</a></li>
                 <li><a href="/civikaccess/pricing">Pricing</a></li>
               </ul>
             </div>
           </div>
         </li>
         <li><a href="/about">About</a></li>
-        <li><a href="/events">Events</a></li>
+        <li class="has-sub-menu">
+          <a href="#">
+            Events <svg class="inline-icon"><use xlink:href="#chevron-down-small"></use></svg>
+          </a>
+          <div class="sub-menu-menus">
+            <div class="sub-menu-menu">
+              <ul>
+                <li><a href="/events">ACCESS26</a></li>
+                <li><a href="/events/partners">Partners</a></li>
+                <li><a href="/events/sponsors">Sponsors</a></li>
+                <li><a href="/events/vendors">Vendors</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
         <li><a href="/press">Press</a></li>
       </ul>
     </nav>
@@ -1294,8 +1306,6 @@
         <p class="type-small"><strong>CivikAccess</strong></p>
         <ul class="type-small">
           <li><a href="/civikaccess">Overview</a></li>
-          <li><a href="/civikaccess/security">Privacy architecture</a></li>
-          <li><a href="/civikaccess/integrations">Integrations</a></li>
           <li><a href="/civikaccess/pricing">Pricing</a></li>
           <li><a href="/civikaccess/book-intro">Book intro</a></li>
         </ul>
@@ -1784,7 +1794,6 @@
  <div id="cookie-consent" class="cookie" style="z-index: 9000">
   <div style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; background-color: rgba(150, 150, 150, 0.15); cursor: pointer; backdrop-filter: saturate(115%) blur(6px); -webkit-backdrop-filter: saturate(180%) blur(6px)" id="cookie-consent-backdrop"></div>
   <div class="cookie-inner center">
-    <p style="font-size: 40px; margin: 0 0 15px; height: 40px">🍪</p>
     <p class="small-title margin-xs">Cookies</p>
     <p class="cookie-p">We and selected partners use cookies or similar technologies as specified in the cookie policy. You can consent to the use of such technologies by closing this notice, by interacting with any link or button outside of this notice or by continuing to browse otherwise. <a href="/legal/cookie-settings" style="text-decoration: underline">Learn more</a></p>
     <a id="cookie-consent-button" class="cookie-btn-big btn-flash">Accept</a>
@@ -1844,7 +1853,7 @@
     -moz-appearance: none;
     appearance: none;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 1em;
     transition: 0.3s ease transform;
     display: flex;
@@ -1854,19 +1863,19 @@
     justify-content: center;
     font-weight: 400;
     position: relative;
-    padding: 16px 32px;
-    border-radius: 18px;
+    padding: 10px 22px;
+    border-radius: 10px;
     margin-bottom: 8px;
-    background-color: #4700de;
+    background-color: #0A0A0A;
     color: #fff;
     transition: 0.1s ease transform;
   }
   @media screen and (max-width: 760px) {
     .cookie-btn-big {
-      font-size: 20px;
+      font-size: 15px;
       font-weight: 440;
-      padding: 20px 32px;
-      border-radius: 22px;
+      padding: 12px 22px;
+      border-radius: 12px;
     }
   }
   .cookie-btn {

@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CivikNet — Instagram Reels · 7 Variations</title>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #ffffff;
+      --ink:   #0a0a0a;
+      --deep:  #09102b;
+      --blue:  #0057f3;
+      --warm:  #ff5102;
+      --neon:  #cdfe00;
+      --sans:  'Geist', system-ui, sans-serif;
+      --mono:  'Geist Mono', 'Courier New', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #080c18;
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      padding: 56px 40px 120px;
+    }
+
+    /* PAGE HEADER */
+    .page-hd { text-align: center; margin-bottom: 64px; }
+    .page-hd .eye {
+      font-family: var(--mono); font-size: 9px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(255,255,255,0.22); margin-bottom: 10px;
+    }
+    .page-hd h1 {
+      font-size: 24px; font-weight: 300; letter-spacing: -0.03em;
+      color: #fff; margin-bottom: 6px;
+    }
+    .page-hd .sub {
+      font-family: var(--mono); font-size: 9px; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.16);
+    }
+
+    /* GALLERY GRID — 4 columns for portrait cards */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    /* Row 2: center the last 3 cards */
+    .gallery .card-wrap:nth-child(5) { grid-column: 1; }
+    .gallery .card-wrap:nth-child(5),
+    .gallery .card-wrap:nth-child(6),
+    .gallery .card-wrap:nth-child(7) { grid-column: auto; }
+
+    .card-wrap { display: flex; flex-direction: column; }
+
+    .card-label { margin-bottom: 10px; }
+    .card-label .num {
+      font-family: var(--mono); font-size: 9px; font-weight: 700;
+      letter-spacing: 0.12em; color: var(--blue); display: block; margin-bottom: 2px;
+    }
+    .card-label .name {
+      font-family: var(--mono); font-size: 8px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.2); display: block; margin-bottom: 2px;
+    }
+    .card-label .tag {
+      font-family: var(--mono); font-size: 7px; letter-spacing: 0.06em;
+      text-transform: uppercase; color: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 3px;
+      padding: 2px 6px; display: inline-block;
+    }
+
+    /* Viewport — scales 1080×1920 down */
+    .vp {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.07),
+        0 20px 60px rgba(0,0,0,0.7);
+    }
+    /* Always 1080×1920 native, JS sets height */
+    .inner {
+      width: 1080px;
+      height: 1920px;
+      transform-origin: top left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ── HERO GRADIENT (shared asset) ─────────────────── */
+    .grad {
+      background:
+        radial-gradient(ellipse 90% 70% at 72% 20%, rgba(0,87,243,0.55) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 18% 68%, rgba(0,87,243,0.28) 0%, transparent 55%),
+        radial-gradient(ellipse 45% 40% at 88% 80%, rgba(26,122,255,0.22) 0%, transparent 50%),
+        linear-gradient(158deg, #09102b 0%, #0d1c47 52%, #09102b 100%);
+    }
+
+    /* Noise overlay */
+    .noise::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 256px 256px;
+      z-index: 1; opacity: 0.6; pointer-events: none;
+    }
+
+    /* Grid lines */
+    .gridlines::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+      z-index: 1; pointer-events: none;
+    }
+
+    /* ── SHARED ATOMS ─────────────────────────────────── */
+    .logo {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--mono); font-size: 22px; font-weight: 700;
+      letter-spacing: 0.01em; color: white;
+      border: 2.5px solid rgba(255,255,255,0.7);
+      border-radius: 8px; padding: 8px 16px 6px;
+      white-space: nowrap; position: relative; z-index: 4;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+      background: rgba(0,0,0,0.12);
+    }
+    .logo.dk { color: var(--ink); border-color: rgba(10,10,10,0.45); text-shadow: none; background: transparent; }
+    .logo .star { font-size: 26px; line-height: 1; }
+
+    .kicker {
+      font-family: var(--mono); font-weight: 400;
+      letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.4;
+      position: relative; z-index: 4;
+    }
+    .kicker.lt { color: rgba(255,255,255,0.65); text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+    .kicker.dk { color: rgba(10,10,10,0.42); }
+
+    .hl {
+      font-family: var(--sans); font-weight: 300; letter-spacing: -0.03em;
+      line-height: 1.02; position: relative; z-index: 4;
+    }
+    .hl.lt { color: white; }
+    .hl.dk { color: var(--ink); }
+
+    .display-type {
+      font-family: var(--sans); font-weight: 700; letter-spacing: -0.05em;
+      line-height: 0.88; color: white; position: relative; z-index: 4;
+    }
+
+    .body-copy {
+      font-family: var(--sans); font-weight: 400; line-height: 1.5;
+      position: relative; z-index: 4;
+    }
+    .body-copy.lt { color: rgba(255,255,255,0.72); }
+    .body-copy.dk { color: rgba(10,10,10,0.52); }
+
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); letter-spacing: 0.08em;
+      text-transform: uppercase; border-radius: 999px;
+      position: relative; z-index: 4;
+    }
+    .pill.lt { color: rgba(255,255,255,0.6); border: 1.5px solid rgba(255,255,255,0.2); }
+    .pill.dk { color: rgba(10,10,10,0.5); border: 1.5px solid rgba(10,10,10,0.14); }
+    .pill.accent { background: var(--blue); border-color: var(--blue); color: white; }
+    .pill.warm { background: var(--warm); border-color: var(--warm); color: white; }
+    .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); display: inline-block; }
+
+    .hairline { height: 1.5px; position: relative; z-index: 4; }
+    .hairline.lt { background: rgba(255,255,255,0.12); }
+    .hairline.dk { background: rgba(10,10,10,0.08); }
+
+    .url {
+      font-family: var(--mono); letter-spacing: 0.08em;
+      text-transform: uppercase; position: relative; z-index: 4;
+    }
+    .url.lt { color: rgba(255,255,255,0.4); }
+    .url.dk { color: rgba(10,10,10,0.28); }
+
+    /* Watermark */
+    .wm {
+      position: absolute; font-family: var(--sans); font-weight: 700;
+      letter-spacing: -0.06em; line-height: 1;
+      user-select: none; pointer-events: none;
+    }
+
+    /* Photo utilities */
+    .photo-cover {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block; z-index: 0;
+    }
+    .overlay-dark { position: absolute; inset: 0; background: rgba(9,16,43,0.50); z-index: 1; }
+    .overlay-tint { position: absolute; inset: 0; background: rgba(0,30,80,0.28); z-index: 1; }
+    .fade-bottom-strong {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 55%; background: linear-gradient(to top, rgba(9,16,43,0.96) 0%, transparent 100%);
+      z-index: 2;
+    }
+    .fade-top-strong {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 55%; background: linear-gradient(to bottom, rgba(9,16,43,0.96) 0%, transparent 100%);
+      z-index: 2;
+    }
+    .fade-bottom-soft {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 35%; background: linear-gradient(to top, rgba(9,16,43,0.7) 0%, transparent 100%);
+      z-index: 2;
+    }
+
+    /* Accent vertical bar */
+    .accent-bar-v {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 8px; background: var(--blue); z-index: 4;
+    }
+
+    /* ─────────────────────────────────────────────────────
+       VAR 1 — ORIGINAL GRADIENT (pure brand)
+    ───────────────────────────────────────────────────── */
+    #v1 .inner {
+      padding: 80px 64px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    #v1 .top-row { display: flex; justify-content: space-between; align-items: flex-start; }
+    #v1 .center-zone { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 80px 0; gap: 32px; }
+    #v1 .titan { font-family: var(--sans); font-weight: 700; font-size: 220px; color: white; line-height: 0.88; letter-spacing: -0.05em; position: relative; z-index: 4; }
+    #v1 .sub-hl { font-family: var(--sans); font-size: 72px; font-weight: 300; color: rgba(255,255,255,0.72); line-height: 1.05; letter-spacing: -0.02em; position: relative; z-index: 4; }
+    #v1 .bottom-zone { display: flex; flex-direction: column; gap: 28px; }
+
+    /* ─────────────────────────────────────────────────────
+       VAR 2 — FULL BLEED CENTERED
+    ───────────────────────────────────────────────────── */
+    #v2 .content {
+      position: absolute; inset: 0;
+      padding: 80px 64px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      z-index: 4;
+    }
+    #v2 .top-row { display: flex; justify-content: space-between; align-items: flex-start; }
+    #v2 .center-zone {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center; gap: 36px; padding: 60px 0;
+    }
+    #v2 .bottom-row { display: flex; justify-content: space-between; align-items: flex-end; }
+
+    /* ─────────────────────────────────────────────────────
+       VAR 3 — PHOTO TOP HALF + GRADIENT BOTTOM
+    ───────────────────────────────────────────────────── */
+    #v3 .photo-zone {
+      position: absolute; left: 0; top: 0;
+      width: 1080px; height: 960px; overflow: hidden;
+    }
+    #v3 .gradient-zone {
+      position: absolute; left: 0; top: 960px;
+      width: 1080px; height: 960px;
+      padding: 72px 64px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    #v3 .photo-hud {
+      position: absolute; left: 0; top: 0;
+      width: 1080px; height: 960px;
+      padding: 80px 64px;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      z-index: 4;
+    }
+
+    /* ─────────────────────────────────────────────────────
+       VAR 4 — GRADIENT TOP + PHOTO BOTTOM HALF
+    ───────────────────────────────────────────────────── */
+    #v4 .gradient-zone {
+      position: absolute; left: 0; top: 0;
+      width: 1080px; height: 960px;
+      padding: 80px 64px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      z-index: 4;
+    }
+    #v4 .photo-zone {
+      position: absolute; left: 0; top: 963px;
+      width: 1080px; height: 957px; overflow: hidden;
+    }
+    #v4 .divider-h {
+      position: absolute; left: 0; top: 960px;
+      width: 100%; height: 3px; background: var(--blue); z-index: 4;
+    }
+
+    /* ─────────────────────────────────────────────────────
+       VAR 5 — PHOTO STRIP TOP + BOLD GRADIENT
+    ───────────────────────────────────────────────────── */
+    #v5 .photo-zone {
+      position: absolute; left: 0; top: 0;
+      width: 1080px; height: 480px; overflow: hidden;
+    }
+    #v5 .gradient-zone {
+      position: absolute; left: 0; top: 480px;
+      width: 1080px; height: 1440px;
+      padding: 72px 64px 80px;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    #v5 .photo-hud {
+      position: absolute; left: 0; top: 0;
+      width: 1080px; height: 480px;
+      padding: 56px 64px;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      z-index: 4;
+    }
+    #v5 .accent-strip {
+      position: absolute; left: 0; top: 480px;
+      width: 100%; height: 6px; background: var(--blue); z-index: 5;
+    }
+    #v5 .titan { font-family: var(--sans); font-weight: 700; font-size: 260px; color: white; line-height: 0.85; letter-spacing: -0.05em; position: relative; z-index: 4; }
+
+    /* ─────────────────────────────────────────────────────
+       VAR 6 — FULL PHOTO + WHITE BOTTOM BAR
+    ───────────────────────────────────────────────────── */
+    #v6 .bar {
+      position: absolute; left: 0; bottom: 0; right: 0;
+      height: 480px;
+      background: var(--paper);
+      border-top: 3px solid var(--blue);
+      padding: 52px 64px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      z-index: 5;
+    }
+    #v6 .top-hud {
+      position: absolute; top: 0; left: 0; right: 0;
+      padding: 72px 64px;
+      display: flex; justify-content: space-between; align-items: flex-start;
+      z-index: 4;
+    }
+
+    /* ─────────────────────────────────────────────────────
+       VAR 7 — LAYERED: PHOTO + SIDE TEXT PANEL
+    ───────────────────────────────────────────────────── */
+    #v7 .photo-zone {
+      position: absolute; inset: 0; overflow: hidden;
+    }
+    #v7 .panel {
+      position: absolute; right: 0; top: 0; bottom: 0;
+      width: 520px;
+      background: rgba(9,16,43,0.92);
+      border-left: 3px solid var(--blue);
+      padding: 80px 48px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      z-index: 4;
+    }
+    #v7 .photo-text {
+      position: absolute; left: 0; top: 0;
+      width: 564px; height: 1920px;
+      padding: 80px 48px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      z-index: 4;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="page-hd">
+    <div class="eye">CivikNet · Brand System · V1.2</div>
+    <h1>Instagram Reels — 7 Layout Variations</h1>
+    <p class="sub">1080 × 1920 px · 9:16 · Same brand asset, 7 compositions</p>
+  </div>
+
+  <div class="gallery">
+
+    <!-- ═══════════════════════════════════
+         VAR 1 — ORIGINAL GRADIENT (no photo)
+    ════════════════════════════════════ -->
+    <div class="card-wrap">
+      <div class="card-label">
+        <span class="num">01</span>
+        <span class="name">Original Gradient</span>
+        <span class="tag">Pure brand · No photo</span>
+      </div>
+      <div class="vp">
+        <div class="inner grad noise gridlines" id="v1">
+          <div class="wm" style="bottom:120px;right:48px;font-size:360px;color:rgba(255,255,255,0.035);">CN</div>
+          <div class="top-row">
+            <div class="logo">CivikNet<span class="star">✦</span></div>
+            <span class="kicker lt" style="font-size:18px;">Story</span>
+          </div>
+          <div class="center-zone">
+            <div class="kicker lt" style="font-size:20px;">Access reliability</div>
+            <div class="titan">Access.</div>
+            <div class="sub-hl">reliability for<br>public services.</div>
+            <div class="body-copy lt" style="font-size:32px;max-width:820px;">A practical, governable way to bring AI into your agency's workflows.</div>
+          </div>
+          <div class="bottom-zone">
+            <div class="hairline lt"></div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;">
+              <div class="pill accent" style="font-size:18px;padding:12px 32px;">
+                <span class="dot" style="width:10px;height:10px;"></span>
+                Start in Platform
+              </div>
+              <div class="url lt" style="font-size:18px;">civiknet.com</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         VAR 2 — FULL BLEED CENTERED
+    ════════════════════════════════════ -->
+    <div class="card-wrap">
+      <div class="card-label">
+        <span class="num">02</span>
+        <span class="name">Full Bleed Centered</span>
+        <span class="tag">Photo 100% · Text overlay</span>
+      </div>
+      <div class="vp">
+        <div class="inner" id="v2">
+          <img class="photo-cover" src="img/linkedin-variations/r1-megaphone.jpg" alt="Community voice">
+          <div class="overlay-dark"></div>
+          <div class="wm" style="bottom:100px;right:40px;font-size:300px;color:rgba(255,255,255,0.05);">CN</div>
+          <div class="content gridlines">
+            <div class="top-row">
+              <div class="logo">CivikNet<span class="star">✦</span></div>
+              <span class="kicker lt" style="font-size:18px;">Reel</span>
+            </div>
+            <div class="center-zone">
+              <div class="kicker lt" style="font-size:18px;letter-spacing:0.18em;">— Civic Technology —</div>
+              <div class="hl lt" style="font-size:96px;text-align:center;max-width:900px;">For agencies<br>that have to<br>be right.</div>
+              <div class="body-copy lt" style="font-size:30px;text-align:center;max-width:820px;">A practical, governable way to bring AI into your agency's workflows.</div>
+              <div class="pill lt" style="font-size:18px;padding:12px 32px;align-self:center;">
+                <span class="dot" style="width:10px;height:10px;"></span>
+                Public-Service OS
+              </div>
+            </div>
+            <div class="bottom-row">
+              <div class="url lt" style="font-size:18px;">civiknet.com</div>
+              <div class="kicker lt" style="font-size:16px;">May 2026</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         VAR 3 — PHOTO TOP + GRADIENT BOTTOM
+    ════════════════════════════════════ -->
+    <div class="card-wrap">
+      <div class="card-label">
+        <span class="num">03</span>
+        <span class="name">Photo Top Half</span>
+        <span class="tag">Photo 50% · Gradient 50%</span>
+      </div>
+      <div class="vp">
+        <div class="inner" id="v3">
+          <!-- Top: photo -->
+          <div class="photo-zone">
+            <img class="photo-cover" src="img/linkedin-variations/r2-cityhall.jpg" alt="City hall">
+            <div class="overlay-tint"></div>
+            <div class="fade-bottom-strong"></div>
+          </div>
+          <div class="photo-hud">
+            <div class="logo">CivikNet<span class="star">✦</span></div>
+            <span class="kicker lt" style="font-size:18px;">Reel</span>
+          </div>
+          <!-- Bottom: gradient -->
+          <div class="gradient-zone grad noise gridlines">
+            <div class="wm" style="bottom:40px;right:40px;font-size:260px;color:rgba(255,255,255,0.04);">CN</div>
+            <div style="display:flex;flex-direction:column;gap:28px;position:relative;z-index:4;">
+              <div class="kicker lt" style="font-size:20px;">Civic Infrastructure</div>
+              <div class="hl lt" style="font-size:88px;">Where policy meets participation.</div>
+              <div class="body-copy lt" style="font-size:28px;max-width:860px;">CivikNet bridges the gap between civic institutions and the communities they serve.</div>
+            </div>
+            <div style="position:relative;z-index:4;display:flex;flex-direction:column;gap:24px;">
+              <div class="hairline lt"></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div class="pill lt" style="font-size:18px;padding:10px 28px;">
+                  <span class="dot" style="width:10px;height:10px;"></span>GovTech
+                </div>
+                <div class="url lt" style="font-size:18px;">civiknet.com</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         VAR 4 — GRADIENT TOP + PHOTO BOTTOM
+    ════════════════════════════════════ -->
+    <div class="card-wrap">
+      <div class="card-label">
+        <span class="num">04</span>
+        <span class="name">Gradient Top + Photo Bottom</span>
+        <span class="tag">Gradient 50% · Photo 50%</span>
+      </div>
+      <div class="vp">
+        <div class="inner" id="v4">
+          <!-- Top: gradient with text -->
+          <div class="gradient-zone grad noise gridlines">
+            <div class="wm" style="bottom:40px;right:40px;font-size:260px;color:rgba(255,255,255,0.04);">CN</div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:4;">
+              <div class="logo">CivikNet<span class="star">✦</span></div>
+              <span class="kicker lt" style="font-size:18px;">Reel</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:28px;position:relative;z-index:4;">
+              <div class="kicker lt" style="font-size:20px;">Digital Equity</div>
+              <div class="hl lt" style="font-size:96px;">Every community deserves a digital front door.</div>
+              <div style="display:flex;gap:16px;flex-wrap:wrap;">
+                <div class="pill lt" style="font-size:18px;padding:10px 28px;"><span class="dot" style="width:10px;height:10px;"></span>Civic access</div>
+                <div class="pill lt" style="font-size:18px;padding:10px 28px;">Open gov</div>
+              </div>
+            </div>
+          </div>
+          <!-- Blue divider -->
+          <div class="divider-h"></div>
+          <!-- Bottom: photo -->
+          <div class="photo-zone">
+            <img class="photo-cover" src="img/linkedin-variations/r3-walking.jpg" alt="People walking" style="object-position:center top;">
+            <div class="overlay-tint"></div>
+            <div class="fade-top-strong"></div>
+            <!-- Overlay logo + url at bottom of photo -->
+            <div style="position:absolute;bottom:80px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:flex-end;z-index:4;">
+              <div class="kicker lt" style="font-size:18px;">May 2026</div>
+              <div class="url lt" style="font-size:18px;">civiknet.com</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         VAR 5 — PHOTO STRIP TOP + BOLD TYPE
+    ════════════════════════════════════ -->
+    <div class="card-wrap">
+      <div class="card-label">
+        <span class="num">05</span>
+        <span class="name">Photo Strip Top</span>
+        <span class="tag">Photo 25% · Gradient 75%</span>
+      </div>
+      <div class="vp">
+        <div class="inner" id="v5">
+          <!-- Photo strip -->
+          <div class="photo-zone">
+            <img class="photo-cover" src="img/linkedin-variations/r4-building.jpg" alt="Civic building" style="object-position:center top;">
+            <div class="overlay-tint"></div>
+            <div class="fade-bottom-strong" style="height:50%;"></div>
+          </div>
+          <div class="photo-hud">
+            <div class="logo">CivikNet<span class="star">✦</span></div>
+            <span class="kicker lt" style="font-size:18px;">Reel</span>
+          </div>
+          <div class="accent-strip"></div>
+          <!-- Gradient lower section -->
+          <div class="gradient-zone grad noise gridlines">
+            <div class="wm" style="bottom:80px;right:48px;font-size:280px;color:rgba(255,255,255,0.04);">CN</div>
+            <div style="display:flex;flex-direction:column;gap:24px;position:relative;z-index:4;">
+              <div class="kicker lt" style="font-size:20px;">Governance Layer</div>
+              <div class="titan">Build<br>trust.</div>
+              <div class="body-copy lt" style="font-size:30px;max-width:860px;">Transparent systems for modern governance. CivikNet makes accountability the architecture — not an afterthought.</div>
+            </div>
+            <div style="position:relative;z-index:4;display:flex;flex-direction:column;gap:24px;">
+              <div class="hairline lt"></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div class="pill accent" style="font-size:18px;padding:12px 32px;"><span class="dot" style="width:10px;height:10px;background:white;"></span>Civic innovation</div>
+                <div class="url lt" style="font-size:18px;">civiknet.com</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         VAR 6 — FULL PHOTO + WHITE BAR
+    ════════════════════════════════════ -->
+    <div class="card-wrap">
+      <div class="card-label">
+        <span class="num">06</span>
+        <span class="name">Full Photo + White Bar</span>
+        <span class="tag">Photo 100% + white bar</span>
+      </div>
+      <div class="vp">
+        <div class="inner" id="v6">
+          <img class="photo-cover" src="img/linkedin-variations/r1-megaphone.jpg" alt="Community voice">
+          <div class="overlay-tint"></div>
+          <div class="top-hud">
+            <div class="logo">CivikNet<span class="star">✦</span></div>
+            <span class="kicker lt" style="font-size:18px;">Reel</span>
+          </div>
+          <!-- White bottom bar -->
+          <div class="bar">
+            <div>
+              <div class="kicker dk" style="font-size:18px;margin-bottom:16px;">Community Voice</div>
+              <div class="hl dk" style="font-size:76px;">Amplifying civic voices at scale.</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:20px;">
+              <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                <div class="pill dk" style="font-size:16px;padding:8px 24px;"><span class="dot"></span>Civic participation</div>
+                <div class="pill dk" style="font-size:16px;padding:8px 24px;">Community tools</div>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div class="logo dk" style="font-size:18px;">CivikNet<span class="star" style="color:var(--ink);">✦</span></div>
+                <div class="url dk" style="font-size:16px;">civiknet.com</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════
+         VAR 7 — PHOTO + SIDE PANEL
+    ════════════════════════════════════ -->
+    <div class="card-wrap">
+      <div class="card-label">
+        <span class="num">07</span>
+        <span class="name">Photo + Side Panel</span>
+        <span class="tag">Photo bg · Dark sidebar</span>
+      </div>
+      <div class="vp">
+        <div class="inner" id="v7">
+          <!-- Full photo -->
+          <div class="photo-zone">
+            <img class="photo-cover" src="img/linkedin-variations/r3-walking.jpg" alt="Urban engagement" style="object-position:left center;">
+            <div class="overlay-tint"></div>
+          </div>
+          <!-- Left text over photo -->
+          <div class="photo-text">
+            <div class="logo">CivikNet<span class="star">✦</span></div>
+            <div style="display:flex;flex-direction:column;gap:20px;">
+              <div class="kicker lt" style="font-size:18px;">Digital Equity</div>
+              <div class="hl lt" style="font-size:80px;max-width:480px;">Open civic infrastructure.</div>
+            </div>
+          </div>
+          <!-- Right panel -->
+          <div class="panel grad noise">
+            <div class="accent-bar-v"></div>
+            <div class="wm" style="bottom:60px;right:24px;font-size:200px;color:rgba(255,255,255,0.04);">CN</div>
+            <div style="position:relative;z-index:4;">
+              <div class="kicker lt" style="font-size:18px;margin-bottom:20px;">Why it matters</div>
+              <div class="body-copy lt" style="font-size:26px;">CivikNet removes barriers between residents and public services — making participation the default, not the exception.</div>
+            </div>
+            <div style="position:relative;z-index:4;display:flex;flex-direction:column;gap:20px;">
+              <div class="pill lt" style="font-size:16px;padding:10px 24px;"><span class="dot" style="width:10px;height:10px;"></span>Civic access</div>
+              <div class="pill lt" style="font-size:16px;padding:10px 24px;">Open government</div>
+              <div class="pill lt" style="font-size:16px;padding:10px 24px;">Smart city</div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
+                <div class="logo" style="font-size:16px;padding:6px 12px;">CivikNet<span class="star">✦</span></div>
+                <div class="url lt" style="font-size:16px;">civiknet.com</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /gallery -->
+
+  <!-- LAYOUT REFERENCE TABLE -->
+  <div style="max-width:1100px;margin:80px auto 0;border-top:1px solid rgba(255,255,255,0.06);padding-top:40px;">
+    <div style="font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.18);margin-bottom:28px;">Composition Guide — 7 Reel Layouts</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
+      <div>
+        <div style="font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;">Variation</div>
+        <div style="font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.32);line-height:2.1;">01 Original<br>02 Full Bleed<br>03 Photo Top<br>04 Photo Bottom<br>05 Strip Top<br>06 White Bar<br>07 Side Panel</div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;">Photo %</div>
+        <div style="font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.32);line-height:2.1;">0%<br>100%<br>50% top<br>50% bottom<br>25% top<br>100%<br>100% bg</div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;">Content Style</div>
+        <div style="font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.32);line-height:2.1;">Titan type<br>Centered white<br>Split zones<br>Split zones<br>Bold display<br>White bar<br>Side panel</div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue);margin-bottom:10px;">Best For</div>
+        <div style="font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.32);line-height:2.1;">Brand continuity<br>Bold statement<br>Event / launch<br>Feature story<br>Key message<br>Announcement<br>Deep content</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS: scale each .inner to fit its .vp (portrait 1080×1920) -->
+  <script>
+    function scaleAll() {
+      document.querySelectorAll('.vp').forEach(function(vp) {
+        var inner = vp.querySelector('.inner');
+        if (!inner) return;
+        var scale = vp.offsetWidth / 1080;
+        inner.style.transform = 'scale(' + scale + ')';
+        vp.style.height = (1920 * scale) + 'px';
+      });
+    }
+    scaleAll();
+    window.addEventListener('resize', scaleAll);
+  </script>
+
+</body>
+</html>
