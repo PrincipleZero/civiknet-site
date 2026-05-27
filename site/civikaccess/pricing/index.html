@@ -944,29 +944,6 @@
 
 <section>
   <div class="wrap">
-    <div class="pricing-notes">
-      <div class="pn-card">
-        <p class="pn-label">Seat types</p>
-        <p>Three seat types. <strong>Editor</strong> seats author pathways and use AI. <strong>Caseworker</strong> seats run families through pathways at 50% the editor price. <strong>Viewer</strong> seats (auditors, supervisors, funders) are always free.</p>
-      </div>
-      <div class="pn-card">
-        <p class="pn-label">Families never count</p>
-        <p>The people you serve — residents using the Civik App, scanning QR codes, tracking their progress — are unlimited on every tier. We don't charge per family helped.</p>
-      </div>
-      <div class="pn-card">
-        <p class="pn-label">Pooled AI quota</p>
-        <p>AI quota is pooled across your team. A Team workspace with 5 editors gets 5 × 500 = 2,500 AI actions / month from a shared pool. Overage is a notice, not a surprise bill.</p>
-      </div>
-      <div class="pn-card">
-        <p class="pn-label">Volume discounts</p>
-        <p>Volume discounts kick in at 10 seats for Team and Agency tiers — 10% off at 10, 20% at 25, 30% at 50, 40% at 100+. Applies to the editor rate; caseworker math follows.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
     <h2 class="h3 margin-m">Full feature comparison</h2>
 
     <div class="feature-block">
@@ -1145,45 +1122,6 @@
 
   </div>
 </section>
-
-<section>
-  <div class="wrap">
-    <h2 class="h3 margin-m">Worked pricing examples</h2>
-    <div class="examples-grid">
-      <div class="example-card">
-        <p class="ex-label">Solo program director piloting at a small nonprofit</p>
-        <p class="ex-config">1 editor · 8 pathways · light AI use.</p>
-        <p class="ex-price"><strong>Starter solo → $19 / month</strong>, $228 / year.</p>
-        <p class="ex-note">Personal-card territory.</p>
-      </div>
-      <div class="example-card">
-        <p class="ex-label">Two-person community nonprofit</p>
-        <p class="ex-config">2 editors · 4 caseworkers · 6 pathways.</p>
-        <p class="ex-price"><strong>Starter → $76 / month</strong>, $912 / year.</p>
-        <p class="ex-note">($38 editors + $38 caseworkers.) Manager-approval territory at most civic orgs.</p>
-      </div>
-      <div class="example-card">
-        <p class="ex-label">Small county program team</p>
-        <p class="ex-config">3 editors · 8 caseworkers · 4 viewers · 12 pathways.</p>
-        <p class="ex-price"><strong>Team → $273 / month</strong>, $3,276 / year.</p>
-        <p class="ex-note">($117 editors + $156 caseworkers + $0 viewers.) Budget-line item, no procurement needed.</p>
-      </div>
-      <div class="example-card">
-        <p class="ex-label">Mid-size county Dept. of Social Services</p>
-        <p class="ex-config">4 editors · 18 caseworkers · 6 viewers · 22 pathways · simulation mode.</p>
-        <p class="ex-price"><strong>Agency, 28 seats, 10% volume → ~$820 / month</strong>, ~$9,860 / year.</p>
-        <p class="ex-note">With annual commit: ~$8,090 / year. Standard departmental procurement.</p>
-      </div>
-      <div class="example-card">
-        <p class="ex-label">State agency, multi-county</p>
-        <p class="ex-config">12 editors · 80 caseworkers · 30 viewers · custom domain · BAA required.</p>
-        <p class="ex-price"><strong>Enterprise → ~$45,000 / year</strong> typical.</p>
-        <p class="ex-note">Includes custom integrations and SOC 2 docs.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section>
   <div class="wrap">
     <h2 class="h3">FAQ</h2>
@@ -1356,31 +1294,6 @@
     margin-top: 0.2rem;
     opacity: 0.85;
   }
-
-  /* Pricing notes */
-  .pricing-notes {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.6rem;
-  }
-  @media (max-width: 860px) {
-    .pricing-notes { grid-template-columns: 1fr; }
-  }
-  .pn-card {
-    padding: 2.4rem;
-    background: rgba(0,0,0,0.03);
-    border-radius: 1.2rem;
-  }
-  .pn-label {
-    font-size: 1.2rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    opacity: 0.55;
-    margin-bottom: 0.8rem;
-    font-family: "Geist Mono", ui-monospace, monospace;
-  }
-  .pn-card p:last-child { font-size: 1.5rem; line-height: 1.55; margin: 0; }
-
   /* Feature comparison */
   .feature-block { margin-bottom: 5.6rem; }
   .feature-title {
@@ -1430,29 +1343,6 @@
     padding: 0.1rem 0.4rem;
     border-radius: 0.3rem;
   }
-
-  /* Worked examples */
-  .examples-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.6rem;
-  }
-  @media (max-width: 1100px) {
-    .examples-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 700px) {
-    .examples-grid { grid-template-columns: 1fr; }
-  }
-  .example-card {
-    padding: 2.4rem;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 1.2rem;
-    background: var(--white, #fff);
-  }
-  .ex-label { font-size: 1.3rem; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.6; margin-bottom: 0.8rem; font-family: "Geist Mono", ui-monospace, monospace; }
-  .ex-config { font-size: 1.4rem; opacity: 0.75; margin-bottom: 1.2rem; line-height: 1.5; }
-  .ex-price { font-size: 1.6rem; margin-bottom: 0.6rem; }
-  .ex-note { font-size: 1.3rem; opacity: 0.6; line-height: 1.5; margin: 0; }
 
   /* FAQ — inherits existing details/summary styles below */
   details {
