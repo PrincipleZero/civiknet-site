@@ -1389,13 +1389,19 @@
     padding-bottom: 0.8rem;
     border-bottom: 1px solid rgba(0,0,0,0.1);
   }
-  .feature-table-wrap { overflow-x: auto; }
+  .feature-table-wrap { overflow-x: auto; width: 100%; }
   .feature-table {
     width: 100%;
+    max-width: 100%;
     border-collapse: collapse;
     font-size: 1.4rem;
-    min-width: 72rem;
+    table-layout: fixed;
   }
+  /* Lock column widths: Feature ~40%, then 5 tier columns share the rest evenly */
+  .feature-table thead th:first-child,
+  .feature-table tbody td:first-child { width: 40%; }
+  .feature-table thead th:not(:first-child),
+  .feature-table tbody td:not(:first-child) { width: 12%; }
   .feature-table thead th {
     text-align: left;
     padding: 1.2rem 1.2rem;
@@ -1406,11 +1412,13 @@
     text-transform: uppercase;
     opacity: 0.65;
   }
-  .feature-table thead th:not(:first-child) { text-align: center; width: 11rem; }
+  .feature-table thead th:not(:first-child) { text-align: center; }
   .feature-table tbody td {
     padding: 1.2rem 1.2rem;
     border-bottom: 1px solid rgba(0,0,0,0.06);
     vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
   .feature-table tbody td:not(:first-child) { text-align: center; }
   .feature-table tbody td.ck { color: #1a1a1a; font-weight: 600; }
