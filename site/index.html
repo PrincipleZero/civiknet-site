@@ -846,13 +846,97 @@
     </div>
   </div>
 </section>
+
+<section style="background: var(--white); padding: 8rem 0;">
+  <div class="columns margin-m">
+    <div class="gc gc-12 text-c">
+      <p class="eyebrow blue"><strong>How we build it</strong></p>
+      <h2 class="margin-s" style="max-width: 56rem; margin-inline: auto;">Three parts. One system.</h2>
+      <p style="max-width: 58rem; margin: 0 auto;">CivikAccess is built on three parts. <strong>Formation</strong> draws the path families take. <strong>Privacy</strong> lets it run without using names. <strong>Navigation</strong> helps families find their way.</p>
+    </div>
+  </div>
+  <div class="columns pillar-cards">
+    <div class="gc gc-4 pillar-card">
+      <p class="pillar-num">01</p>
+      <p class="pillar-label">Formation</p>
+      <h3>Speed</h3>
+      <p>The map of how help moves shows up in seconds. Workers fix it when things change in real life.</p>
+    </div>
+    <div class="gc gc-4 pillar-card">
+      <p class="pillar-num">02</p>
+      <p class="pillar-label">Privacy</p>
+      <h3>Trust</h3>
+      <p>We follow the work like a package. We never need a name. There's no big file with everyone's info.</p>
+    </div>
+    <div class="gc gc-4 pillar-card">
+      <p class="pillar-num">03</p>
+      <p class="pillar-label">Navigation</p>
+      <h3>Reach</h3>
+      <p>Families see one clear path. When they get stuck, help reaches them at that exact step.</p>
+    </div>
+  </div>
+  <div class="columns" style="margin-top: 4rem">
+    <div class="gc gc-12 text-c">
+      <p style="font-size: 1.8rem; opacity: 0.65; max-width: 60rem; margin-inline: auto;"><em>Speed gets things moving. Trust keeps people safe. Reach brings help all the way to the door.</em></p>
+    </div>
+  </div>
+  <style>
+    .pillar-cards { row-gap: 2rem; margin-top: 1.6rem; }
+    .pillar-card {
+      padding: 3.2rem 2.4rem;
+      border: 1px solid rgba(0,0,0,0.1);
+      border-radius: 1.6rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      background: var(--white, #fff);
+    }
+    .pillar-card:hover { border-color: rgba(0,0,0,0.25); transform: translateY(-2px); }
+    .pillar-num {
+      font-family: "Geist Mono", ui-monospace, monospace;
+      font-size: 1.2rem;
+      opacity: 0.4;
+      margin-bottom: 1.2rem;
+    }
+    .pillar-label {
+      font-family: "Geist Mono", ui-monospace, monospace;
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+      opacity: 0.55;
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+    }
+    .pillar-card h3 {
+      font-size: 2.8rem;
+      margin-bottom: 1.6rem;
+      line-height: 1.1;
+    }
+    .pillar-card p {
+      font-size: 1.5rem;
+      line-height: 1.55;
+      margin: 0;
+      color: rgba(0,0,0,0.75);
+    }
+    @media (max-width: 860px) {
+      .pillar-cards .pillar-card { grid-column: span 12 !important; }
+    }
+    .pillar-list { list-style: none; padding: 0; }
+    .pillar-list li {
+      padding: 1.2rem 0;
+      line-height: 1.55;
+      font-size: 1.5rem;
+    }
+    .pillar-list li + li {
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+  </style>
+</section>
 <div style="height: 8rem; background: var(--white);"></div>
 <section class="no-padding" style="background: var(--white);">
   <div class="home-wrap" style="display: block;">
   <div class="home-product-card bg-sand active">
     <div class="home-product-card-content flow center">
       <p class="h2">CivikAccess</p>
-      <p class="fade-8" style="max-width: 47rem">The platform behind the Sprint. Built around the pathway — not the single case. Built around the workers on the ground — not the dashboard at the top. We route the work, not the family's identity. The platform knows what's happening. It does not know who it's happening to.</p>
+      <p class="fade-8" style="max-width: 47rem">CivikAccess draws the path a family takes to get help — in seconds. Workers fix it when things change. Families see what to do next, even when they get stuck. And the whole thing runs without sharing the family's name.</p>
+      <p class="fade-8" style="max-width: 47rem">We route the work, not the family's identity. The platform knows what's happening. It does not know who it's happening to.</p>
       <a href="/civikaccess" class="btn bg-blue white">Explore CivikAccess</a>
     </div>
     <div class="home-product-card-icons type-small" style="margin-bottom: 0">
@@ -861,14 +945,14 @@
           <path fill-rule="evenodd" clip-rule="evenodd" d="M4.40438 4.41491C6.97525 1.84404 11.144 1.84323 13.7149 4.41393C16.0656 6.76483 16.2649 10.4505 14.3165 13.0301L17.3858 16.0995C17.7434 16.4573 17.7433 17.0375 17.3858 17.3954C17.0279 17.7531 16.4469 17.754 16.0889 17.3964L13.0196 14.327C10.4401 16.2747 6.75503 16.0749 4.40438 13.7245C1.83386 11.1537 1.83406 6.98582 4.40438 4.41491ZM12.6544 5.47448C10.6692 3.48956 7.45001 3.49037 5.46493 5.47545C3.48039 7.46058 3.48019 10.6789 5.46493 12.6639C7.44998 14.6488 10.6693 14.6487 12.6544 12.6639C14.6392 10.6788 14.6392 7.45955 12.6544 5.47448Z" fill="black"></path>
         </svg>
         <strong>Coordinate</strong>
-        <span class="fade-8">Shared coordination terms across every partner</span>
+        <span class="fade-8">One shared map. Agency, partner, vendor — all on the same page.</span>
       </div>
       <div class="home-product-card-icon">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M3.95068 5.94714C3.54028 4.71473 4.71253 3.54248 5.94494 3.95287L15.9618 7.28815C17.3758 7.7594 17.4068 9.74835 16.0081 10.2637L11.809 11.8112L10.2615 16.0103C9.74615 17.409 7.75719 17.3781 7.28596 15.964L3.95068 5.94714ZM8.78165 15.4655L10.3291 11.2663C10.4888 10.833 10.8308 10.491 11.2641 10.3313L15.4633 8.78385L5.44637 5.44857L8.78165 15.4655Z" fill="black"></path>
         </svg>
-        <strong>Close loops</strong>
-        <span class="fade-8">Every handoff tracked through a nine-state lifecycle</span>
+        <strong>Track</strong>
+        <span class="fade-8">Follow every handoff to the end. Did help arrive?</span>
       </div>
       <div class="home-product-card-icon">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -876,7 +960,7 @@
           <path fill-rule="evenodd" clip-rule="evenodd" d="M14.8418 1.75195C15.7696 0.824217 17.2734 0.824221 18.2012 1.75195C19.1289 2.67977 19.1289 4.18351 18.2012 5.11133L12.082 11.2314C11.8655 11.4479 11.5905 11.5975 11.291 11.6611L8.61524 12.2275C8.36699 12.2801 8.10817 12.2038 7.92871 12.0244C7.74931 11.845 7.67299 11.5861 7.72559 11.3379L8.29199 8.66211C8.35558 8.36265 8.50523 8.0876 8.72168 7.87109L14.8418 1.75195ZM17.1406 2.8125C16.7986 2.47055 16.2444 2.47055 15.9023 2.8125L9.78223 8.93164C9.77978 8.9341 9.77846 8.93766 9.77637 8.94043L11.0117 10.1758C11.0146 10.1737 11.019 10.1734 11.0215 10.1709L17.1406 4.05078C17.4826 3.70875 17.4826 3.15453 17.1406 2.8125Z" fill="black"></path>
         </svg>
         <strong>Listen</strong>
-        <span class="fade-8">Frontline workers reshape the pathway as reality shifts</span>
+        <span class="fade-8">When real life changes, workers fix the map. We call that drift.</span>
       </div>
       <div class="home-product-card-icon">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -884,7 +968,7 @@
           <path d="M16.4648 6.79545C16.4648 6.46796 16.2905 6.16525 16.0068 6.00151L10.457 2.7974C10.1734 2.63366 9.82366 2.63366 9.54004 2.7974L3.99023 6.00151C3.70662 6.16525 3.53125 6.46796 3.53125 6.79545V13.2046C3.53137 13.532 3.70671 13.8349 3.99023 13.9986L9.54004 17.2027C9.82365 17.3664 10.1734 17.3664 10.457 17.2027L16.0068 13.9986C16.2904 13.8349 16.4647 13.532 16.4648 13.2046V6.79545ZM17.9648 13.2046C17.9647 14.0679 17.5045 14.8658 16.7568 15.2974L11.207 18.5015C10.4593 18.9332 9.53776 18.9332 8.79004 18.5015L3.24023 15.2974C2.49261 14.8658 2.03137 14.0679 2.03125 13.2046V6.79545C2.03125 5.93206 2.49252 5.13437 3.24023 4.70268L8.79004 1.49858C9.53776 1.06688 10.4593 1.06688 11.207 1.49858L16.7568 4.70268C17.5046 5.13437 17.9648 5.93206 17.9648 6.79545V13.2046Z" fill="black"></path>
         </svg>
         <strong>Protect</strong>
-        <span class="fade-8">Privacy by architecture — coordination without identification</span>
+        <span class="fade-8">We follow the work like a package. We never need a name.</span>
       </div>
       <div class="home-product-card-icon">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -892,7 +976,7 @@
           <path d="M13.7333 6.26674L8.06661 8.46674L6.26661 13.7334L11.9333 11.5334L13.7333 6.26674ZM10 11.0001C9.44773 11.0001 9.00002 10.5523 9.00002 10.0001C9.00002 9.44781 9.44773 9.00009 10 9.00009C10.5523 9.00009 11 9.44781 11 10.0001C11 10.5523 10.5523 11.0001 10 11.0001Z" fill="black"></path>
         </svg>
         <strong>Navigate</strong>
-        <span class="fade-8">Families see one clear pathway — phone or printed QR sheet</span>
+        <span class="fade-8">Families see their next step. On a phone or a printed QR sheet.</span>
       </div>
     </div>
     <div class="home-product-card-display" style="margin: 6.4rem auto; max-width: 80rem; padding-bottom: 6.4rem;">
@@ -922,12 +1006,18 @@
 <section>
   <div class="columns">
     <div class="gc text-c flow">
-      <p class="eyebrow blue"><strong>Make help frictionless</strong></p>
+      <p class="eyebrow blue"><strong>Navigation</strong></p>
       <h2>
         Built for the family,<br class="hide-small">
         not just the agency.
       </h2>
-      <p style="max-width: 56rem">A family in crisis sees one clear pathway &#8212; the next step, then the next. When someone gets stuck, CivikAccess sees where, and help reaches them at that exact point. Works from their phone or a printed sheet with a QR code. The goal is simple: make help frictionless.</p>
+      <p style="max-width: 56rem">Most tools are built for workers. They hand a family a list and say &#8220;good luck.&#8221; That&#8217;s why most help fails &#8212; no one can reach the family after they walk out the door.</p>
+      <ul class="pillar-list" style="max-width: 56rem; margin: 2.4rem auto; text-align: left;">
+        <li><strong>A clear path, step by step.</strong> Families see what to do next. Then what to do after that.</li>
+        <li><strong>We see when they&#8217;re stuck.</strong> If a family stops moving forward, we see where. Help reaches them right there.</li>
+        <li><strong>Works anywhere.</strong> On a phone. From a printed QR sheet. With or without internet.</li>
+      </ul>
+      <p style="max-width: 56rem"><em>The goal is simple: make help frictionless.</em></p>
       <a href="/civikaccess/book-intro" class="btn bg-black white">Book an alignment conversation</a>
     </div>
   </div>
@@ -936,10 +1026,10 @@
 <section>
   <div class="columns">
     <div class="gc text-c flow">
-      <p class="eyebrow blue"><strong>Coordination layer</strong></p>
+      <p class="eyebrow blue"><strong>Formation</strong></p>
       <h2>
-        One operating layer<br class="hide-small">
-        for public-service coordination.
+        Draw the path in seconds.<br class="hide-small">
+        Keep it true over time.
       </h2>
       <p style="max-width: 52rem"><strong>Stand up coordination in days, not months. The first pathway forms in seconds.</strong> Map pathways once. Publish them across every program. Update them from the field. The work that holds the system together becomes visible &#8212; and reliable.</p>
       <a href="/civikaccess/book-intro" class="btn bg-black white">Book an alignment conversation</a>
@@ -1128,7 +1218,7 @@
 <section>
   <div class="columns margin-m">
     <div class="gc gc-12 text-c">
-      <p class="eyebrow blue"><strong>Privacy by architecture</strong></p>
+      <p class="eyebrow blue"><strong>Privacy</strong></p>
       <h2 class="margin-s">Coordination without identification</h2>
     </div>
   </div>
@@ -1138,6 +1228,11 @@
         <img src="/img/stock/deepmind-coordination.jpg" alt="Coordination without identification" style="width: 100%; height: auto; display: block; border-radius: 1.6rem;">
       </div>
       <p class="type-small margin-s" style="max-width: 53rem"><span class="fade">A family can be supported through an entire pathway — across multiple agencies — without their personal identifying information ever entering CivikAccess in a form that can be surfaced, queried, or extracted. Personal data stays inside the agency that already holds it; the platform routes the work, not the person.</span></p>
+      <ul class="pillar-list" style="max-width: 53rem; margin: 2.4rem auto 0; text-align: left;">
+        <li><strong>The package model.</strong> A family moves through the system like a tracked package &#8212; followed all the way, without anyone in the middle knowing who&#8217;s inside.</li>
+        <li><strong>Names stay at the edge.</strong> Personal info lives with the agency, partner, or vendor &#8212; the place that already has it. Not in the middle.</li>
+        <li><strong>No central file.</strong> There&#8217;s no big shared list of everyone in the system. That&#8217;s the biggest reason agencies can&#8217;t work together &#8212; gone.</li>
+      </ul>
     </div>
   </div>
 </section>
