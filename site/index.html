@@ -990,7 +990,9 @@
     .home-product-card.active { margin-inline: 0; border-radius: 0; padding-inline: 7.5rem; }
     .home-product-card.bg-sand { background: var(--sand, #F4F1EA); }
     .home-product-card-content { display: flex; flex-direction: column; align-items: center; gap: 2.4rem; max-width: 80rem; margin-inline: auto; }
-    .home-product-card-icons { max-width: 108rem; display: grid; grid-template-columns: repeat(5, 1fr); row-gap: 1.2rem; column-gap: 2rem; margin-inline: auto; margin-block: 4.8rem; }
+    .home-product-card-icons { max-width: 91.2rem; display: grid; grid-template-columns: repeat(4, 1fr); row-gap: 1.2rem; column-gap: 2.4rem; margin-inline: auto; margin-block: 4.8rem; }
+    /* The sand CivikAccess card has 5 tiles (incl. Navigate); widen and use 5 columns there only */
+    .home-product-card.bg-sand .home-product-card-icons { max-width: 108rem; grid-template-columns: repeat(5, 1fr); column-gap: 2rem; }
     .home-product-card-icon { display: flex; flex-direction: column; align-items: center; }
     .home-product-card-icon span { text-wrap: balance; }
     .home-product-card-icon svg { margin-bottom: 0.8rem; }
