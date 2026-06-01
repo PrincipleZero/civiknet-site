@@ -237,6 +237,68 @@
   .docs-section-grid { grid-template-columns: 1fr; }
 }
 
+/* --- Figure + image placeholder --- */
+.docs-figure {
+  margin: 2.4rem 0 3.2rem;
+  max-width: 100%;
+}
+.docs-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 1.2rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.docs-figure figcaption {
+  margin-top: 1rem;
+  font-size: 1.35rem;
+  line-height: 1.45;
+  color: rgba(0, 0, 0, 0.55);
+  font-family: "Geist Mono", ui-monospace, monospace;
+  letter-spacing: 0.02em;
+}
+
+.docs-img-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px dashed rgba(0, 0, 0, 0.2);
+  border-radius: 1.2rem;
+  padding: 3.2rem 2.4rem;
+  text-align: center;
+}
+.docs-img-placeholder.ph-16-9 { aspect-ratio: 16 / 9; }
+.docs-img-placeholder.ph-4-3  { aspect-ratio: 4 / 3; }
+.docs-img-placeholder.ph-2-1  { aspect-ratio: 2 / 1; }
+.docs-img-placeholder.ph-1-2  { aspect-ratio: 1 / 2; max-width: 30rem; margin-inline: auto; }
+.docs-img-placeholder .ph-label {
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.5);
+  margin: 0 0 1rem;
+}
+.docs-img-placeholder .ph-desc {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  color: rgba(0, 0, 0, 0.75);
+  max-width: 48rem;
+  margin: 0 0 0.8rem;
+}
+.docs-img-placeholder .ph-spec {
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.5);
+  word-break: break-all;
+  max-width: 56rem;
+  margin: 0;
+}
+
 /* --- The "page moved" body used by old pages with the docs chrome --- */
 .docs-moved {
   grid-column: 1 / -1;
