@@ -6,11 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&family=Caveat:wght@400;600;700&family=Albert+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&family=Albert+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  /* Dark-mode palette — paired to the #141414 Access Reliability card */
   --paper: #141414;
   --paper-deep: #1a1a1a;
   --paper-darker: #222222;
@@ -20,438 +18,87 @@
   --ink-whisper: rgba(255, 255, 255, 0.06);
   --teal: #4cb8b8;
   --teal-deep: #2d8585;
-  --teal-soft: rgba(76, 184, 184, 0.18);
-  --teal-whisper: rgba(76, 184, 184, 0.08);
   --rust: #e07d4a;
   --rust-deep: #c4663a;
-  --rust-soft: rgba(224, 125, 74, 0.22);
   --olive: #a3b85a;
   --olive-deep: #7a8e3a;
-  --amber: #d4a72c;
 
   --font-display: 'Crimson Pro', Georgia, serif;
   --font-body: 'Albert Sans', -apple-system, sans-serif;
   --font-mono: 'DM Mono', ui-monospace, "SF Mono", Menlo, monospace;
-  --font-hand: 'Caveat', cursive;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
 }
 
 body {
-  background: var(--paper-deep);
+  background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ====== TOP BAR ====== */
-.top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 36px;
-  border-bottom: 1px solid var(--ink-faint);
-  background: var(--paper);
-  flex-shrink: 0;
+/* ====== FRAME ====== */
+.frame {
+  width: 100%;
   position: relative;
-  z-index: 50;
-}
-
-.brand {
-  display: flex;
-  align-items: baseline;
-  gap: 14px;
-}
-
-.brand-mark {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: var(--teal);
-  border: 1px solid var(--teal);
-  padding: 4px 8px;
-  border-radius: 2px;
-}
-
-.brand-title {
-  font-family: var(--font-display);
-  font-size: 21px;
-  font-weight: 500;
-  letter-spacing: 0.005em;
-  color: var(--ink);
-}
-
-.brand-subtitle {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--ink-soft);
-}
-
-/* Step indicator */
-.step-indicator {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.step-pills {
-  display: flex;
-  gap: 6px;
-}
-
-.step-pill {
-  width: 32px;
-  height: 5px;
-  background: var(--ink-whisper);
-  border-radius: 1px;
-  transition: background 0.4s ease, transform 0.3s ease;
-  cursor: pointer;
-}
-.step-pill:hover { background: var(--ink-faint); }
-.step-pill.completed { background: var(--ink); }
-.step-pill.active {
-  background: var(--teal);
-  transform: scaleY(1.6);
-}
-
-.step-counter {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  color: var(--ink-soft);
-  font-variant-numeric: tabular-nums;
-}
-
-/* Controls */
-.controls {
-  display: flex;
-  gap: 6px;
-}
-
-.control-btn {
-  width: 38px;
-  height: 38px;
-  border: 1px solid var(--ink-faint);
-  background: transparent;
-  color: var(--ink);
-  cursor: pointer;
-  border-radius: 3px;
-  font-family: var(--font-mono);
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-.control-btn:hover {
-  background: var(--ink);
-  color: var(--paper);
-  border-color: var(--ink);
-}
-.control-btn.playing {
-  background: var(--teal);
-  color: var(--paper);
-  border-color: var(--teal);
-}
-
-/* ====== STAGE ====== */
-.stage {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
   background: var(--paper);
+  padding: 56px 36px 64px;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 24px;
+  border-bottom: 1px solid var(--ink-whisper);
+}
+.frame:last-child { border-bottom: 0; }
+
+.frame[data-state="reliable"] {
+  background:
+    radial-gradient(ellipse at center top, #1c1c1a 0%, #1a1a18 60%, #181816 100%);
 }
 
-/* Corner crops (architectural plate chrome) */
+/* Architectural chrome */
 .corner-crop {
   position: absolute;
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-color: var(--ink-soft);
   border-style: solid;
   border-width: 0;
   opacity: 0.5;
   pointer-events: none;
-  z-index: 10;
 }
 .corner-crop.tl { top: 18px; left: 18px; border-top-width: 1px; border-left-width: 1px; }
 .corner-crop.tr { top: 18px; right: 18px; border-top-width: 1px; border-right-width: 1px; }
 .corner-crop.bl { bottom: 18px; left: 18px; border-bottom-width: 1px; border-left-width: 1px; }
 .corner-crop.br { bottom: 18px; right: 18px; border-bottom-width: 1px; border-right-width: 1px; }
 
-/* FIG label (plate-style) */
 .fig-label {
   position: absolute;
-  top: 30px;
+  top: 28px;
   left: 32px;
   font-family: var(--font-mono);
   font-size: 9px;
   text-transform: uppercase;
   letter-spacing: 0.22em;
   color: var(--ink-soft);
-  z-index: 10;
   pointer-events: none;
 }
 
-.scene {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.6s ease, visibility 0.6s;
-}
-.scene.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* ===== SCENE 0: Process diagram (Excalidraw style) ===== */
-.scene-process {
-  background: var(--paper);
-  background-image:
-    radial-gradient(circle at 20% 30%, rgba(76, 184, 184, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(224, 125, 74, 0.08) 0%, transparent 50%);
-}
-
-.process-wrapper {
-  width: 92%;
-  height: 80%;
-  max-width: 1280px;
+/* ====== MAP ====== */
+.map-wrap {
   position: relative;
-}
-
-#processCanvas {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 1500 / 800;
+  max-height: 70vh;
 }
-
-.process-caption {
-  position: absolute;
-  top: 8%;
-  right: 6%;
-  font-family: var(--font-hand);
-  font-size: 26px;
-  color: var(--ink);
-  transform: rotate(-3deg);
-  opacity: 0;
-  animation: fadeInLate 1.2s ease 0.8s forwards;
-  max-width: 260px;
-  line-height: 1.1;
-  text-align: left;
-}
-
-.process-caption .arrow-down {
-  font-size: 32px;
-  color: var(--rust);
-  display: inline-block;
-  margin-top: 4px;
-}
-
-@keyframes fadeInLate {
-  from { opacity: 0; transform: translateY(8px) rotate(-3deg); }
-  to { opacity: 1; transform: translateY(0) rotate(-3deg); }
-}
-
-/* ===== SCENE 1-5: Isometric Map ===== */
-.scene-map {
-  background:
-    radial-gradient(ellipse at center top, var(--paper) 0%, var(--paper-deep) 60%, var(--paper-darker) 100%);
-}
-
-.scene-map.scene-flow,
-.scene-map.scene-stuck {
-  background:
-    radial-gradient(ellipse at center top, var(--paper) 0%, var(--paper-deep) 60%, var(--paper-darker) 100%);
-}
-
-.scene-map.scene-reliable {
-  background:
-    radial-gradient(ellipse at center top, #1c1c1a 0%, #1a1a18 60%, #181816 100%);
-}
-
-#mapSvg {
+.map-svg {
   width: 100%;
   height: 100%;
   display: block;
-}
-
-/* ===== COUNTER PANEL ===== */
-.counter-panel {
-  position: absolute;
-  top: 88px;
-  right: 36px;
-  background: var(--paper);
-  border: 1px solid var(--ink-faint);
-  padding: 18px 20px 16px;
-  min-width: 240px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease, visibility 0.5s;
-  z-index: 20;
-  box-shadow: 0 1px 0 var(--ink-whisper);
-}
-.counter-panel.visible {
-  opacity: 1;
-  visibility: visible;
-}
-
-.counter-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--ink-faint);
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-}
-
-.counter-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: var(--ink-soft);
-}
-
-.live-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--teal);
-  animation: livePulse 1.6s ease-in-out infinite;
-}
-@keyframes livePulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.8); }
-}
-
-.counter-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 5px 0;
-}
-
-.counter-row .label {
-  color: var(--ink-soft);
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
-.counter-row .value {
-  font-family: var(--font-mono);
-  font-size: 16px;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  color: var(--ink);
-}
-
-.counter-row.entered .value { color: var(--ink); }
-.counter-row.inprogress .value { color: var(--teal); }
-.counter-row.completed .value { color: var(--olive); }
-.counter-row.stuck .value { color: var(--rust); }
-.counter-row.lost .value { color: var(--ink-soft); }
-
-.counter-divider {
-  height: 1px;
-  background: var(--ink-faint);
-  margin: 10px 0;
-}
-
-.counter-summary {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding-top: 4px;
-}
-
-.counter-summary .label {
-  color: var(--ink-soft);
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
-.counter-summary .rate {
-  font-family: var(--font-display);
-  font-size: 22px;
-  font-weight: 500;
-  color: var(--ink);
-  letter-spacing: -0.01em;
-}
-
-/* ===== BOTTOM NARRATION ===== */
-.bottom-panel {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 28px 56px 32px;
-  background: linear-gradient(180deg, transparent 0%, rgba(20, 20, 20, 0.92) 35%, rgba(20, 20, 20, 1) 100%);
-  pointer-events: none;
-  z-index: 15;
-}
-
-.narration {
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-.narration-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--teal);
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.narration-eyebrow::before {
-  content: "";
-  display: inline-block;
-  width: 20px;
-  height: 1px;
-  background: var(--teal);
-}
-
-.narration-title {
-  font-family: var(--font-display);
-  font-size: 32px;
-  font-weight: 500;
-  line-height: 1.15;
-  color: var(--ink);
-  margin-bottom: 8px;
-  letter-spacing: -0.005em;
-}
-
-.narration-desc {
-  font-family: var(--font-body);
-  font-size: 14.5px;
-  line-height: 1.55;
-  color: var(--ink-soft);
-  max-width: 640px;
-  font-weight: 400;
 }
 
 /* SVG building styles */
@@ -465,1119 +112,732 @@ body {
 .tree-canopy { fill: #4a5a2a; opacity: 0.55; stroke: #2f3c1a; stroke-width: 0.4; }
 .tree-trunk { fill: #3a281c; opacity: 0.7; }
 
-/* Route building (active) */
-.route-bldg .bldg-top { fill: var(--paper); stroke: var(--ink); stroke-width: 0.9; }
-.route-bldg .bldg-east { fill: var(--paper-deep); stroke: var(--ink); stroke-width: 0.7; }
-.route-bldg .bldg-south { fill: var(--paper-darker); stroke: var(--ink); stroke-width: 0.7; }
+.route-bldg .bldg-top { fill: #2a2a26; stroke: var(--ink); stroke-width: 0.9; }
+.route-bldg .bldg-east { fill: #1f1f1c; stroke: var(--ink); stroke-width: 0.7; }
+.route-bldg .bldg-south { fill: #181815; stroke: var(--ink); stroke-width: 0.7; }
 
-.route-bldg.active .bldg-top { fill: #2a2a26; }
-.route-bldg.active .bldg-east { fill: #1f1f1c; }
-.route-bldg.active .bldg-south { fill: #181815; }
-
-/* Number pins */
-.pin-circle {
-  fill: var(--paper);
-  stroke: var(--ink);
-  stroke-width: 1.2;
-}
+.pin-circle { fill: var(--paper); stroke: var(--ink); stroke-width: 1.2; }
 .pin-number {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 500;
-  fill: var(--ink);
-  text-anchor: middle;
-  dominant-baseline: central;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  fill: var(--ink); text-anchor: middle; dominant-baseline: central;
 }
 .pin-label {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  fill: var(--ink);
-  text-anchor: middle;
+  font-family: var(--font-mono); font-size: 9.5px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.18em;
+  fill: var(--ink); text-anchor: middle;
 }
 .pin-label-sub {
-  font-family: var(--font-mono);
-  font-size: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  fill: var(--ink-soft);
-  text-anchor: middle;
+  font-family: var(--font-mono); font-size: 8px;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  fill: var(--ink-soft); text-anchor: middle;
 }
 
-/* Route line */
 .route-line {
-  stroke: var(--teal);
-  stroke-width: 1.4;
-  fill: none;
-  stroke-linecap: round;
-  stroke-dasharray: 6 5;
-  opacity: 0.7;
+  stroke: var(--teal); stroke-width: 1.4; fill: none;
+  stroke-linecap: round; stroke-dasharray: 6 5; opacity: 0.7;
 }
 
-/* Nodes (the family dots) */
-.node-dot {
-  stroke: var(--ink);
-  stroke-width: 0.6;
-}
+.node-dot { stroke: var(--ink); stroke-width: 0.6; }
 
-/* Warning indicator (stuck handoff) */
 .stuck-warning {
-  fill: none;
-  stroke: var(--rust);
-  stroke-width: 1.4;
-  opacity: 0;
-}
-
-.stuck-warning.active {
-  opacity: 0.7;
+  fill: none; stroke: var(--rust); stroke-width: 1.4; opacity: 0.5;
   animation: stuckPulse 1.8s ease-in-out infinite;
 }
-
 @keyframes stuckPulse {
   0%, 100% { opacity: 0.35; r: 28; stroke-width: 1.2; }
   50% { opacity: 0.7; r: 36; stroke-width: 1.8; }
 }
-
 .stuck-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  fill: var(--rust);
-  text-anchor: middle;
-  opacity: 0;
-  transition: opacity 0.5s;
+  font-family: var(--font-mono); font-size: 9px;
+  text-transform: uppercase; letter-spacing: 0.18em;
+  fill: var(--rust); text-anchor: middle;
 }
-.stuck-label.visible { opacity: 1; }
 
-/* Reliable overlay */
 .reliable-grid {
-  stroke: var(--teal);
-  stroke-width: 0.4;
-  fill: none;
-  opacity: 0;
-  transition: opacity 1s;
+  stroke: var(--teal); stroke-width: 0.4; fill: none; opacity: 0.25;
 }
-.reliable-grid.visible { opacity: 0.25; }
 
-.reliable-badge {
-  opacity: 0;
-  transition: opacity 0.6s;
+/* ====== NARRATION ====== */
+.narration {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
 }
-.reliable-badge.visible { opacity: 1; }
+.narration-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.narration-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: var(--teal);
+}
+.narration-title {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--ink);
+  margin-bottom: 8px;
+  letter-spacing: -0.005em;
+}
+.narration-desc {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 640px;
+  margin: 0 auto;
+}
 
-/* Hint footer */
-.hint-footer {
+/* ====== COUNTER PANEL ====== */
+.counter-panel {
   position: absolute;
-  bottom: 12px;
-  right: 18px;
+  top: 72px;
+  right: 36px;
+  background: var(--paper);
+  border: 1px solid var(--ink-faint);
+  padding: 16px 18px 14px;
+  min-width: 220px;
+  z-index: 5;
+}
+.counter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--ink-faint);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.counter-label {
   font-family: var(--font-mono);
   font-size: 9px;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   color: var(--ink-soft);
-  opacity: 0.6;
-  pointer-events: none;
+}
+.live-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--teal);
+  animation: livePulse 1.6s ease-in-out infinite;
+}
+@keyframes livePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+.counter-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 4px 0;
+}
+.counter-row .label {
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.counter-row .value {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.counter-row.inprogress .value { color: var(--teal); }
+.counter-row.completed .value { color: var(--olive); }
+.counter-row.stuck .value { color: var(--rust); }
+.counter-divider { height: 1px; background: var(--ink-faint); margin: 8px 0; }
+.counter-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.counter-summary .label {
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.counter-summary .rate {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* Responsive — mobile */
+@media (max-width: 720px) {
+  .frame { padding: 40px 20px 48px; }
+  .narration-title { font-size: 22px; }
+  .counter-panel {
+    position: static;
+    margin: 0 auto 16px;
+    min-width: 0;
+    width: 100%;
+    max-width: 360px;
+  }
+  .fig-label { font-size: 8px; }
 }
 </style>
 </head>
 <body>
 
-<div class="stage">
+<!-- ===== STATE 03 · OVERLAY ===== -->
+<section class="frame" data-state="overlay">
   <div class="corner-crop tl"></div>
   <div class="corner-crop tr"></div>
   <div class="corner-crop bl"></div>
   <div class="corner-crop br"></div>
-  <div class="fig-label">SCALE — N.T.S. · DATUM 00 · SHEET A · 08/08</div>
+  <div class="fig-label">SCALE — N.T.S. · DATUM 00 · SHEET A · 01/04</div>
 
-  <!-- ===== Scene 0: Process diagram (hand-drawn) ===== -->
-  <div class="scene scene-process active" data-scene="0">
-    <div class="process-wrapper">
-      <canvas id="processCanvas" width="1280" height="640"></canvas>
-      <div class="process-caption">
-        this is the plan<br>
-        on the whiteboard<br>
-        <span class="arrow-down">↓</span>
-      </div>
-    </div>
+  <div class="map-wrap">
+    <svg class="map-svg" data-state="overlay" viewBox="0 0 1500 800" preserveAspectRatio="xMidYMid meet"></svg>
   </div>
 
-  <!-- ===== Scenes 1-5: Isometric Map ===== -->
-  <div class="scene scene-map" data-scene="1">
-    <svg id="mapSvg" viewBox="0 0 1500 800" preserveAspectRatio="xMidYMid meet">
-      <defs>
-        <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur in="SourceAlpha" stdDeviation="1.2"/>
-          <feOffset dx="0" dy="1.5" result="offsetblur"/>
-          <feComponentTransfer><feFuncA type="linear" slope="0.25"/></feComponentTransfer>
-          <feMerge>
-            <feMergeNode/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
-      </defs>
-
-      <g id="mapRoot" transform="translate(700, 90)">
-        <g id="layerGround"></g>
-        <g id="layerRoads"></g>
-        <g id="layerAmbientBuildings"></g>
-        <g id="layerTrees"></g>
-        <g id="layerRouteLine" style="display:none;"></g>
-        <g id="layerRouteBuildings"></g>
-        <g id="layerPins" style="display:none;"></g>
-        <g id="layerStuckWarning"></g>
-        <g id="layerNodes"></g>
-        <g id="layerReliableOverlay"></g>
-      </g>
-    </svg>
+  <div class="narration">
+    <div class="narration-eyebrow">STATE 03 · OVERLAY</div>
+    <h2 class="narration-title">Place the process on the place.</h2>
+    <p class="narration-desc">Each step lives at an address. The route becomes traceable — not as boxes and arrows, but as the actual journey a family takes through their week, across agencies, in working hours.</p>
   </div>
+</section>
 
-  <!-- Counter panel -->
-  <div class="counter-panel" id="counterPanel">
+<!-- ===== STATE 04 · LIVE FLOW ===== -->
+<section class="frame" data-state="flow">
+  <div class="corner-crop tl"></div>
+  <div class="corner-crop tr"></div>
+  <div class="corner-crop bl"></div>
+  <div class="corner-crop br"></div>
+  <div class="fig-label">SCALE — N.T.S. · DATUM 00 · SHEET B · 02/04</div>
+
+  <div class="counter-panel">
     <div class="counter-header">
       <span class="counter-label">Live Pathway Status</span>
       <div class="live-dot"></div>
     </div>
-    <div class="counter-row entered">
-      <span class="label">Families entered</span>
-      <span class="value" id="cntEntered">0</span>
-    </div>
-    <div class="counter-row inprogress">
-      <span class="label">In progress</span>
-      <span class="value" id="cntInProgress">0</span>
-    </div>
-    <div class="counter-row completed">
-      <span class="label">Completed</span>
-      <span class="value" id="cntCompleted">0</span>
-    </div>
-    <div class="counter-row stuck">
-      <span class="label">Stuck · 14+ days</span>
-      <span class="value" id="cntStuck">0</span>
-    </div>
-    <div class="counter-row lost">
-      <span class="label">Lost to follow-up</span>
-      <span class="value" id="cntLost">0</span>
-    </div>
+    <div class="counter-row entered"><span class="label">Families entered</span><span class="value cnt-entered">0</span></div>
+    <div class="counter-row inprogress"><span class="label">In progress</span><span class="value cnt-inprogress">0</span></div>
+    <div class="counter-row completed"><span class="label">Completed</span><span class="value cnt-completed">0</span></div>
+    <div class="counter-row stuck"><span class="label">Stuck · 14+ days</span><span class="value cnt-stuck">0</span></div>
     <div class="counter-divider"></div>
-    <div class="counter-summary">
-      <span class="label">Resolution rate</span>
-      <span class="rate" id="rateValue">—</span>
-    </div>
+    <div class="counter-summary"><span class="label">Resolution rate</span><span class="rate cnt-rate">—</span></div>
   </div>
 
-  <!-- Narration -->
-  <div class="bottom-panel">
-    <div class="narration">
-      <div class="narration-eyebrow" id="sceneEyebrow">STATE 01 · PROCESS DIAGRAM</div>
-      <h2 class="narration-title" id="sceneTitle">First, draw the process.</h2>
-      <p class="narration-desc" id="sceneDescription">This is how partnerships plan coordination — on paper, in a planning session. Steps connect. Handoffs are named. Everyone agrees on the flow. The work, once drawn, looks tractable.</p>
-    </div>
+  <div class="map-wrap">
+    <svg class="map-svg" data-state="flow" viewBox="0 0 1500 800" preserveAspectRatio="xMidYMid meet"></svg>
   </div>
 
-  <div class="hint-footer">← → arrows · space to play</div>
-</div>
+  <div class="narration">
+    <div class="narration-eyebrow">STATE 04 · LIVE FLOW</div>
+    <h2 class="narration-title">Now watch what happens.</h2>
+    <p class="narration-desc">Each dot is a family entering the system. They move through the pathway — step to step, handoff to handoff. When coordination works, this is what it looks like.</p>
+  </div>
+</section>
+
+<!-- ===== STATE 05 · WHERE ACCESS BREAKS ===== -->
+<section class="frame" data-state="stuck">
+  <div class="corner-crop tl"></div>
+  <div class="corner-crop tr"></div>
+  <div class="corner-crop bl"></div>
+  <div class="corner-crop br"></div>
+  <div class="fig-label">SCALE — N.T.S. · DATUM 00 · SHEET C · 03/04</div>
+
+  <div class="counter-panel">
+    <div class="counter-header">
+      <span class="counter-label">Live Pathway Status</span>
+      <div class="live-dot"></div>
+    </div>
+    <div class="counter-row entered"><span class="label">Families entered</span><span class="value cnt-entered">0</span></div>
+    <div class="counter-row inprogress"><span class="label">In progress</span><span class="value cnt-inprogress">0</span></div>
+    <div class="counter-row completed"><span class="label">Completed</span><span class="value cnt-completed">0</span></div>
+    <div class="counter-row stuck"><span class="label">Stuck · 14+ days</span><span class="value cnt-stuck">0</span></div>
+    <div class="counter-divider"></div>
+    <div class="counter-summary"><span class="label">Resolution rate</span><span class="rate cnt-rate">—</span></div>
+  </div>
+
+  <div class="map-wrap">
+    <svg class="map-svg" data-state="stuck" viewBox="0 0 1500 800" preserveAspectRatio="xMidYMid meet"></svg>
+  </div>
+
+  <div class="narration">
+    <div class="narration-eyebrow">STATE 05 · WHERE ACCESS BREAKS</div>
+    <h2 class="narration-title">And here’s where it actually breaks.</h2>
+    <p class="narration-desc">Families stall at the handoff. No one is responsible for confirming the catch. Days pass. Some get lost entirely. This isn’t a personnel problem — it’s an infrastructure gap.</p>
+  </div>
+</section>
+
+<!-- ===== STATE 06 · COORDINATION INFRASTRUCTURE ===== -->
+<section class="frame" data-state="reliable">
+  <div class="corner-crop tl"></div>
+  <div class="corner-crop tr"></div>
+  <div class="corner-crop bl"></div>
+  <div class="corner-crop br"></div>
+  <div class="fig-label">SCALE — N.T.S. · DATUM 00 · SHEET D · 04/04</div>
+
+  <div class="counter-panel">
+    <div class="counter-header">
+      <span class="counter-label">Live Pathway Status</span>
+      <div class="live-dot"></div>
+    </div>
+    <div class="counter-row entered"><span class="label">Families entered</span><span class="value cnt-entered">0</span></div>
+    <div class="counter-row inprogress"><span class="label">In progress</span><span class="value cnt-inprogress">0</span></div>
+    <div class="counter-row completed"><span class="label">Completed</span><span class="value cnt-completed">0</span></div>
+    <div class="counter-row stuck"><span class="label">Stuck · 14+ days</span><span class="value cnt-stuck">0</span></div>
+    <div class="counter-divider"></div>
+    <div class="counter-summary"><span class="label">Resolution rate</span><span class="rate cnt-rate">—</span></div>
+  </div>
+
+  <div class="map-wrap">
+    <svg class="map-svg" data-state="reliable" viewBox="0 0 1500 800" preserveAspectRatio="xMidYMid meet"></svg>
+  </div>
+
+  <div class="narration">
+    <div class="narration-eyebrow">STATE 06 · COORDINATION INFRASTRUCTURE</div>
+    <h2 class="narration-title">Now make the layer operational.</h2>
+    <p class="narration-desc">Pathways visible. Handoffs owned. Outcomes auditable. The work doesn’t change — it becomes accountable. This is the operating layer the field has been missing.</p>
+  </div>
+</section>
 
 <script>
 /* ============================================================
    ISOMETRIC HELPERS
    ============================================================ */
-const TILE_W = 44;
-const TILE_H = 20;
-const HEIGHT_UNIT = 22;
-
+const TILE_W = 44, TILE_H = 20, HEIGHT_UNIT = 22;
 function iso(x, y, z = 0) {
-  return {
-    x: (x - y) * TILE_W,
-    y: (x + y) * TILE_H - z * HEIGHT_UNIT
-  };
+  return { x: (x - y) * TILE_W, y: (x + y) * TILE_H - z * HEIGHT_UNIT };
 }
-
 function svgEl(tag, attrs = {}) {
   const el = document.createElementNS('http://www.w3.org/2000/svg', tag);
   for (const k in attrs) el.setAttribute(k, attrs[k]);
   return el;
 }
-
 function buildingPath(gx, gy, w, d, h) {
-  const A = iso(gx,     gy,     h);
-  const B = iso(gx + w, gy,     h);
-  const C = iso(gx + w, gy + d, h);
-  const D = iso(gx,     gy + d, h);
-  const E_top1 = iso(gx + w, gy,     h);
-  const E_top2 = iso(gx + w, gy + d, h);
-  const E_bot2 = iso(gx + w, gy + d, 0);
-  const E_bot1 = iso(gx + w, gy,     0);
-  const S_top1 = iso(gx,     gy + d, h);
-  const S_top2 = iso(gx + w, gy + d, h);
-  const S_bot2 = iso(gx + w, gy + d, 0);
-  const S_bot1 = iso(gx,     gy + d, 0);
-
+  const A = iso(gx, gy, h), B = iso(gx+w, gy, h), C = iso(gx+w, gy+d, h), D = iso(gx, gy+d, h);
+  const E1 = iso(gx+w, gy, h), E2 = iso(gx+w, gy+d, h), E3 = iso(gx+w, gy+d, 0), E4 = iso(gx+w, gy, 0);
+  const S1 = iso(gx, gy+d, h), S2 = iso(gx+w, gy+d, h), S3 = iso(gx+w, gy+d, 0), S4 = iso(gx, gy+d, 0);
   return {
-    top:   `M ${A.x} ${A.y} L ${B.x} ${B.y} L ${C.x} ${C.y} L ${D.x} ${D.y} Z`,
-    east:  `M ${E_top1.x} ${E_top1.y} L ${E_top2.x} ${E_top2.y} L ${E_bot2.x} ${E_bot2.y} L ${E_bot1.x} ${E_bot1.y} Z`,
-    south: `M ${S_top1.x} ${S_top1.y} L ${S_top2.x} ${S_top2.y} L ${S_bot2.x} ${S_bot2.y} L ${S_bot1.x} ${S_bot1.y} Z`,
-    centerTop: iso(gx + w/2, gy + d/2, h),
-    centerBase: iso(gx + w/2, gy + d/2, 0)
+    top: `M ${A.x} ${A.y} L ${B.x} ${B.y} L ${C.x} ${C.y} L ${D.x} ${D.y} Z`,
+    east: `M ${E1.x} ${E1.y} L ${E2.x} ${E2.y} L ${E3.x} ${E3.y} L ${E4.x} ${E4.y} Z`,
+    south: `M ${S1.x} ${S1.y} L ${S2.x} ${S2.y} L ${S3.x} ${S3.y} L ${S4.x} ${S4.y} Z`
   };
 }
 
 /* ============================================================
-   BUILDING DATA
+   DATA
    ============================================================ */
 const ROUTE_BUILDINGS = [
-  { id: 1, gx: 0,  gy: 5, w: 2.5, d: 2, h: 2.2,  label: 'Family Resource Center', short: 'INTAKE' },
-  { id: 2, gx: 4,  gy: 5, w: 2,   d: 2, h: 2.8,  label: 'Eligibility Office',     short: 'ASSESS' },
-  { id: 3, gx: 7,  gy: 5, w: 2.2, d: 2, h: 3.4,  label: 'Service Match',          short: 'MATCH' },
-  { id: 4, gx: 9,  gy: 9, w: 1.6, d: 1.6, h: 2.0,label: 'Handoff & Confirmation', short: 'HANDOFF' },
-  { id: 5, gx: 13, gy: 7, w: 2,   d: 2, h: 2.6,  label: 'Service Delivery',       short: 'SERVICE' },
-  { id: 6, gx: 16, gy: 4, w: 2,   d: 1.6, h: 2.2,label: 'Resolution & Report',    short: 'RESOLVE' }
+  { id: 1, gx: 0,  gy: 5, w: 2.5, d: 2,   h: 2.2, label: 'Family Resource Center', short: 'INTAKE' },
+  { id: 2, gx: 4,  gy: 5, w: 2,   d: 2,   h: 2.8, label: 'Eligibility Office',     short: 'ASSESS' },
+  { id: 3, gx: 7,  gy: 5, w: 2.2, d: 2,   h: 3.4, label: 'Service Match',          short: 'MATCH' },
+  { id: 4, gx: 9,  gy: 9, w: 1.6, d: 1.6, h: 2.0, label: 'Handoff & Confirmation', short: 'HANDOFF' },
+  { id: 5, gx: 13, gy: 7, w: 2,   d: 2,   h: 2.6, label: 'Service Delivery',       short: 'SERVICE' },
+  { id: 6, gx: 16, gy: 4, w: 2,   d: 1.6, h: 2.2, label: 'Resolution & Report',    short: 'RESOLVE' }
 ];
-
 const AMBIENT_BUILDINGS = [
-  { gx: 2,  gy: 1, w: 1.2, d: 1.2, h: 1.4 },
-  { gx: 0,  gy: 2, w: 1.5, d: 1, h: 1.0 },
-  { gx: 5,  gy: 1, w: 1.4, d: 1.2, h: 1.6 },
-  { gx: 8,  gy: 2, w: 1.6, d: 1.2, h: 1.2 },
-  { gx: 11, gy: 1, w: 1.2, d: 1.4, h: 1.8 },
-  { gx: 13, gy: 2, w: 1.4, d: 1.2, h: 1.2 },
-  { gx: 16, gy: 1, w: 1.2, d: 1.2, h: 1.4 },
-
-  { gx: 2,  gy: 8, w: 1.2, d: 1.2, h: 1.2 },
-  { gx: 5,  gy: 9, w: 1.4, d: 1.2, h: 1.0 },
-  { gx: 12, gy: 10, w: 1.4, d: 1.2, h: 1.4 },
-  { gx: 15, gy: 10, w: 1.2, d: 1.2, h: 1.2 },
-  { gx: 17, gy: 8, w: 1.5, d: 1, h: 1.4 },
-  { gx: 18, gy: 6, w: 1.2, d: 1.2, h: 1.6 },
-
-  { gx: 0,  gy: 8, w: 1.0, d: 1.0, h: 0.9 },
-  { gx: 11, gy: 6, w: 1.2, d: 1.2, h: 1.0 },
-  { gx: 14, gy: 5, w: 1.0, d: 1.0, h: 1.2 }
+  { gx: 2,gy:1,w:1.2,d:1.2,h:1.4 },{ gx:0,gy:2,w:1.5,d:1,h:1.0 },
+  { gx: 5,gy:1,w:1.4,d:1.2,h:1.6 },{ gx:8,gy:2,w:1.6,d:1.2,h:1.2 },
+  { gx:11,gy:1,w:1.2,d:1.4,h:1.8 },{ gx:13,gy:2,w:1.4,d:1.2,h:1.2 },
+  { gx:16,gy:1,w:1.2,d:1.2,h:1.4 },
+  { gx: 2,gy:8,w:1.2,d:1.2,h:1.2 },{ gx:5,gy:9,w:1.4,d:1.2,h:1.0 },
+  { gx:12,gy:10,w:1.4,d:1.2,h:1.4 },{ gx:15,gy:10,w:1.2,d:1.2,h:1.2 },
+  { gx:17,gy:8,w:1.5,d:1,h:1.4 },{ gx:18,gy:6,w:1.2,d:1.2,h:1.6 },
+  { gx: 0,gy:8,w:1.0,d:1.0,h:0.9 },{ gx:11,gy:6,w:1.2,d:1.2,h:1.0 },
+  { gx:14,gy:5,w:1.0,d:1.0,h:1.2 }
 ];
-
 const TREES = [
-  { gx: 1.5, gy: 0.5, scale: 1.0 },
-  { gx: 7,   gy: 0.5, scale: 0.9 },
-  { gx: 10,  gy: 0.5, scale: 1.1 },
-  { gx: 14,  gy: 0.5, scale: 1.0 },
-  { gx: 18,  gy: 0.5, scale: 0.9 },
-
-  { gx: 1.5, gy: 10.5, scale: 1.0 },
-  { gx: 4,   gy: 11,   scale: 0.95 },
-  { gx: 8,   gy: 11,   scale: 1.0 },
-  { gx: 14,  gy: 11.5, scale: 1.05 },
-
-  { gx: 6,   gy: 7,   scale: 0.7 },
-  { gx: 11,  gy: 3.5, scale: 0.75 },
-  { gx: 15.5, gy: 6.5, scale: 0.7 }
+  {gx:1.5,gy:0.5,scale:1.0},{gx:7,gy:0.5,scale:0.9},{gx:10,gy:0.5,scale:1.1},
+  {gx:14,gy:0.5,scale:1.0},{gx:18,gy:0.5,scale:0.9},
+  {gx:1.5,gy:10.5,scale:1.0},{gx:4,gy:11,scale:0.95},{gx:8,gy:11,scale:1.0},
+  {gx:14,gy:11.5,scale:1.05},
+  {gx:6,gy:7,scale:0.7},{gx:11,gy:3.5,scale:0.75},{gx:15.5,gy:6.5,scale:0.7}
 ];
 
-/* ============================================================
-   COLORS for buildings — DARK MODE
-   ============================================================ */
 const C = {
   ambientTop:   '#262626',
   ambientEast:  '#1c1c1c',
-  ambientSouth: '#141414',
-
-  routeTop:     '#36362f',
-  routeEast:    '#28281f',
-  routeSouth:   '#1c1c14',
-
-  groundLine:   'rgba(255, 255, 255, 0.10)'
+  ambientSouth: '#141414'
 };
-
-/* ============================================================
-   MAP RENDERING
-   ============================================================ */
-function renderGround() {
-  const g = document.getElementById('layerGround');
-  g.innerHTML = '';
-
-  const GRID_MIN = -1, GRID_MAX = 20, GRID_MIN_Y = -1, GRID_MAX_Y = 13;
-  for (let i = GRID_MIN; i <= GRID_MAX; i += 2) {
-    const p1 = iso(i, GRID_MIN_Y);
-    const p2 = iso(i, GRID_MAX_Y);
-    g.appendChild(svgEl('line', {
-      x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y,
-      class: 'ground-line'
-    }));
-  }
-  for (let j = GRID_MIN_Y; j <= GRID_MAX_Y; j += 2) {
-    const p1 = iso(GRID_MIN, j);
-    const p2 = iso(GRID_MAX, j);
-    g.appendChild(svgEl('line', {
-      x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y,
-      class: 'ground-line'
-    }));
-  }
-}
-
-function renderRoads() {
-  const g = document.getElementById('layerRoads');
-  g.innerHTML = '';
-
-  const roads = [
-    [{x:0,y:4}, {x:20,y:4}],
-    [{x:0,y:7.2}, {x:20,y:7.2}],
-    [{x:0,y:11}, {x:20,y:11}],
-    [{x:3.5,y:0}, {x:3.5,y:12}],
-    [{x:6.7,y:0}, {x:6.7,y:12}],
-    [{x:10,y:0}, {x:10,y:12}],
-    [{x:12.5,y:0}, {x:12.5,y:12}],
-    [{x:15.5,y:0}, {x:15.5,y:12}],
-    [{x:18.5,y:0}, {x:18.5,y:12}]
-  ];
-
-  for (const [a, b] of roads) {
-    const p1 = iso(a.x, a.y);
-    const p2 = iso(b.x, b.y);
-    g.appendChild(svgEl('line', {
-      x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y,
-      class: 'road'
-    }));
-  }
-}
-
-function renderAmbientBuildings() {
-  const g = document.getElementById('layerAmbientBuildings');
-  g.innerHTML = '';
-
-  const sorted = [...AMBIENT_BUILDINGS].sort((a, b) => (a.gx + a.gy) - (b.gx + b.gy));
-
-  for (const b of sorted) {
-    const paths = buildingPath(b.gx, b.gy, b.w, b.d, b.h);
-    const group = svgEl('g', { class: 'ambient-bldg' });
-    group.appendChild(svgEl('path', { d: paths.south, fill: C.ambientSouth, class: 'bldg-south' }));
-    group.appendChild(svgEl('path', { d: paths.east,  fill: C.ambientEast,  class: 'bldg-east' }));
-    group.appendChild(svgEl('path', { d: paths.top,   fill: C.ambientTop,   class: 'bldg-top' }));
-    g.appendChild(group);
-  }
-}
-
-function renderTrees() {
-  const g = document.getElementById('layerTrees');
-  g.innerHTML = '';
-  const sorted = [...TREES].sort((a, b) => (a.gx + a.gy) - (b.gx + b.gy));
-  for (const t of sorted) {
-    const base = iso(t.gx, t.gy, 0);
-    const top  = iso(t.gx, t.gy, 0.9 * t.scale);
-    const grp = svgEl('g');
-    grp.appendChild(svgEl('rect', {
-      x: base.x - 1, y: base.y - 14 * t.scale, width: 2, height: 14 * t.scale,
-      class: 'tree-trunk'
-    }));
-    grp.appendChild(svgEl('ellipse', {
-      cx: top.x, cy: top.y - 4 * t.scale,
-      rx: 9 * t.scale, ry: 7 * t.scale,
-      class: 'tree-canopy'
-    }));
-    g.appendChild(grp);
-  }
-}
-
-function renderRouteBuildings() {
-  const g = document.getElementById('layerRouteBuildings');
-  g.innerHTML = '';
-  const sorted = [...ROUTE_BUILDINGS].sort((a, b) => (a.gx + a.gy) - (b.gx + b.gy));
-
-  for (const b of sorted) {
-    const paths = buildingPath(b.gx, b.gy, b.w, b.d, b.h);
-    const group = svgEl('g', { class: 'route-bldg active', 'data-id': b.id });
-    group.appendChild(svgEl('path', { d: paths.south, class: 'bldg-south' }));
-    group.appendChild(svgEl('path', { d: paths.east,  class: 'bldg-east' }));
-    group.appendChild(svgEl('path', { d: paths.top,   class: 'bldg-top' }));
-
-    const c = iso(b.gx + b.w/2, b.gy + b.d/2, b.h);
-    group.appendChild(svgEl('circle', {
-      cx: c.x, cy: c.y, r: 3,
-      fill: '#4cb8b8', opacity: '0.95'
-    }));
-
-    g.appendChild(group);
-    b._paths = paths;
-  }
-}
-
-function renderPins() {
-  const g = document.getElementById('layerPins');
-  g.innerHTML = '';
-
-  for (const b of ROUTE_BUILDINGS) {
-    const c = iso(b.gx + b.w/2, b.gy + b.d/2, b.h);
-    const pinY = c.y - 32;
-    const grp = svgEl('g', { class: 'pin-group' });
-
-    grp.appendChild(svgEl('line', {
-      x1: c.x, y1: c.y, x2: c.x, y2: pinY + 12,
-      stroke: '#f0eee4', 'stroke-width': '0.6', opacity: 0.5
-    }));
-
-    grp.appendChild(svgEl('circle', {
-      cx: c.x, cy: pinY, r: 12,
-      class: 'pin-circle'
-    }));
-
-    const num = svgEl('text', {
-      x: c.x, y: pinY,
-      class: 'pin-number'
-    });
-    num.textContent = b.id;
-    grp.appendChild(num);
-
-    const labelY = iso(b.gx + b.w/2, b.gy + b.d, 0).y + 16;
-    const lbl = svgEl('text', {
-      x: c.x, y: labelY,
-      class: 'pin-label'
-    });
-    lbl.textContent = b.short;
-    grp.appendChild(lbl);
-
-    const sub = svgEl('text', {
-      x: c.x, y: labelY + 12,
-      class: 'pin-label-sub'
-    });
-    sub.textContent = b.label;
-    grp.appendChild(sub);
-
-    g.appendChild(grp);
-  }
-}
-
-function renderRouteLine() {
-  const g = document.getElementById('layerRouteLine');
-  g.innerHTML = '';
-
-  const pts = ROUTE_BUILDINGS.map(b => iso(b.gx + b.w/2, b.gy + b.d/2, 0));
-  let d = `M ${pts[0].x} ${pts[0].y}`;
-  for (let i = 1; i < pts.length; i++) {
-    const prev = pts[i-1];
-    const curr = pts[i];
-    const midX = (prev.x + curr.x) / 2;
-    const midY = (prev.y + curr.y) / 2 + 4;
-    d += ` Q ${midX} ${midY} ${curr.x} ${curr.y}`;
-  }
-  g.appendChild(svgEl('path', {
-    d: d, class: 'route-line', id: 'routePath'
-  }));
-}
-
-function renderStuckWarning() {
-  const g = document.getElementById('layerStuckWarning');
-  g.innerHTML = '';
-
-  const b = ROUTE_BUILDINGS.find(x => x.id === 4);
-  const c = iso(b.gx + b.w/2, b.gy + b.d/2, 0);
-
-  const ring = svgEl('circle', {
-    cx: c.x, cy: c.y + 8, r: 30,
-    class: 'stuck-warning', id: 'stuckRing'
-  });
-  g.appendChild(ring);
-
-  const ring2 = svgEl('circle', {
-    cx: c.x, cy: c.y + 8, r: 45,
-    class: 'stuck-warning', id: 'stuckRing2'
-  });
-  ring2.style.animationDelay = '0.9s';
-  g.appendChild(ring2);
-
-  const lbl = svgEl('text', {
-    x: c.x, y: c.y + 60,
-    class: 'stuck-label', id: 'stuckLabel'
-  });
-  lbl.textContent = 'HANDOFF GAP — NO ONE OWNS THE CATCH';
-  g.appendChild(lbl);
-}
-
-function renderReliableOverlay() {
-  const g = document.getElementById('layerReliableOverlay');
-  g.innerHTML = '';
-
-  for (let i = -2; i <= 22; i += 1) {
-    const p1 = iso(i, -1);
-    const p2 = iso(i, 13);
-    g.appendChild(svgEl('line', {
-      x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y,
-      class: 'reliable-grid'
-    }));
-  }
-  for (let j = -1; j <= 13; j += 1) {
-    const p1 = iso(-2, j);
-    const p2 = iso(22, j);
-    g.appendChild(svgEl('line', {
-      x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y,
-      class: 'reliable-grid'
-    }));
-  }
-
-  const badgeG = svgEl('g', { class: 'reliable-badge', id: 'reliableBadge', transform: 'translate(0, 40)' });
-  badgeG.appendChild(svgEl('rect', {
-    x: -230, y: 0, width: 460, height: 64,
-    style: 'fill: #1a1a1a; stroke: #4cb8b8; stroke-width: 1.2;',
-    rx: 1
-  }));
-  const bt1 = svgEl('text', {
-    x: 0, y: 24,
-    style: 'font-family: "DM Mono", monospace; font-size: 10px; fill: #4cb8b8; letter-spacing: 0.22em; font-weight: 500;',
-    'text-anchor': 'middle'
-  });
-  bt1.textContent = 'COORDINATION INFRASTRUCTURE · ENGAGED';
-  badgeG.appendChild(bt1);
-  const bt2 = svgEl('text', {
-    x: 0, y: 50,
-    style: 'font-family: "Crimson Pro", Georgia, serif; font-size: 20px; fill: #f0eee4; font-style: italic;',
-    'text-anchor': 'middle'
-  });
-  bt2.textContent = 'Every pathway visible. Every handoff owned.';
-  badgeG.appendChild(bt2);
-  g.appendChild(badgeG);
-}
-
-/* ============================================================
-   PROCESS DIAGRAM (rough.js / Excalidraw style) — DARK MODE
-   ============================================================ */
-const PROCESS_STEPS = [
-  { label: 'Intake',     sub: 'family arrives' },
-  { label: 'Assess',     sub: 'needs identified' },
-  { label: 'Match',      sub: 'services located' },
-  { label: 'Handoff',    sub: 'referral confirmed' },
-  { label: 'Service',    sub: 'help delivered' },
-  { label: 'Resolve',    sub: 'outcome captured' }
-];
-
-function renderProcessDiagram() {
-  const canvas = document.getElementById('processCanvas');
-  const dpr = window.devicePixelRatio || 1;
-  const rect = canvas.getBoundingClientRect();
-  canvas.width = rect.width * dpr;
-  canvas.height = rect.height * dpr;
-  const ctx = canvas.getContext('2d');
-  ctx.scale(dpr, dpr);
-  ctx.clearRect(0, 0, rect.width, rect.height);
-
-  const rc = rough.canvas(canvas);
-
-  const W = rect.width;
-  const H = rect.height;
-
-  const cols = 3, rows = 2;
-  const boxW = 180, boxH = 90;
-  const gapX = (W - cols * boxW) / (cols + 1);
-  const gapY = 80;
-
-  const positions = [];
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      const idx = r * cols + c;
-      const baseX = gapX + c * (boxW + gapX);
-      const baseY = (H - rows * boxH - (rows-1) * gapY) / 2 + r * (boxH + gapY);
-      positions.push({
-        x: baseX + (Math.random() - 0.5) * 14,
-        y: baseY + (Math.random() - 0.5) * 8,
-        rotation: (Math.random() - 0.5) * 0.025
-      });
-    }
-  }
-
-  positions.forEach((pos, i) => {
-    ctx.save();
-    ctx.translate(pos.x + boxW/2, pos.y + boxH/2);
-    ctx.rotate(pos.rotation);
-
-    rc.rectangle(-boxW/2, -boxH/2, boxW, boxH, {
-      stroke: '#f0eee4',
-      strokeWidth: 1.6,
-      roughness: 1.8,
-      bowing: 1.4,
-      fillStyle: 'solid',
-      fill: 'rgba(255,255,255,0.04)'
-    });
-
-    ctx.font = '500 14px "DM Mono", monospace';
-    ctx.fillStyle = '#9a9a9a';
-    ctx.textAlign = 'left';
-    ctx.fillText(`0${i+1}`, -boxW/2 + 12, -boxH/2 + 22);
-
-    ctx.font = '700 30px "Caveat", cursive';
-    ctx.fillStyle = '#f0eee4';
-    ctx.textAlign = 'center';
-    ctx.fillText(PROCESS_STEPS[i].label, 0, 8);
-
-    ctx.font = '500 16px "Caveat", cursive';
-    ctx.fillStyle = '#9a9a9a';
-    ctx.fillText(PROCESS_STEPS[i].sub, 0, 32);
-
-    ctx.restore();
-  });
-
-  const arrows = [
-    [0, 1], [1, 2], [2, 3], [3, 4], [4, 5]
-  ];
-
-  arrows.forEach(([from, to]) => {
-    const a = positions[from];
-    const b = positions[to];
-
-    const aRow = Math.floor(from / cols);
-    const bRow = Math.floor(to / cols);
-
-    if (aRow === bRow) {
-      const x1 = a.x + boxW + 8;
-      const y1 = a.y + boxH/2;
-      const x2 = b.x - 8;
-      const y2 = b.y + boxH/2;
-      rc.line(x1, y1, x2, y2, {
-        stroke: '#f0eee4', strokeWidth: 1.5, roughness: 1.6
-      });
-      rc.line(x2, y2, x2 - 10, y2 - 6, { stroke: '#f0eee4', strokeWidth: 1.5, roughness: 1.5 });
-      rc.line(x2, y2, x2 - 10, y2 + 6, { stroke: '#f0eee4', strokeWidth: 1.5, roughness: 1.5 });
-    } else {
-      const x1 = a.x + boxW + 10;
-      const y1 = a.y + boxH/2;
-      const cx1 = x1 + 30;
-      const cy1 = y1;
-      const cx2 = b.x + boxW + 30;
-      const cy2 = b.y + boxH/2;
-      const x2 = b.x + boxW + 8;
-      const y2 = b.y + boxH/2;
-
-      rc.curve([[x1, y1], [cx1, cy1], [cx2, cy2], [x2, y2]], {
-        stroke: '#f0eee4', strokeWidth: 1.5, roughness: 1.4, bowing: 0.8
-      });
-      rc.line(x2, y2, x2 + 10, y2 - 6, { stroke: '#f0eee4', strokeWidth: 1.5, roughness: 1.5 });
-      rc.line(x2, y2, x2 + 10, y2 + 6, { stroke: '#f0eee4', strokeWidth: 1.5, roughness: 1.5 });
-    }
-  });
-}
-
-/* ============================================================
-   NODES (animated families)
-   ============================================================ */
-let nodes = [];
-let spawnAccum = 0;
-let lastFrameTime = 0;
-let totalEntered = 0;
-let stats = { entered: 0, inProgress: 0, completed: 0, stuck: 0, lost: 0 };
 
 const NODE_COLORS = ['#5cc5c5', '#4ab5b5', '#7dd6d6', '#6acaca'];
 
-function getRoutePoint(segment, t) {
-  const from = ROUTE_BUILDINGS[segment];
-  const to = ROUTE_BUILDINGS[segment + 1];
-  if (!to) {
-    const p = iso(from.gx + from.w/2, from.gy + from.d/2, 0);
-    return p;
+/* ============================================================
+   STATIC MAP RENDERING (per SVG)
+   ============================================================ */
+function buildStaticMap(svg) {
+  // Defs (filter — kept for future use)
+  const defs = svgEl('defs');
+  svg.appendChild(defs);
+
+  // Root translate group (centers the map)
+  const root = svgEl('g', { transform: 'translate(700, 90)' });
+  svg.appendChild(root);
+
+  // Ground grid
+  const gGround = svgEl('g');
+  const GRID_MIN=-1, GRID_MAX=20, GRID_MIN_Y=-1, GRID_MAX_Y=13;
+  for (let i = GRID_MIN; i <= GRID_MAX; i += 2) {
+    const p1 = iso(i, GRID_MIN_Y), p2 = iso(i, GRID_MAX_Y);
+    gGround.appendChild(svgEl('line', { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, class: 'ground-line' }));
   }
-  const a = iso(from.gx + from.w/2, from.gy + from.d/2, 0);
-  const b = iso(to.gx   + to.w/2,   to.gy   + to.d/2,   0);
-
-  const midX = (a.x + b.x) / 2;
-  const midY = (a.y + b.y) / 2 + 4;
-  const x = (1-t)*(1-t)*a.x + 2*(1-t)*t*midX + t*t*b.x;
-  const y = (1-t)*(1-t)*a.y + 2*(1-t)*t*midY + t*t*b.y;
-  return { x, y };
-}
-
-function spawnNode() {
-  totalEntered++;
-  const node = {
-    id: totalEntered,
-    segment: 0,
-    t: 0,
-    speed: 0.0006 + Math.random() * 0.0008,
-    status: 'flowing',
-    color: NODE_COLORS[Math.floor(Math.random() * NODE_COLORS.length)],
-    radius: 4 + Math.random() * 1.2,
-    stuckTimer: 0,
-    el: null
-  };
-  if (currentScene === 4) {
-    const r = Math.random();
-    node.willStick = r < 0.55;
-    node.willLose = r > 0.92;
-  } else if (currentScene === 3) {
-    node.willStick = false;
-    node.willLose = false;
-  } else if (currentScene === 5) {
-    node.willStick = false;
-    node.willLose = false;
-    node.speed *= 1.5;
+  for (let j = GRID_MIN_Y; j <= GRID_MAX_Y; j += 2) {
+    const p1 = iso(GRID_MIN, j), p2 = iso(GRID_MAX, j);
+    gGround.appendChild(svgEl('line', { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, class: 'ground-line' }));
   }
-  const dot = svgEl('circle', {
-    r: node.radius,
-    fill: node.color,
-    class: 'node-dot',
-    opacity: 0.92
-  });
-  document.getElementById('layerNodes').appendChild(dot);
-  node.el = dot;
+  root.appendChild(gGround);
 
-  nodes.push(node);
-  stats.entered++;
-  stats.inProgress++;
-}
+  // Roads
+  const gRoads = svgEl('g');
+  const roads = [
+    [{x:0,y:4},{x:20,y:4}],[{x:0,y:7.2},{x:20,y:7.2}],[{x:0,y:11},{x:20,y:11}],
+    [{x:3.5,y:0},{x:3.5,y:12}],[{x:6.7,y:0},{x:6.7,y:12}],[{x:10,y:0},{x:10,y:12}],
+    [{x:12.5,y:0},{x:12.5,y:12}],[{x:15.5,y:0},{x:15.5,y:12}],[{x:18.5,y:0},{x:18.5,y:12}]
+  ];
+  for (const [a,b] of roads) {
+    const p1=iso(a.x,a.y), p2=iso(b.x,b.y);
+    gRoads.appendChild(svgEl('line', { x1:p1.x, y1:p1.y, x2:p2.x, y2:p2.y, class: 'road' }));
+  }
+  root.appendChild(gRoads);
 
-function updateNodes(dt) {
-  for (let i = nodes.length - 1; i >= 0; i--) {
-    const n = nodes[i];
+  // Ambient buildings
+  const gAmb = svgEl('g');
+  for (const b of [...AMBIENT_BUILDINGS].sort((a,b)=>(a.gx+a.gy)-(b.gx+b.gy))) {
+    const p = buildingPath(b.gx, b.gy, b.w, b.d, b.h);
+    gAmb.appendChild(svgEl('path', { d: p.south, fill: C.ambientSouth, class: 'bldg-south' }));
+    gAmb.appendChild(svgEl('path', { d: p.east,  fill: C.ambientEast,  class: 'bldg-east' }));
+    gAmb.appendChild(svgEl('path', { d: p.top,   fill: C.ambientTop,   class: 'bldg-top' }));
+  }
+  root.appendChild(gAmb);
 
-    if (n.status === 'completed' || n.status === 'lost') {
-      n.fadeOut = (n.fadeOut || 0) + dt;
-      if (n.el) {
-        n.el.setAttribute('opacity', Math.max(0, 0.92 - n.fadeOut * 0.0015));
-      }
-      if (n.fadeOut > 700) {
-        if (n.el && n.el.parentNode) n.el.parentNode.removeChild(n.el);
-        nodes.splice(i, 1);
-      }
-      continue;
+  // Trees
+  const gTrees = svgEl('g');
+  for (const t of [...TREES].sort((a,b)=>(a.gx+a.gy)-(b.gx+b.gy))) {
+    const base = iso(t.gx, t.gy, 0), top = iso(t.gx, t.gy, 0.9 * t.scale);
+    gTrees.appendChild(svgEl('rect', {
+      x: base.x - 1, y: base.y - 14 * t.scale, width: 2, height: 14 * t.scale, class: 'tree-trunk'
+    }));
+    gTrees.appendChild(svgEl('ellipse', {
+      cx: top.x, cy: top.y - 4 * t.scale,
+      rx: 9 * t.scale, ry: 7 * t.scale, class: 'tree-canopy'
+    }));
+  }
+  root.appendChild(gTrees);
+
+  // Route line (curved polyline through route buildings)
+  const gRoute = svgEl('g');
+  const pts = ROUTE_BUILDINGS.map(b => iso(b.gx + b.w/2, b.gy + b.d/2, 0));
+  let pathD = `M ${pts[0].x} ${pts[0].y}`;
+  for (let i = 1; i < pts.length; i++) {
+    const prev = pts[i-1], curr = pts[i];
+    const midX = (prev.x + curr.x) / 2;
+    const midY = (prev.y + curr.y) / 2 + 4;
+    pathD += ` Q ${midX} ${midY} ${curr.x} ${curr.y}`;
+  }
+  gRoute.appendChild(svgEl('path', { d: pathD, class: 'route-line' }));
+  root.appendChild(gRoute);
+
+  // Route buildings
+  const gRouteBld = svgEl('g');
+  for (const b of [...ROUTE_BUILDINGS].sort((a,b)=>(a.gx+a.gy)-(b.gx+b.gy))) {
+    const p = buildingPath(b.gx, b.gy, b.w, b.d, b.h);
+    const group = svgEl('g', { class: 'route-bldg', 'data-id': b.id });
+    group.appendChild(svgEl('path', { d: p.south, class: 'bldg-south' }));
+    group.appendChild(svgEl('path', { d: p.east,  class: 'bldg-east' }));
+    group.appendChild(svgEl('path', { d: p.top,   class: 'bldg-top' }));
+    const c = iso(b.gx + b.w/2, b.gy + b.d/2, b.h);
+    group.appendChild(svgEl('circle', { cx: c.x, cy: c.y, r: 3, fill: '#4cb8b8', opacity: '0.95' }));
+    gRouteBld.appendChild(group);
+  }
+  root.appendChild(gRouteBld);
+
+  // Pins
+  const gPins = svgEl('g');
+  for (const b of ROUTE_BUILDINGS) {
+    const c = iso(b.gx + b.w/2, b.gy + b.d/2, b.h);
+    const pinY = c.y - 32;
+    const grp = svgEl('g');
+    grp.appendChild(svgEl('line', { x1: c.x, y1: c.y, x2: c.x, y2: pinY + 12,
+      stroke: '#f0eee4', 'stroke-width': '0.6', opacity: 0.5 }));
+    grp.appendChild(svgEl('circle', { cx: c.x, cy: pinY, r: 12, class: 'pin-circle' }));
+    const num = svgEl('text', { x: c.x, y: pinY, class: 'pin-number' });
+    num.textContent = b.id;
+    grp.appendChild(num);
+    const labelY = iso(b.gx + b.w/2, b.gy + b.d, 0).y + 16;
+    const lbl = svgEl('text', { x: c.x, y: labelY, class: 'pin-label' });
+    lbl.textContent = b.short;
+    grp.appendChild(lbl);
+    const sub = svgEl('text', { x: c.x, y: labelY + 12, class: 'pin-label-sub' });
+    sub.textContent = b.label;
+    grp.appendChild(sub);
+    gPins.appendChild(grp);
+  }
+  root.appendChild(gPins);
+
+  // State-specific overlay layers
+  const gNodes = svgEl('g', { class: 'layer-nodes' });
+  root.appendChild(gNodes);
+
+  const state = svg.getAttribute('data-state');
+
+  if (state === 'stuck') {
+    const b = ROUTE_BUILDINGS.find(x => x.id === 4);
+    const c = iso(b.gx + b.w/2, b.gy + b.d/2, 0);
+    const gStuck = svgEl('g');
+    gStuck.appendChild(svgEl('circle', { cx: c.x, cy: c.y + 8, r: 30, class: 'stuck-warning' }));
+    const ring2 = svgEl('circle', { cx: c.x, cy: c.y + 8, r: 45, class: 'stuck-warning' });
+    ring2.style.animationDelay = '0.9s';
+    gStuck.appendChild(ring2);
+    const lbl = svgEl('text', { x: c.x, y: c.y + 60, class: 'stuck-label' });
+    lbl.textContent = 'HANDOFF GAP — NO ONE OWNS THE CATCH';
+    gStuck.appendChild(lbl);
+    root.appendChild(gStuck);
+  }
+
+  if (state === 'reliable') {
+    const gGrid = svgEl('g');
+    for (let i = -2; i <= 22; i += 1) {
+      const p1 = iso(i, -1), p2 = iso(i, 13);
+      gGrid.appendChild(svgEl('line', { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, class: 'reliable-grid' }));
     }
-
-    if (n.status === 'stuck') {
-      n.stuckTimer += dt;
-      const pulse = 1 + Math.sin(n.stuckTimer / 200) * 0.08;
-      if (n.el) {
-        n.el.setAttribute('r', n.radius * pulse);
-        n.el.setAttribute('fill', '#e07d4a');
-        n.el.setAttribute('stroke', '#c4663a');
-        const stuckPos = getRoutePoint(3, 0);
-        n.el.setAttribute('cx', stuckPos.x + (n.stuckOffsetX || 0));
-        n.el.setAttribute('cy', stuckPos.y + (n.stuckOffsetY || 0));
-      }
-      if (currentScene === 4 && n.stuckTimer > 9000 && Math.random() < 0.002) {
-        n.status = 'lost';
-        stats.stuck--;
-        stats.lost++;
-        stats.inProgress--;
-        updateCounters();
-      }
-      if (currentScene === 5) {
-        n.status = 'flowing';
-        stats.stuck--;
-        if (n.el) {
-          n.el.setAttribute('fill', n.color);
-          n.el.setAttribute('stroke', '#f0eee4');
-          n.el.setAttribute('r', n.radius);
-        }
-        updateCounters();
-      }
-      continue;
+    for (let j = -1; j <= 13; j += 1) {
+      const p1 = iso(-2, j), p2 = iso(22, j);
+      gGrid.appendChild(svgEl('line', { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, class: 'reliable-grid' }));
     }
+    root.appendChild(gGrid);
 
-    n.t += n.speed * dt;
-
-    if (n.t >= 1) {
-      n.segment++;
-      n.t = 0;
-
-      if (n.segment >= ROUTE_BUILDINGS.length - 1) {
-        n.status = 'completed';
-        stats.completed++;
-        stats.inProgress--;
-        if (n.el) n.el.setAttribute('fill', '#a3b85a');
-        updateCounters();
-        continue;
-      }
-
-      if (n.segment === 3 && n.willStick) {
-        n.status = 'stuck';
-        n.stuckOffsetX = (Math.random() - 0.5) * 38;
-        n.stuckOffsetY = (Math.random() - 0.5) * 22;
-        stats.stuck++;
-        updateCounters();
-      }
-    }
-
-    const pos = getRoutePoint(n.segment, n.t);
-    if (n.el) {
-      n.el.setAttribute('cx', pos.x);
-      n.el.setAttribute('cy', pos.y);
-    }
+    const badge = svgEl('g', { transform: 'translate(0, 40)' });
+    badge.appendChild(svgEl('rect', {
+      x: -230, y: 0, width: 460, height: 64,
+      style: 'fill: #1a1a1a; stroke: #4cb8b8; stroke-width: 1.2;', rx: 1
+    }));
+    const t1 = svgEl('text', {
+      x: 0, y: 24,
+      style: 'font-family: "DM Mono", monospace; font-size: 10px; fill: #4cb8b8; letter-spacing: 0.22em; font-weight: 500;',
+      'text-anchor': 'middle'
+    });
+    t1.textContent = 'COORDINATION INFRASTRUCTURE · ENGAGED';
+    badge.appendChild(t1);
+    const t2 = svgEl('text', {
+      x: 0, y: 50,
+      style: 'font-family: "Crimson Pro", Georgia, serif; font-size: 20px; fill: #f0eee4; font-style: italic;',
+      'text-anchor': 'middle'
+    });
+    t2.textContent = 'Every pathway visible. Every handoff owned.';
+    badge.appendChild(t2);
+    root.appendChild(badge);
   }
-}
 
-function clearAllNodes() {
-  for (const n of nodes) {
-    if (n.el && n.el.parentNode) n.el.parentNode.removeChild(n.el);
-  }
-  nodes = [];
-  stats = { entered: 0, inProgress: 0, completed: 0, stuck: 0, lost: 0 };
-  totalEntered = 0;
-  updateCounters();
-}
-
-function updateCounters() {
-  document.getElementById('cntEntered').textContent = stats.entered;
-  document.getElementById('cntInProgress').textContent = stats.inProgress;
-  document.getElementById('cntCompleted').textContent = stats.completed;
-  document.getElementById('cntStuck').textContent = stats.stuck;
-  document.getElementById('cntLost').textContent = stats.lost;
-  const total = stats.completed + stats.stuck + stats.lost;
-  const rateEl = document.getElementById('rateValue');
-  if (total > 5) {
-    const rate = Math.round((stats.completed / total) * 100);
-    rateEl.textContent = rate + '%';
-    if (rate >= 80) rateEl.style.color = 'var(--olive)';
-    else if (rate >= 50) rateEl.style.color = 'var(--ink)';
-    else rateEl.style.color = 'var(--rust)';
-  } else {
-    rateEl.textContent = '—';
-    rateEl.style.color = 'var(--ink)';
-  }
+  return gNodes;
 }
 
 /* ============================================================
-   ANIMATION LOOP
+   PER-FRAME ANIMATION STATE
    ============================================================ */
-function animLoop(ts) {
-  const dt = ts - (lastFrameTime || ts);
-  lastFrameTime = ts;
+function getRoutePoint(segment, t) {
+  const from = ROUTE_BUILDINGS[segment], to = ROUTE_BUILDINGS[segment + 1];
+  if (!to) return iso(from.gx + from.w/2, from.gy + from.d/2, 0);
+  const a = iso(from.gx + from.w/2, from.gy + from.d/2, 0);
+  const b = iso(to.gx + to.w/2, to.gy + to.d/2, 0);
+  const midX = (a.x + b.x) / 2, midY = (a.y + b.y) / 2 + 4;
+  return {
+    x: (1-t)*(1-t)*a.x + 2*(1-t)*t*midX + t*t*b.x,
+    y: (1-t)*(1-t)*a.y + 2*(1-t)*t*midY + t*t*b.y
+  };
+}
 
-  if (currentScene === 3 || currentScene === 4 || currentScene === 5) {
+function createFrameController(frameEl) {
+  const state = frameEl.dataset.state;
+  const svg = frameEl.querySelector('.map-svg');
+  const nodesLayer = buildStaticMap(svg);
+
+  // Overlay frame doesn't animate — just static.
+  if (state === 'overlay') {
+    return { start() {}, stop() {} };
+  }
+
+  // Counter elements
+  const cntEntered = frameEl.querySelector('.cnt-entered');
+  const cntInProgress = frameEl.querySelector('.cnt-inprogress');
+  const cntCompleted = frameEl.querySelector('.cnt-completed');
+  const cntStuck = frameEl.querySelector('.cnt-stuck');
+  const cntRate = frameEl.querySelector('.cnt-rate');
+
+  let nodes = [];
+  let stats = { entered: 0, inProgress: 0, completed: 0, stuck: 0, lost: 0 };
+  let spawnAccum = 0;
+  let lastT = 0;
+  let rafId = null;
+  let running = false;
+  let totalEntered = 0;
+
+  function updateCounters() {
+    cntEntered.textContent = stats.entered;
+    cntInProgress.textContent = stats.inProgress;
+    cntCompleted.textContent = stats.completed;
+    cntStuck.textContent = stats.stuck;
+    const total = stats.completed + stats.stuck + stats.lost;
+    if (total > 5) {
+      const rate = Math.round((stats.completed / total) * 100);
+      cntRate.textContent = rate + '%';
+      if (rate >= 80) cntRate.style.color = 'var(--olive)';
+      else if (rate >= 50) cntRate.style.color = 'var(--ink)';
+      else cntRate.style.color = 'var(--rust)';
+    } else {
+      cntRate.textContent = '—';
+      cntRate.style.color = 'var(--ink)';
+    }
+  }
+
+  function spawnNode() {
+    totalEntered++;
+    const n = {
+      id: totalEntered,
+      segment: 0, t: 0,
+      speed: 0.0006 + Math.random() * 0.0008,
+      status: 'flowing',
+      color: NODE_COLORS[Math.floor(Math.random() * NODE_COLORS.length)],
+      radius: 4 + Math.random() * 1.2,
+      stuckTimer: 0,
+      el: null,
+      willStick: false,
+      willLose: false
+    };
+    if (state === 'stuck') {
+      const r = Math.random();
+      n.willStick = r < 0.55;
+      n.willLose = r > 0.92;
+    } else if (state === 'reliable') {
+      n.speed *= 1.5;
+    }
+    const dot = svgEl('circle', { r: n.radius, fill: n.color, class: 'node-dot', opacity: 0.92 });
+    nodesLayer.appendChild(dot);
+    n.el = dot;
+    nodes.push(n);
+    stats.entered++;
+    stats.inProgress++;
+  }
+
+  function update(dt) {
+    for (let i = nodes.length - 1; i >= 0; i--) {
+      const n = nodes[i];
+
+      if (n.status === 'completed' || n.status === 'lost') {
+        n.fadeOut = (n.fadeOut || 0) + dt;
+        if (n.el) n.el.setAttribute('opacity', Math.max(0, 0.92 - n.fadeOut * 0.0015));
+        if (n.fadeOut > 700) {
+          if (n.el && n.el.parentNode) n.el.parentNode.removeChild(n.el);
+          nodes.splice(i, 1);
+        }
+        continue;
+      }
+
+      if (n.status === 'stuck') {
+        n.stuckTimer += dt;
+        const pulse = 1 + Math.sin(n.stuckTimer / 200) * 0.08;
+        if (n.el) {
+          n.el.setAttribute('r', n.radius * pulse);
+          n.el.setAttribute('fill', '#e07d4a');
+          n.el.setAttribute('stroke', '#c4663a');
+          const sp = getRoutePoint(3, 0);
+          n.el.setAttribute('cx', sp.x + (n.stuckOffsetX || 0));
+          n.el.setAttribute('cy', sp.y + (n.stuckOffsetY || 0));
+        }
+        if (state === 'stuck' && n.stuckTimer > 9000 && Math.random() < 0.002) {
+          n.status = 'lost';
+          stats.stuck--; stats.lost++; stats.inProgress--;
+          updateCounters();
+        }
+        continue;
+      }
+
+      n.t += n.speed * dt;
+      if (n.t >= 1) {
+        n.segment++;
+        n.t = 0;
+        if (n.segment >= ROUTE_BUILDINGS.length - 1) {
+          n.status = 'completed';
+          stats.completed++; stats.inProgress--;
+          if (n.el) n.el.setAttribute('fill', '#a3b85a');
+          updateCounters();
+          continue;
+        }
+        if (n.segment === 3 && n.willStick) {
+          n.status = 'stuck';
+          n.stuckOffsetX = (Math.random() - 0.5) * 38;
+          n.stuckOffsetY = (Math.random() - 0.5) * 22;
+          stats.stuck++;
+          updateCounters();
+        }
+      }
+      const p = getRoutePoint(n.segment, n.t);
+      if (n.el) {
+        n.el.setAttribute('cx', p.x);
+        n.el.setAttribute('cy', p.y);
+      }
+    }
+  }
+
+  function frame(ts) {
+    if (!running) return;
+    const dt = ts - (lastT || ts);
+    lastT = ts;
+
     spawnAccum += dt;
-    const spawnInterval = currentScene === 5 ? 500 : 700;
+    const spawnInterval = (state === 'reliable') ? 500 : 700;
     if (spawnAccum > spawnInterval && nodes.length < 80) {
       spawnNode();
       spawnAccum = 0;
       updateCounters();
     }
+    update(dt);
+    rafId = requestAnimationFrame(frame);
   }
 
-  updateNodes(dt);
-
-  requestAnimationFrame(animLoop);
-}
-
-/* ============================================================
-   SCENE MANAGEMENT
-   ============================================================ */
-let currentScene = 0;
-const TOTAL_SCENES = 6;
-
-const SCENE_DATA = [
-  {
-    eyebrow: 'STATE 01 · PROCESS DIAGRAM',
-    title: 'First, draw the process.',
-    desc: 'This is how partnerships plan coordination — on paper, in a planning session. Steps connect. Handoffs are named. Everyone agrees on the flow. The work, once drawn, looks tractable.'
-  },
-  {
-    eyebrow: 'STATE 02 · PHYSICAL TERRITORY',
-    title: 'But families don’t move through processes. They move through space.',
-    desc: 'This is the city the partnership actually operates in. Real buildings. Real distances. Real time spent getting from one place to the next. The process diagram doesn’t live here yet.'
-  },
-  {
-    eyebrow: 'STATE 03 · OVERLAY',
-    title: 'Place the process on the place.',
-    desc: 'Each step lives at an address. The route becomes traceable — not as boxes and arrows, but as the actual journey a family takes through their week, across agencies, in working hours.'
-  },
-  {
-    eyebrow: 'STATE 04 · LIVE FLOW',
-    title: 'Now watch what happens.',
-    desc: 'Each dot is a family entering the system. They move through the pathway — step to step, handoff to handoff. When coordination works, this is what it looks like.'
-  },
-  {
-    eyebrow: 'STATE 05 · WHERE ACCESS BREAKS',
-    title: 'And here’s where it actually breaks.',
-    desc: 'Families stall at the handoff. No one is responsible for confirming the catch. Days pass. Some get lost entirely. This isn’t a personnel problem — it’s an infrastructure gap.'
-  },
-  {
-    eyebrow: 'STATE 06 · COORDINATION INFRASTRUCTURE',
-    title: 'Now make the layer operational.',
-    desc: 'Pathways visible. Handoffs owned. Outcomes auditable. The work doesn’t change — it becomes accountable. This is the operating layer the field has been missing.'
-  }
-];
-
-function goToScene(n) {
-  if (n < 0 || n >= TOTAL_SCENES) return;
-  const prevScene = currentScene;
-  currentScene = n;
-
-  const stepCounter = document.getElementById('stepCounter');
-  if (stepCounter) {
-    stepCounter.textContent = String(n + 1).padStart(2, '0') + ' / 0' + TOTAL_SCENES;
-  }
-
-  document.querySelectorAll('.step-pill').forEach((p, i) => {
-    p.classList.remove('active', 'completed');
-    if (i < n) p.classList.add('completed');
-    if (i === n) p.classList.add('active');
-  });
-
-  const data = SCENE_DATA[n];
-  document.getElementById('sceneEyebrow').textContent = data.eyebrow;
-  document.getElementById('sceneTitle').textContent = data.title;
-  document.getElementById('sceneDescription').textContent = data.desc;
-
-  document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
-  if (n === 0) {
-    document.querySelector('.scene-process').classList.add('active');
-    setTimeout(renderProcessDiagram, 50);
-  } else {
-    const mapScene = document.querySelector('.scene-map');
-    mapScene.classList.add('active');
-    mapScene.classList.remove('scene-flow', 'scene-stuck', 'scene-reliable');
-    if (n === 3) mapScene.classList.add('scene-flow');
-    if (n === 4) mapScene.classList.add('scene-stuck');
-    if (n === 5) mapScene.classList.add('scene-reliable');
-  }
-
-  const showRouteLine = (n >= 2);
-  const showPins = (n >= 2);
-  const showStuckWarning = (n === 4);
-  const showCounter = (n >= 3);
-  const showReliable = (n === 5);
-
-  document.getElementById('layerRouteLine').style.display = showRouteLine ? 'block' : 'none';
-  document.getElementById('layerPins').style.display = showPins ? 'block' : 'none';
-
-  document.querySelectorAll('.stuck-warning').forEach(r => r.classList.toggle('active', showStuckWarning));
-  document.getElementById('stuckLabel').classList.toggle('visible', showStuckWarning);
-
-  document.querySelectorAll('.reliable-grid').forEach(g => g.classList.toggle('visible', showReliable));
-  document.getElementById('reliableBadge').classList.toggle('visible', showReliable);
-
-  document.getElementById('counterPanel').classList.toggle('visible', showCounter);
-
-  if (n < 3) {
-    clearAllNodes();
-  } else {
-    if (prevScene < 3) {
-      clearAllNodes();
-    } else if (prevScene === 3 && n === 4) {
-      for (const node of nodes) {
-        if (node.status === 'flowing' && node.segment < 3) {
-          const r = Math.random();
-          if (r < 0.55) node.willStick = true;
-          if (r > 0.95) node.willLose = true;
-        }
-      }
-    } else if (prevScene === 4 && n === 5) {
-      // existing nodes continue, unstick naturally
-    } else if (n < prevScene) {
-      clearAllNodes();
+  return {
+    start() {
+      if (running) return;
+      running = true;
+      lastT = 0;
+      rafId = requestAnimationFrame(frame);
+    },
+    stop() {
+      running = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = null;
     }
-  }
-}
-
-function nextScene() { goToScene(Math.min(currentScene + 1, TOTAL_SCENES - 1)); }
-function prevScene() { goToScene(Math.max(currentScene - 1, 0)); }
-
-/* ============================================================
-   AUTOPLAY
-   ============================================================ */
-let isPlaying = false;
-let autoplayTimer = null;
-const AUTOPLAY_DURATIONS = [4500, 4500, 4500, 8000, 9000, 8000];
-
-function startAutoplay() {
-  isPlaying = true;
-  const playBtn = document.getElementById('playBtn');
-  if (playBtn) {
-    playBtn.textContent = '❚❚';
-    playBtn.classList.add('playing');
-  }
-  scheduleNext();
-}
-
-function stopAutoplay() {
-  isPlaying = false;
-  const playBtn = document.getElementById('playBtn');
-  if (playBtn) {
-    playBtn.textContent = '▶';
-    playBtn.classList.remove('playing');
-  }
-  if (autoplayTimer) { clearTimeout(autoplayTimer); autoplayTimer = null; }
-}
-
-function scheduleNext() {
-  if (!isPlaying) return;
-  const dur = AUTOPLAY_DURATIONS[currentScene] || 5000;
-  autoplayTimer = setTimeout(() => {
-    if (currentScene < TOTAL_SCENES - 1) {
-      nextScene();
-      scheduleNext();
-    } else {
-      // Loop back to the beginning so the embed plays continuously
-      goToScene(0);
-      scheduleNext();
-    }
-  }, dur);
-}
-
-function togglePlay() {
-  if (isPlaying) stopAutoplay();
-  else {
-    if (currentScene === TOTAL_SCENES - 1) goToScene(0);
-    startAutoplay();
-  }
+  };
 }
 
 /* ============================================================
-   CONTROLS WIRING
+   INIT — set up each frame + scroll observer
    ============================================================ */
-function setupControls() {
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const playBtn = document.getElementById('playBtn');
-  if (prevBtn) prevBtn.addEventListener('click', () => { stopAutoplay(); prevScene(); });
-  if (nextBtn) nextBtn.addEventListener('click', () => { stopAutoplay(); nextScene(); });
-  if (playBtn) playBtn.addEventListener('click', togglePlay);
+window.addEventListener('load', () => {
+  const frames = document.querySelectorAll('.frame');
+  const controllers = new Map();
+  frames.forEach(f => controllers.set(f, createFrameController(f)));
 
-  document.querySelectorAll('.step-pill').forEach((p, i) => {
-    p.addEventListener('click', () => { stopAutoplay(); goToScene(i); });
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight') { stopAutoplay(); nextScene(); }
-    if (e.key === 'ArrowLeft') { stopAutoplay(); prevScene(); }
-    if (e.key === ' ') { e.preventDefault(); togglePlay(); }
-  });
-
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      if (currentScene === 0) renderProcessDiagram();
-    }, 200);
-  });
-}
-
-/* ============================================================
-   INIT
-   ============================================================ */
-function init() {
-  renderGround();
-  renderRoads();
-  renderAmbientBuildings();
-  renderTrees();
-  renderRouteLine();
-  renderRouteBuildings();
-  renderPins();
-  renderStuckWarning();
-  renderReliableOverlay();
-
-  setupControls();
-
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(() => {
-      renderProcessDiagram();
+  // Pause/resume animations based on visibility for smoother performance
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      const ctrl = controllers.get(e.target);
+      if (!ctrl) return;
+      if (e.isIntersecting) ctrl.start();
+      else ctrl.stop();
     });
-  } else {
-    setTimeout(renderProcessDiagram, 200);
-  }
+  }, { threshold: 0.05 });
 
-  requestAnimationFrame(animLoop);
-
-  goToScene(0);
-
-  // Auto-start the loop (top-bar controls have been removed)
-  startAutoplay();
-}
-
-window.addEventListener('load', init);
+  frames.forEach(f => io.observe(f));
+});
 </script>
-
 </body>
 </html>
