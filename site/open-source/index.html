@@ -12,13 +12,15 @@
 <!-- <link rel="preload" href="/fonts/SanaSans-RegularDisplay.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/fonts/SanaSans-Regular440.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/fonts/SanaSans-Regular480.woff2" as="font" type="font/woff2" crossorigin /> -->
-<link rel="icon" href="../favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="../js/ext/flickity.min.css">
-<link href="../css/base.css" rel="stylesheet" type="text/css">
-<link href="../css/modules/accordion.css" rel="stylesheet" type="text/css">
-<link href="../css/web2.css" rel="stylesheet" type="text/css">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/js/ext/flickity.min.css">
+<link href="/css/base.css" rel="stylesheet" type="text/css">
+<link href="/css/modules/accordion.css" rel="stylesheet" type="text/css">
+<link href="/css/web2.css" rel="stylesheet" type="text/css">
+<link href="/css/docs.css" rel="stylesheet" type="text/css">
+
 <script src="https://sanalabs.chilipiper.com/concierge-js/cjs/concierge.js" type="text/javascript"></script>
-<script src="../js/jq.js"></script>
+<script src="/js/jq.js"></script>
 
 <script type="text/plain" data-category="analytics">
   (function () {
@@ -78,9 +80,9 @@
   })("1008556", document.location.href, document);
 </script>
 
-    <script src="../js/trackers.js"></script>
+    <script src="/js/trackers.js"></script>
 
-    <title>Open Source | CivikAccess</title>
+    <title>Moved | CivikAccess</title>
     <style>
       /* About page — invert nav for visibility over the lobby image */
       .site-header,
@@ -217,19 +219,7 @@
             </div>
           </div>
         </li>
-        <li class="has-sub-menu">
-          <a href="#">
-            Docs <svg class="inline-icon"><use xlink:href="#chevron-down-small"></use></svg>
-          </a>
-          <div class="sub-menu-menus">
-            <div class="sub-menu-menu">
-              <ul>
-                <li><a href="/civikaccess/how-it-works">How it works</a></li>
-                <li><a href="/open-source">Open Source</a></li>
-              </ul>
-            </div>
-          </div>
-        </li>
+        <li><a href="/docs/">Docs</a></li>
         <li><a href="/about">About</a></li>
         <li class="has-sub-menu">
           <a href="#">
@@ -837,151 +827,83 @@
 </script>
 
     <div class="main">
-<section class="ca-stacked-hero" style="background: var(--white); padding-block: 14rem 4rem; text-align: center;">
-  <div class="columns">
-    <div class="gc text-c" style="margin-bottom: 3.6rem">
-      <p class="eyebrow blue"><strong>Open Source</strong></p>
-      <h1 style="margin-bottom: 3.2rem; max-width: 80rem; margin-inline: auto;">
-        Open by design.<br>
-        <span style="font-weight: 400; font-variation-settings: 'wght' 400;">Trust-held.</span>
-      </h1>
-      <p style="max-width: 60rem; margin: 0 auto 2.4rem">CivikAccess is open source under AGPL-3.0. The standards behind it are held by an independent trust &mdash; not by us. The infrastructure for public services can't be a black box.</p>
-      <div style="display: flex; gap: 1.2rem; flex-wrap: wrap; justify-content: center;">
-        <a href="#" class="btn bg-black white">View on GitHub</a>
-        <a href="/civikaccess/book-intro" class="btn" style="background: rgba(0,0,0,0.05)">Talk to us</a>
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="docs-shell">
 
-<section style="padding: 6rem 0;">
-  <div class="columns">
-    <div class="gc gc-10 text-c" style="--start: 2">
-      <p class="os-summary">Three things are open. Three reasons it matters.</p>
-    </div>
-  </div>
-  <div class="columns os-cards" style="margin-top: 4rem">
-    <div class="gc gc-4 os-card">
-      <p class="os-num">01</p>
-      <p class="os-label">The platform</p>
-      <h3>AGPL-3.0</h3>
-      <p>The CivikAccess application is open-sourced under AGPL-3.0. You can read it, run it, and self-host it. If you modify and serve it, your changes go back to the community.</p>
-    </div>
-    <div class="gc gc-4 os-card">
-      <p class="os-num">02</p>
-      <p class="os-label">The schemas</p>
-      <h3>Apache 2.0</h3>
-      <p>Integration libraries, pathway schemas, and data formats are open under Apache 2.0. So other tools, partners, and platforms can build on top &mdash; no strings attached.</p>
-    </div>
-    <div class="gc gc-4 os-card">
-      <p class="os-num">03</p>
-      <p class="os-label">The standards</p>
-      <h3>Held by a Trust</h3>
-      <p>The Civic Infrastructure Trust is a publicly accountable trust, separate from the operating company. It owns the standards. It owns the "CivikAccess Certified" mark. The standards an administration depends on can't belong to a private company.</p>
-    </div>
-  </div>
-</section>
+      <aside class="docs-sidebar">
+        <div class="docs-sidebar-inner">
 
-<section style="padding: 8rem 0; background: rgba(0,0,0,0.02);">
-  <div class="columns">
-    <div class="gc gc-10" style="--start: 2">
-      <p class="eyebrow blue"><strong>What you can do</strong></p>
-      <h2 style="margin-bottom: 2.4rem">Read it. Run it. Build on it.</h2>
-      <ul class="os-list">
-        <li><strong>Read the code.</strong> The full platform source is on GitHub. No login, no NDA.</li>
-        <li><strong>Self-host the platform.</strong> Run CivikAccess on your own infrastructure. You keep your data, your logs, your stack.</li>
-        <li><strong>Contribute pathways and integrations.</strong> Frontline practitioners whose pathway work gets elevated into the standard are credited as contributors.</li>
-        <li><strong>Use the schemas.</strong> Apache 2.0 schemas mean any tool can read and write the same coordination format. The point is interoperability.</li>
-      </ul>
-    </div>
-  </div>
-</section>
+          <p class="docs-group-label">Getting started</p>
+          <ul class="docs-nav">
+            <li><a href="/docs/">Overview</a></li>
+            <li><a href="/docs/introduction/">Introduction</a></li>
+          </ul>
 
-<section style="padding: 8rem 0;">
-  <div class="columns">
-    <div class="gc gc-10" style="--start: 2">
-      <p class="eyebrow blue"><strong>Certified deployments</strong></p>
-      <h2 style="margin-bottom: 2.4rem">Open source, with backing when it matters.</h2>
-      <p style="max-width: 60rem; font-size: 1.7rem; line-height: 1.55;">Anyone can run the open-source platform. A certified deployment carries a Trust-issued audit confirming the install matches the standard. It also carries indemnification &mdash; often the deciding factor for government legal teams who can't indemnify themselves against open source.</p>
-      <p style="max-width: 60rem; font-size: 1.7rem; line-height: 1.55; margin-top: 1.6rem;">Self-host the OSS core for free. Add managed hosting, support, and SOC 2 / BAA paperwork when your procurement team needs them.</p>
-      <div style="margin-top: 3.2rem; display: flex; gap: 1.2rem; flex-wrap: wrap;">
-        <a href="/civikaccess/pricing" class="btn bg-black white">See pricing &amp; tiers</a>
-        <a href="/civikaccess/book-intro" class="btn" style="background: rgba(0,0,0,0.05)">Talk to us</a>
-      </div>
-    </div>
-  </div>
-</section>
+          <p class="docs-group-label">Concepts</p>
+          <ul class="docs-nav">
+            <li><a href="/docs/concepts/pathway/">Pathway</a></li>
+            <li><a href="/docs/concepts/handoff/">Handoff</a></li>
+            <li><a href="/docs/concepts/drift/">Drift</a></li>
+            <li><a href="/docs/concepts/parcel-model/">Parcel model</a></li>
+            <li><a href="/docs/concepts/nine-state-lifecycle/">Nine-state lifecycle</a></li>
+          </ul>
 
-<section style="padding: 8rem 0; background: #141414; color: #fff;">
-  <div class="columns text-c">
-    <div class="gc gc-10" style="--start: 2">
-      <h2 style="margin-bottom: 1.6rem">Built so it can outlast us.</h2>
-      <p style="opacity: 0.7; max-width: 56rem; margin: 0 auto 3.2rem; font-size: 1.8rem;"><em>The test the ecosystem was built to pass: twenty years from now, no one &mdash; including our own future leadership &mdash; can capture this infrastructure and turn it into an extractive platform.</em></p>
-      <a href="/about" class="btn bg-orange black">Read about the ecosystem</a>
-    </div>
-  </div>
-</section>
+          <p class="docs-group-label">Three pillars</p>
+          <ul class="docs-nav">
+            <li><a href="/docs/three-pillars/">Overview</a></li>
+            <li><a href="/docs/three-pillars/formation/">Formation</a></li>
+            <li><a href="/docs/three-pillars/navigation/">Navigation</a></li>
+            <li><a href="/docs/three-pillars/privacy/">Privacy</a></li>
+          </ul>
 
-<style>
-  .os-summary {
-    font-size: 2.2rem;
-    line-height: 1.5;
-    max-width: 56rem;
-    margin: 0 auto;
-    opacity: 0.85;
-  }
-  .os-cards { row-gap: 2rem; }
-  .os-card {
-    padding: 3.2rem 2.4rem;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 1.6rem;
-  }
-  .os-num {
-    font-family: "Geist Mono", ui-monospace, monospace;
-    font-size: 1.2rem;
-    opacity: 0.4;
-    margin-bottom: 1.2rem;
-  }
-  .os-label {
-    font-family: "Geist Mono", ui-monospace, monospace;
-    font-size: 1.2rem;
-    letter-spacing: 0.06em;
-    opacity: 0.55;
-    margin-bottom: 0.8rem;
-    text-transform: uppercase;
-  }
-  .os-card h3 {
-    font-size: 2.8rem;
-    line-height: 1.1;
-    margin-bottom: 1.6rem;
-  }
-  .os-card p {
-    font-size: 1.5rem;
-    line-height: 1.55;
-    color: rgba(0,0,0,0.75);
-    margin: 0;
-  }
-  .os-list {
-    list-style: none;
-    padding: 0;
-    max-width: 68rem;
-    margin-top: 1.2rem;
-  }
-  .os-list li {
-    padding: 1.6rem 0;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
-    line-height: 1.55;
-    font-size: 1.6rem;
-  }
-  .os-list li strong {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-size: 1.7rem;
-  }
-  @media (max-width: 860px) {
-    .os-cards .os-card { grid-column: span 12 !important; }
-  }
-</style>
+          <p class="docs-group-label">Open source</p>
+          <ul class="docs-nav">
+            <li><a href="/docs/open-source/">Overview</a></li>
+            <li><a href="/docs/open-source/license/">License</a></li>
+            <li><a href="/docs/open-source/self-host/">Self-host</a></li>
+            <li><a href="/docs/open-source/trust-governance/">Trust governance</a></li>
+          </ul>
+
+          <p class="docs-group-label">Security &amp; compliance</p>
+          <ul class="docs-nav">
+            <li><a href="/docs/security/">Overview <span class="badge-soon">Soon</span></a></li>
+          </ul>
+
+          <p class="docs-group-label">API &amp; integrations</p>
+          <ul class="docs-nav">
+            <li><a href="/docs/api/">Public API <span class="badge-soon">Soon</span></a></li>
+            <li><a href="/docs/api/mcp-server/">MCP server <span class="badge-soon">Soon</span></a></li>
+            <li><a href="/docs/api/webhooks/">Webhooks <span class="badge-soon">Soon</span></a></li>
+          </ul>
+
+        </div>
+      </aside>
+
+
+      <main class="docs-content">
+
+        <p class="docs-eyebrow">Page moved</p>
+        <h1 class="docs-title">This page has moved.</h1>
+        <p class="docs-lede">We&rsquo;ve reorganized the documentation. You&rsquo;ll find this content under <strong>Docs &rarr; Open source</strong>.</p>
+        <div style="margin-top: 2.4rem; display: flex; gap: 1.2rem; flex-wrap: wrap;">
+          <a href="/docs/open-source/" class="btn bg-black white" style="text-decoration: none;">Go to the new page</a>
+          <a href="/docs/" class="btn" style="background: rgba(0,0,0,0.05); text-decoration: none;">All docs</a>
+        </div>
+
+
+      </main>
+
+      <aside class="docs-toc"></aside>
+    </div>
+
+<script>
+  (function () {
+    var path = location.pathname.replace(/\/$/, '') || '/';
+    document.querySelectorAll('.docs-nav a, .docs-section-card').forEach(function (a) {
+      var href = a.getAttribute('href').replace(/\/$/, '') || '/';
+      if (href === path) a.classList.add('is-current');
+    });
+  })();
+</script>
 
 </div>
         <footer class="site-footer">
@@ -1001,9 +923,9 @@
         <p class="type-small"><strong>CivikAccess</strong></p>
         <ul class="type-small">
           <li><a href="/civikaccess">Overview</a></li>
-          <li><a href="/civikaccess/how-it-works">How it works</a></li>
+          <li><a href="/docs/three-pillars/">How it works</a></li>
           <li><a href="/civikaccess/pricing">Pricing</a></li>
-          <li><a href="/open-source">Open Source</a></li>
+          <li><a href="/docs/open-source/">Open Source</a></li>
           <li><a href="/civikaccess/book-intro">Book intro</a></li>
         </ul>
       </div>
@@ -2669,16 +2591,16 @@
 </script>
 
 
-    <script src="../js/js.js"></script>
-    <script src="../js/ext/countUp.umd.min.js"></script>
-    <script src="../js/ext/gsap.min.js"></script>
-    <script src="../js/ext/ScrollTrigger.min.js"></script>
-    <script src="../js/ext/ScrollToPlugin.min.js"></script>
-    <script src="../js/ext/flickity.pkgd.min.js"></script>
-    <script src="../js/brand.js"></script>
-    <script src="../js/modules/accordion.js"></script>
-    <script src="../js/js-base.js"></script>
-    <script src="../js/utm.js"></script>
+    <script src="/js/js.js"></script>
+    <script src="/js/ext/countUp.umd.min.js"></script>
+    <script src="/js/ext/gsap.min.js"></script>
+    <script src="/js/ext/ScrollTrigger.min.js"></script>
+    <script src="/js/ext/ScrollToPlugin.min.js"></script>
+    <script src="/js/ext/flickity.pkgd.min.js"></script>
+    <script src="/js/brand.js"></script>
+    <script src="/js/modules/accordion.js"></script>
+    <script src="/js/js-base.js"></script>
+    <script src="/js/utm.js"></script>
   
 
 </body></html>
