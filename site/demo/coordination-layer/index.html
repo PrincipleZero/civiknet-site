@@ -585,32 +585,6 @@ body {
 </head>
 <body>
 
-<div class="top-bar">
-  <div class="brand">
-    <span class="brand-mark">FIG. 08</span>
-    <span class="brand-title">The Coordination Layer</span>
-    <span class="brand-subtitle">— A Demo · CivikAccess</span>
-  </div>
-
-  <div class="step-indicator">
-    <div class="step-pills">
-      <div class="step-pill active" data-step="0"></div>
-      <div class="step-pill" data-step="1"></div>
-      <div class="step-pill" data-step="2"></div>
-      <div class="step-pill" data-step="3"></div>
-      <div class="step-pill" data-step="4"></div>
-      <div class="step-pill" data-step="5"></div>
-    </div>
-    <span class="step-counter" id="stepCounter">01 / 06</span>
-  </div>
-
-  <div class="controls">
-    <button class="control-btn" id="prevBtn" title="Previous (←)">‹</button>
-    <button class="control-btn" id="playBtn" title="Play / Pause (space)">▶</button>
-    <button class="control-btn" id="nextBtn" title="Next (→)">›</button>
-  </div>
-</div>
-
 <div class="stage">
   <div class="corner-crop tl"></div>
   <div class="corner-crop tr"></div>
@@ -1420,8 +1394,10 @@ function goToScene(n) {
   const prevScene = currentScene;
   currentScene = n;
 
-  document.getElementById('stepCounter').textContent =
-    String(n + 1).padStart(2, '0') + ' / 0' + TOTAL_SCENES;
+  const stepCounter = document.getElementById('stepCounter');
+  if (stepCounter) {
+    stepCounter.textContent = String(n + 1).padStart(2, '0') + ' / 0' + TOTAL_SCENES;
+  }
 
   document.querySelectorAll('.step-pill').forEach((p, i) => {
     p.classList.remove('active', 'completed');
@@ -1497,15 +1473,21 @@ const AUTOPLAY_DURATIONS = [4500, 4500, 4500, 8000, 9000, 8000];
 
 function startAutoplay() {
   isPlaying = true;
-  document.getElementById('playBtn').textContent = '❚❚';
-  document.getElementById('playBtn').classList.add('playing');
+  const playBtn = document.getElementById('playBtn');
+  if (playBtn) {
+    playBtn.textContent = '❚❚';
+    playBtn.classList.add('playing');
+  }
   scheduleNext();
 }
 
 function stopAutoplay() {
   isPlaying = false;
-  document.getElementById('playBtn').textContent = '▶';
-  document.getElementById('playBtn').classList.remove('playing');
+  const playBtn = document.getElementById('playBtn');
+  if (playBtn) {
+    playBtn.textContent = '▶';
+    playBtn.classList.remove('playing');
+  }
   if (autoplayTimer) { clearTimeout(autoplayTimer); autoplayTimer = null; }
 }
 
@@ -1517,7 +1499,9 @@ function scheduleNext() {
       nextScene();
       scheduleNext();
     } else {
-      stopAutoplay();
+      // Loop back to the beginning so the embed plays continuously
+      goToScene(0);
+      scheduleNext();
     }
   }, dur);
 }
@@ -1534,9 +1518,12 @@ function togglePlay() {
    CONTROLS WIRING
    ============================================================ */
 function setupControls() {
-  document.getElementById('prevBtn').addEventListener('click', () => { stopAutoplay(); prevScene(); });
-  document.getElementById('nextBtn').addEventListener('click', () => { stopAutoplay(); nextScene(); });
-  document.getElementById('playBtn').addEventListener('click', togglePlay);
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const playBtn = document.getElementById('playBtn');
+  if (prevBtn) prevBtn.addEventListener('click', () => { stopAutoplay(); prevScene(); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { stopAutoplay(); nextScene(); });
+  if (playBtn) playBtn.addEventListener('click', togglePlay);
 
   document.querySelectorAll('.step-pill').forEach((p, i) => {
     p.addEventListener('click', () => { stopAutoplay(); goToScene(i); });
@@ -1584,6 +1571,9 @@ function init() {
   requestAnimationFrame(animLoop);
 
   goToScene(0);
+
+  // Auto-start the loop (top-bar controls have been removed)
+  startAutoplay();
 }
 
 window.addEventListener('load', init);
