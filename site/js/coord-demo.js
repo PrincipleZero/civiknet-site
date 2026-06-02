@@ -363,6 +363,64 @@
       }
     }
 
+    // ---- Reliable frame: an AI scanner that sweeps step to step ----
+    var scanner = null;
+    if (state === 'reliable') {
+      var head = svgEl('g', { class: 'cd-scanner' });
+      head.appendChild(svgEl('circle', { r: 13, fill: 'none', stroke: '#ff5102', 'stroke-width': 1.5, opacity: 0.95 }));
+      head.appendChild(svgEl('line', { x1: -19, y1: 0, x2: -7, y2: 0, stroke: '#ff5102', 'stroke-width': 1, opacity: 0.7 }));
+      head.appendChild(svgEl('line', { x1: 7, y1: 0, x2: 19, y2: 0, stroke: '#ff5102', 'stroke-width': 1, opacity: 0.7 }));
+      head.appendChild(svgEl('line', { x1: 0, y1: -19, x2: 0, y2: -7, stroke: '#ff5102', 'stroke-width': 1, opacity: 0.7 }));
+      head.appendChild(svgEl('line', { x1: 0, y1: 7, x2: 0, y2: 19, stroke: '#ff5102', 'stroke-width': 1, opacity: 0.7 }));
+      head.appendChild(svgEl('circle', { r: 2.5, fill: '#ff5102' }));
+      nodesLayer.appendChild(head);
+      scanner = { idx: 0, phase: 'scan', timer: 0, ringAccum: 0, head: head, rings: [], from: null, to: null };
+    }
+
+    function scanTarget(idx) {
+      var b = ROUTE_BUILDINGS[idx];
+      var c = iso(b.gx + b.w / 2, b.gy + b.d / 2, b.h);
+      return { x: c.x, y: c.y - 16 };
+    }
+    function spawnScanRing(x, y) {
+      var ring = svgEl('circle', { cx: x, cy: y, r: 8, fill: 'none', stroke: '#ff5102', 'stroke-width': 1.2, opacity: 0.55 });
+      nodesLayer.appendChild(ring);
+      scanner.rings.push({ el: ring, life: 0 });
+    }
+    function updateScanner(dt) {
+      var SCAN_DUR = 1300, MOVE_DUR = 650;
+      if (scanner.phase === 'scan') {
+        var t = scanTarget(scanner.idx);
+        scanner.head.setAttribute('transform', 'translate(' + t.x + ',' + t.y + ')');
+        scanner.ringAccum += dt;
+        if (scanner.ringAccum > 420) { scanner.ringAccum = 0; spawnScanRing(t.x, t.y); }
+        scanner.timer += dt;
+        if (scanner.timer > SCAN_DUR) {
+          scanner.phase = 'move'; scanner.timer = 0;
+          scanner.from = scanTarget(scanner.idx);
+          scanner.to = scanTarget((scanner.idx + 1) % ROUTE_BUILDINGS.length);
+        }
+      } else {
+        scanner.timer += dt;
+        var p = Math.min(1, scanner.timer / MOVE_DUR);
+        var e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+        scanner.head.setAttribute('transform', 'translate(' +
+          (scanner.from.x + (scanner.to.x - scanner.from.x) * e) + ',' +
+          (scanner.from.y + (scanner.to.y - scanner.from.y) * e) + ')');
+        if (scanner.timer > MOVE_DUR) {
+          scanner.idx = (scanner.idx + 1) % ROUTE_BUILDINGS.length;
+          scanner.phase = 'scan'; scanner.timer = 0;
+        }
+      }
+      for (var i = scanner.rings.length - 1; i >= 0; i--) {
+        var r = scanner.rings[i];
+        r.life += dt;
+        var rp = r.life / 850;
+        if (rp >= 1) { if (r.el.parentNode) r.el.parentNode.removeChild(r.el); scanner.rings.splice(i, 1); }
+        else { r.el.setAttribute('r', 8 + rp * 26); r.el.setAttribute('opacity', (1 - rp) * 0.55); }
+      }
+    }
+
     function loop(ts) {
       if (!running) return;
       var dt = ts - (lastT || ts); lastT = ts;
@@ -370,6 +428,7 @@
       var interval = state === 'reliable' ? 500 : 700;
       if (spawnAccum > interval && nodes.length < 80) { spawn(); spawnAccum = 0; updateCounters(); }
       update(dt);
+      if (scanner) updateScanner(dt);
       rafId = requestAnimationFrame(loop);
     }
 
