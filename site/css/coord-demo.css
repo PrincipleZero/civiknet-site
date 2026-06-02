@@ -114,10 +114,10 @@
   fill: var(--cd-ink); text-anchor: middle; dominant-baseline: central;
 }
 .coord-demo .cd-pin-frame {
-  fill: var(--cd-paper-deep);
-  stroke: var(--cd-ink);
-  stroke-width: 0.8;
-  opacity: 0.96;
+  fill: #fbfaf6;
+  stroke: rgba(0, 0, 0, 0.2);
+  stroke-width: 0.7;
+  opacity: 0.97;
 }
 .coord-demo .cd-pin-label {
   font-family: var(--cd-mono); font-size: 16px; font-weight: 600;
@@ -198,15 +198,36 @@
 }
 
 /* ====== COUNTER PANEL ====== */
+/* Live-status panel — rebuilt on the workflow-editor design system:
+   a nested rounded card (outer shell + inner card), the layered ambient
+   shadow stack, mono micro-labels and a status pill. The row VALUE colors
+   stay on the diagram's own palette (orange/olive/rust) so the counter
+   reads in lockstep with the map nodes. */
 .coord-demo .cd-counter {
   position: absolute;
   top: 2rem;
   right: 2rem;
-  background: var(--cd-paper);
-  border: 1px solid var(--cd-ink-faint);
-  padding: 1.6rem 1.8rem 1.4rem;
-  min-width: 22rem;
+  min-width: 24rem;
   z-index: 5;
+  border-radius: 2.4rem;
+  border: 1px solid #e2e2e2;
+  background: linear-gradient(to bottom, rgba(253, 253, 253, 0.4), rgba(253, 253, 253, 0.85));
+  padding: 0.7rem;
+  box-shadow:
+    0 0.5rem 0.15rem -0.4rem rgba(8, 8, 8, 0.05),
+    0 0.6rem 0.4rem -0.4rem rgba(8, 8, 8, 0.05),
+    0 0.6rem 1.3rem 0 rgba(8, 8, 8, 0.03),
+    0 2.4rem 2.4rem -1.6rem rgba(8, 8, 8, 0.04),
+    0 3.2rem 6.4rem -1.2rem rgba(0, 0, 0, 0.08);
+}
+.coord-demo .cd-counter-inner {
+  border-radius: 1.8rem;
+  border: 1px solid #f0efec;
+  background: rgba(255, 255, 255, 0.96);
+  padding: 1.6rem 1.8rem 1.5rem;
+  box-shadow:
+    0 1rem 2.2rem -1.4rem rgba(8, 8, 8, 0.35),
+    0 0.1rem 0 0 rgba(255, 255, 255, 0.55) inset;
 }
 .coord-demo .cd-counter-head {
   display: flex;
@@ -220,12 +241,27 @@
   font-family: var(--cd-mono);
   font-size: 0.9rem;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.16em;
   color: var(--cd-ink-soft);
 }
+.coord-demo .cd-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--cd-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #15803d;
+  background: #dcfce7;
+  border: 1px solid #bbf7d0;
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem 0.25rem 0.6rem;
+}
 .coord-demo .cd-live-dot {
-  width: 0.6rem; height: 0.6rem; border-radius: 50%;
-  background: var(--cd-teal);
+  width: 0.55rem; height: 0.55rem; border-radius: 50%;
+  background: #22c55e;
   animation: cd-livePulse 1.6s ease-in-out infinite;
 }
 @keyframes cd-livePulse {

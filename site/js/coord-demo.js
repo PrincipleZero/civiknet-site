@@ -98,13 +98,18 @@
   function buildCounter() {
     var panel = el('div', 'cd-counter');
     panel.innerHTML =
-      '<div class="cd-counter-head"><span class="cd-counter-label">Live Pathway Status</span><div class="cd-live-dot"></div></div>' +
-      '<div class="cd-row entered"><span class="cd-row-label">Families entered</span><span class="cd-row-value cd-entered">0</span></div>' +
-      '<div class="cd-row inprogress"><span class="cd-row-label">In progress</span><span class="cd-row-value cd-inprogress">0</span></div>' +
-      '<div class="cd-row completed"><span class="cd-row-label">Completed</span><span class="cd-row-value cd-completed">0</span></div>' +
-      '<div class="cd-row stuck"><span class="cd-row-label">Stuck · 14+ days</span><span class="cd-row-value cd-stuck">0</span></div>' +
-      '<div class="cd-counter-divider"></div>' +
-      '<div class="cd-counter-summary"><span class="cd-row-label">Resolution rate</span><span class="cd-rate cd-rate-v">—</span></div>';
+      '<div class="cd-counter-inner">' +
+        '<div class="cd-counter-head">' +
+          '<span class="cd-counter-label">Live Pathway Status</span>' +
+          '<span class="cd-status-pill"><span class="cd-live-dot"></span>Live</span>' +
+        '</div>' +
+        '<div class="cd-row entered"><span class="cd-row-label">Families entered</span><span class="cd-row-value cd-entered">0</span></div>' +
+        '<div class="cd-row inprogress"><span class="cd-row-label">In progress</span><span class="cd-row-value cd-inprogress">0</span></div>' +
+        '<div class="cd-row completed"><span class="cd-row-label">Completed</span><span class="cd-row-value cd-completed">0</span></div>' +
+        '<div class="cd-row stuck"><span class="cd-row-label">Stuck · 14+ days</span><span class="cd-row-value cd-stuck">0</span></div>' +
+        '<div class="cd-counter-divider"></div>' +
+        '<div class="cd-counter-summary"><span class="cd-row-label">Resolution rate</span><span class="cd-rate cd-rate-v">—</span></div>' +
+      '</div>';
     return panel;
   }
 
