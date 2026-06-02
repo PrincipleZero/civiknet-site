@@ -75,9 +75,9 @@
     },
     {
       state: 'stuck', counter: true,
-      eyebrow: 'OWNERSHIP · WHERE THE RECORD GOES BLIND',
-      title: 'No owner, no record.',
-      desc: 'A handoff no one owns is where the picture goes dark. The family stalls, the record breaks — and anything built on that record, AI included, is now working from something that simply isn’t true.'
+      eyebrow: 'STUCK POINTS · SEE WHERE FAMILIES STALL',
+      title: 'See exactly where families get stuck.',
+      desc: 'When a family stops moving forward, CivikAccess pinpoints exactly where in the process they stalled — which step, in real time. Instead of vanishing into the gaps, every stuck family is located, counted, and reachable.'
     },
     {
       state: 'reliable', counter: true,
@@ -241,7 +241,7 @@
       ring2.style.animationDelay = '0.9s';
       gStuck.appendChild(ring2);
       var slbl = svgEl('text', { x: hc.x, y: hc.y + 60, class: 'cd-stuck-label' });
-      slbl.textContent = 'HANDOFF GAP — NO ONE OWNS THE CATCH';
+      slbl.textContent = 'STUCK POINT · FAMILIES STALLED HERE';
       gStuck.appendChild(slbl);
       root.appendChild(gStuck);
     }
