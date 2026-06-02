@@ -62,28 +62,28 @@
 
   var FRAMES = [
     {
-      state: 'overlay', sheet: 'SHEET A · 01/04', counter: false,
-      eyebrow: 'STATE 03 · OVERLAY',
-      title: 'Place the process on the place.',
-      desc: 'Each step lives at an address. The route becomes traceable — not as boxes and arrows, but as the actual journey a family takes through their week, across agencies, in working hours.'
+      state: 'overlay', counter: false,
+      eyebrow: 'PATHWAY · ONE SHARED MAP',
+      title: 'One map. Everyone works from it.',
+      desc: 'Every agency, partner, and vendor in a family’s journey works from the same picture — one pathway, laid out end to end, instead of a stack of disconnected systems that never see each other.'
     },
     {
-      state: 'flow', sheet: 'SHEET B · 02/04', counter: true,
-      eyebrow: 'STATE 04 · LIVE FLOW',
-      title: 'Now watch what happens.',
-      desc: 'Each dot is a family entering the system. They move through the pathway — step to step, handoff to handoff. When coordination works, this is what it looks like.'
+      state: 'flow', counter: true,
+      eyebrow: 'RECORD · EVERY STEP TRACEABLE',
+      title: 'Every step, on the record.',
+      desc: 'As each family moves through the pathway, every step and every handoff is recorded — traceable, examinable, never lost to a missed call or a buried inbox. This is the true picture AI would need before it could be trusted with anything.'
     },
     {
-      state: 'stuck', sheet: 'SHEET C · 03/04', counter: true,
-      eyebrow: 'STATE 05 · WHERE ACCESS BREAKS',
-      title: 'And here’s where it actually breaks.',
-      desc: 'Families stall at the handoff. No one is responsible for confirming the catch. Days pass. Some get lost entirely. This isn’t a personnel problem — it’s an infrastructure gap.'
+      state: 'stuck', counter: true,
+      eyebrow: 'OWNERSHIP · WHERE THE RECORD GOES BLIND',
+      title: 'No owner, no record.',
+      desc: 'A handoff no one owns is where the picture goes dark. The family stalls, the record breaks — and anything built on that record, AI included, is now working from something that simply isn’t true.'
     },
     {
-      state: 'reliable', sheet: 'SHEET D · 04/04', counter: true,
-      eyebrow: 'STATE 06 · COORDINATION INFRASTRUCTURE',
-      title: 'Now make the layer operational.',
-      desc: 'Pathways visible. Handoffs owned. Outcomes auditable. The work doesn’t change — it becomes accountable. This is the operating layer the field has been missing.'
+      state: 'reliable', counter: true,
+      eyebrow: 'FOUNDATION · WHAT AI CAN STAND ON',
+      title: 'The foundation AI can stand on.',
+      desc: 'Every pathway visible. Every handoff owned. Every step on the record. That’s the verifiable foundation anything built on top — including AI — can be trusted to stand on without breaking.'
     }
   ];
 
@@ -258,7 +258,7 @@
       var badge = svgEl('g', { transform: 'translate(0, 40)' });
       badge.appendChild(svgEl('rect', { x: -230, y: 0, width: 460, height: 64, style: 'fill: #1a1a1a; stroke: #4cb8b8; stroke-width: 1.2;', rx: 1 }));
       var t1 = svgEl('text', { x: 0, y: 24, style: 'font-family: "Geist Mono", ui-monospace, monospace; font-size: 10px; fill: #4cb8b8; letter-spacing: 0.22em; font-weight: 500;', 'text-anchor': 'middle' });
-      t1.textContent = 'COORDINATION INFRASTRUCTURE · ENGAGED'; badge.appendChild(t1);
+      t1.textContent = 'ACCESS RELIABILITY · ESTABLISHED'; badge.appendChild(t1);
       var t2 = svgEl('text', { x: 0, y: 50, style: 'font-family: Georgia, serif; font-size: 20px; fill: #f0eee4; font-style: italic;', 'text-anchor': 'middle' });
       t2.textContent = 'Every pathway visible. Every handoff owned.'; badge.appendChild(t2);
       root.appendChild(badge);
