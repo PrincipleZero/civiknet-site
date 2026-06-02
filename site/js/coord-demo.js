@@ -216,10 +216,10 @@
       grp.appendChild(svgEl('circle', { cx: c.x, cy: pinY, r: 12, class: 'cd-pin-circle' }));
       var num = svgEl('text', { x: c.x, y: pinY, class: 'cd-pin-number' });
       num.textContent = b.id; grp.appendChild(num);
-      var labelY = iso(b.gx + b.w/2, b.gy + b.d, 0).y + 16;
-      var lbl = svgEl('text', { x: c.x, y: labelY, class: 'cd-pin-label' });
+      // Labels sit ABOVE the pin (in open space) so they stay legible
+      var lbl = svgEl('text', { x: c.x, y: pinY - 32, class: 'cd-pin-label' });
       lbl.textContent = b.short; grp.appendChild(lbl);
-      var sub = svgEl('text', { x: c.x, y: labelY + 12, class: 'cd-pin-label-sub' });
+      var sub = svgEl('text', { x: c.x, y: pinY - 20, class: 'cd-pin-label-sub' });
       sub.textContent = b.label; grp.appendChild(sub);
       gPins.appendChild(grp);
     });
