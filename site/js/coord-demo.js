@@ -370,8 +370,8 @@
     var scanner = null;
     if (state === 'reliable') {
       var head = svgEl('g', { class: 'cd-scanner' });
-      head.appendChild(svgEl('circle', { r: 11, fill: '#ff5102', opacity: 0.22 }));
-      head.appendChild(svgEl('circle', { r: 6.5, fill: '#ff5102', stroke: '#ffb489', 'stroke-width': 1 }));
+      head.appendChild(svgEl('circle', { r: 11, fill: '#22d3ee', opacity: 0.22 }));
+      head.appendChild(svgEl('path', { d: 'M -8 -6 L 8 -6 L 0 9 Z', fill: '#22d3ee', stroke: '#bff5ff', 'stroke-width': 1, 'stroke-linejoin': 'round' }));
       nodesLayer.appendChild(head);
       scanner = { idx: 0, phase: 'scan', timer: 0, ringAccum: 0, head: head, rings: [], from: null, to: null, lit: false };
     }
@@ -400,7 +400,7 @@
       return { x: c.x, y: c.y - 16 };
     }
     function spawnScanRing(x, y) {
-      var ring = svgEl('circle', { cx: x, cy: y, r: 8, fill: 'none', stroke: '#ff5102', 'stroke-width': 1.2, opacity: 0.55 });
+      var ring = svgEl('circle', { cx: x, cy: y, r: 8, fill: 'none', stroke: '#22d3ee', 'stroke-width': 1.2, opacity: 0.55 });
       nodesLayer.appendChild(ring);
       scanner.rings.push({ el: ring, life: 0 });
     }
