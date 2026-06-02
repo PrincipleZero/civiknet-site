@@ -57,7 +57,7 @@
     {gx:14,gy:11.5,scale:1.05},
     {gx:6,gy:7,scale:0.7},{gx:11,gy:3.5,scale:0.75},{gx:15.5,gy:6.5,scale:0.7}
   ];
-  var AMB = { top: '#262626', east: '#1c1c1c', south: '#141414' };
+  var AMB = { top: '#f2f0ea', east: '#e0ddd4', south: '#cfccc2' };
   var NODE_COLORS = ['#ff5102', '#ff6b28', '#ff7d40', '#ff8c52'];
 
   var FRAMES = [
@@ -218,7 +218,7 @@
       // location names never collide horizontally.
       var pinY = c.y - (idx % 2 === 0 ? 78 : 40);
       var grp = svgEl('g');
-      grp.appendChild(svgEl('line', { x1: c.x, y1: c.y, x2: c.x, y2: pinY + 12, stroke: '#f0eee4', 'stroke-width': '0.6', opacity: 0.5 }));
+      grp.appendChild(svgEl('line', { x1: c.x, y1: c.y, x2: c.x, y2: pinY + 12, stroke: '#1f1f1c', 'stroke-width': '0.6', opacity: 0.5 }));
       grp.appendChild(svgEl('circle', { cx: c.x, cy: pinY, r: 12, class: 'cd-pin-circle' }));
       var num = svgEl('text', { x: c.x, y: pinY, class: 'cd-pin-number' });
       num.textContent = b.id; grp.appendChild(num);
