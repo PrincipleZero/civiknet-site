@@ -1,0 +1,270 @@
+/* ============================================================
+   coord-demo.css — Coordination Layer demo, scoped to .coord-demo
+   Inherits site fonts (no Google Fonts) so it matches the rest of
+   the application. Mono uses Geist Mono per the site's conventions.
+   ============================================================ */
+
+.coord-demo {
+  --cd-paper: #141414;
+  --cd-paper-deep: #1a1a1a;
+  --cd-paper-darker: #222222;
+  --cd-ink: #f0eee4;
+  --cd-ink-soft: #9a9a9a;
+  --cd-ink-faint: rgba(255, 255, 255, 0.15);
+  --cd-ink-whisper: rgba(255, 255, 255, 0.06);
+  --cd-teal: #4cb8b8;
+  --cd-teal-deep: #2d8585;
+  --cd-rust: #e07d4a;
+  --cd-rust-deep: #c4663a;
+  --cd-olive: #a3b85a;
+  --cd-olive-deep: #7a8e3a;
+
+  --cd-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  display: block;
+  width: 100%;
+  background: var(--cd-paper);
+  color: var(--cd-ink);
+  font-family: inherit;
+}
+
+/* ====== FRAME ====== */
+.coord-demo .cd-frame {
+  width: 100%;
+  position: relative;
+  padding: 4rem 3.2rem 5rem;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 2rem;
+  border-bottom: 1px solid var(--cd-ink-whisper);
+}
+.coord-demo .cd-frame:last-child { border-bottom: 0; }
+.coord-demo .cd-frame[data-state="reliable"] {
+  background:
+    radial-gradient(ellipse at center top, #1c1c1a 0%, #1a1a18 60%, #181816 100%);
+}
+
+/* Architectural chrome */
+.coord-demo .cd-corner {
+  position: absolute;
+  width: 2rem; height: 2rem;
+  border-color: var(--cd-ink-soft);
+  border-style: solid;
+  border-width: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.coord-demo .cd-corner.tl { top: 1.6rem; left: 1.6rem; border-top-width: 1px; border-left-width: 1px; }
+.coord-demo .cd-corner.tr { top: 1.6rem; right: 1.6rem; border-top-width: 1px; border-right-width: 1px; }
+.coord-demo .cd-corner.bl { bottom: 1.6rem; left: 1.6rem; border-bottom-width: 1px; border-left-width: 1px; }
+.coord-demo .cd-corner.br { bottom: 1.6rem; right: 1.6rem; border-bottom-width: 1px; border-right-width: 1px; }
+
+.coord-demo .cd-fig-label {
+  position: absolute;
+  top: 2.4rem; left: 2.8rem;
+  font-family: var(--cd-mono);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--cd-ink-soft);
+  pointer-events: none;
+}
+
+/* ====== MAP ====== */
+.coord-demo .cd-map-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1500 / 800;
+  max-height: 70vh;
+}
+.coord-demo .cd-map {
+  width: 100%; height: 100%;
+  display: block;
+}
+
+/* SVG element styles */
+.coord-demo .cd-bldg-top { stroke: var(--cd-ink); stroke-width: 0.7; stroke-linejoin: round; }
+.coord-demo .cd-bldg-east { stroke: var(--cd-ink); stroke-width: 0.6; stroke-linejoin: round; opacity: 0.92; }
+.coord-demo .cd-bldg-south { stroke: var(--cd-ink); stroke-width: 0.6; stroke-linejoin: round; opacity: 0.85; }
+.coord-demo .cd-ground-line { stroke: var(--cd-ink); stroke-width: 0.3; opacity: 0.10; fill: none; }
+.coord-demo .cd-road { stroke: var(--cd-ink-soft); stroke-width: 1.2; opacity: 0.30; fill: none; stroke-linecap: round; }
+.coord-demo .cd-tree-canopy { fill: #4a5a2a; opacity: 0.55; stroke: #2f3c1a; stroke-width: 0.4; }
+.coord-demo .cd-tree-trunk { fill: #3a281c; opacity: 0.7; }
+.coord-demo .cd-route-bldg .cd-bldg-top { fill: #2a2a26; stroke: var(--cd-ink); stroke-width: 0.9; }
+.coord-demo .cd-route-bldg .cd-bldg-east { fill: #1f1f1c; stroke: var(--cd-ink); stroke-width: 0.7; }
+.coord-demo .cd-route-bldg .cd-bldg-south { fill: #181815; stroke: var(--cd-ink); stroke-width: 0.7; }
+
+.coord-demo .cd-pin-circle { fill: var(--cd-paper); stroke: var(--cd-ink); stroke-width: 1.2; }
+.coord-demo .cd-pin-number {
+  font-family: var(--cd-mono); font-size: 12px; font-weight: 500;
+  fill: var(--cd-ink); text-anchor: middle; dominant-baseline: central;
+}
+.coord-demo .cd-pin-label {
+  font-family: var(--cd-mono); font-size: 9.5px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.18em;
+  fill: var(--cd-ink); text-anchor: middle;
+}
+.coord-demo .cd-pin-label-sub {
+  font-family: var(--cd-mono); font-size: 8px;
+  text-transform: uppercase; letter-spacing: 0.15em;
+  fill: var(--cd-ink-soft); text-anchor: middle;
+}
+
+.coord-demo .cd-route-line {
+  stroke: var(--cd-teal); stroke-width: 1.4; fill: none;
+  stroke-linecap: round; stroke-dasharray: 6 5; opacity: 0.7;
+}
+
+.coord-demo .cd-node { stroke: var(--cd-ink); stroke-width: 0.6; }
+
+.coord-demo .cd-stuck-warning {
+  fill: none; stroke: var(--cd-rust); stroke-width: 1.4; opacity: 0.5;
+  animation: cd-stuckPulse 1.8s ease-in-out infinite;
+}
+@keyframes cd-stuckPulse {
+  0%, 100% { opacity: 0.35; r: 28; stroke-width: 1.2; }
+  50% { opacity: 0.7; r: 36; stroke-width: 1.8; }
+}
+.coord-demo .cd-stuck-label {
+  font-family: var(--cd-mono); font-size: 9px;
+  text-transform: uppercase; letter-spacing: 0.18em;
+  fill: var(--cd-rust); text-anchor: middle;
+}
+
+.coord-demo .cd-reliable-grid {
+  stroke: var(--cd-teal); stroke-width: 0.4; fill: none; opacity: 0.25;
+}
+
+/* ====== NARRATION ====== */
+.coord-demo .cd-narration {
+  max-width: 76rem;
+  margin: 0 auto;
+  text-align: center;
+}
+.coord-demo .cd-eyebrow {
+  font-family: var(--cd-mono);
+  font-size: 1.1rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--cd-teal);
+  margin: 0 0 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+.coord-demo .cd-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 2rem;
+  height: 1px;
+  background: var(--cd-teal);
+}
+.coord-demo .cd-title {
+  font-family: inherit;
+  font-size: 2.8rem;
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--cd-ink);
+  margin: 0 0 0.8rem;
+  letter-spacing: -0.005em;
+}
+.coord-demo .cd-desc {
+  font-family: inherit;
+  font-size: 1.5rem;
+  line-height: 1.55;
+  color: var(--cd-ink-soft);
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+/* ====== COUNTER PANEL ====== */
+.coord-demo .cd-counter {
+  position: absolute;
+  top: 6.4rem;
+  right: 3.2rem;
+  background: var(--cd-paper);
+  border: 1px solid var(--cd-ink-faint);
+  padding: 1.6rem 1.8rem 1.4rem;
+  min-width: 22rem;
+  z-index: 5;
+}
+.coord-demo .cd-counter-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--cd-ink-faint);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+.coord-demo .cd-counter-label {
+  font-family: var(--cd-mono);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--cd-ink-soft);
+}
+.coord-demo .cd-live-dot {
+  width: 0.6rem; height: 0.6rem; border-radius: 50%;
+  background: var(--cd-teal);
+  animation: cd-livePulse 1.6s ease-in-out infinite;
+}
+@keyframes cd-livePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+.coord-demo .cd-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.4rem 0;
+}
+.coord-demo .cd-row .cd-row-label {
+  color: var(--cd-ink-soft);
+  font-family: var(--cd-mono);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.coord-demo .cd-row .cd-row-value {
+  font-family: var(--cd-mono);
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--cd-ink);
+}
+.coord-demo .cd-row.inprogress .cd-row-value { color: var(--cd-teal); }
+.coord-demo .cd-row.completed .cd-row-value { color: var(--cd-olive); }
+.coord-demo .cd-row.stuck .cd-row-value { color: var(--cd-rust); }
+.coord-demo .cd-counter-divider { height: 1px; background: var(--cd-ink-faint); margin: 0.8rem 0; }
+.coord-demo .cd-counter-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.coord-demo .cd-counter-summary .cd-row-label {
+  color: var(--cd-ink-soft);
+  font-family: var(--cd-mono);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.coord-demo .cd-counter-summary .cd-rate {
+  font-family: inherit;
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--cd-ink);
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .coord-demo .cd-frame { padding: 3rem 2rem 4rem; }
+  .coord-demo .cd-title { font-size: 2.2rem; }
+  .coord-demo .cd-counter {
+    position: static;
+    margin: 0 auto 1.6rem;
+    min-width: 0;
+    width: 100%;
+    max-width: 36rem;
+  }
+  .coord-demo .cd-fig-label { font-size: 0.8rem; }
+}
