@@ -24,7 +24,7 @@
 
   display: block;
   width: 100%;
-  background: var(--cd-paper);
+  background: transparent;
   color: var(--cd-ink);
   font-family: inherit;
 }
@@ -42,8 +42,7 @@
 }
 .coord-demo .cd-frame:last-child { border-bottom: 0; }
 .coord-demo .cd-frame[data-state="reliable"] {
-  background:
-    radial-gradient(ellipse at center top, #1c1c1a 0%, #1a1a18 60%, #181816 100%);
+  background: transparent;
 }
 
 /* Architectural chrome */
