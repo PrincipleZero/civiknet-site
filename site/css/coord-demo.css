@@ -35,8 +35,8 @@
   position: relative;
   padding: 4rem 3.2rem 5rem;
   display: grid;
-  grid-template-rows: 1fr auto;
-  gap: 2rem;
+  grid-template-rows: auto auto;
+  gap: 2.4rem;
   border-bottom: 1px solid var(--cd-ink-whisper);
 }
 .coord-demo .cd-frame:last-child { border-bottom: 0; }
@@ -184,8 +184,8 @@
 /* ====== COUNTER PANEL ====== */
 .coord-demo .cd-counter {
   position: absolute;
-  top: 6.4rem;
-  right: 3.2rem;
+  top: 2rem;
+  right: 2rem;
   background: var(--cd-paper);
   border: 1px solid var(--cd-ink-faint);
   padding: 1.6rem 1.8rem 1.4rem;
@@ -264,11 +264,10 @@
   .coord-demo .cd-frame { padding: 3rem 2rem 4rem; }
   .coord-demo .cd-title { font-size: 2.2rem; }
   .coord-demo .cd-counter {
-    position: static;
-    margin: 0 auto 1.6rem;
+    top: 1rem;
+    right: 1rem;
     min-width: 0;
-    width: 100%;
-    max-width: 36rem;
+    padding: 1rem 1.2rem;
   }
   .coord-demo .cd-fig-label { font-size: 0.8rem; }
 }

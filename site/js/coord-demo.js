@@ -116,20 +116,21 @@
       frame.appendChild(el('div', 'cd-corner ' + pos));
     });
 
-    if (cfg.counter) frame.appendChild(buildCounter());
-
-    var mapWrap = el('div', 'cd-map-wrap');
-    var svg = svgEl('svg', { class: 'cd-map', viewBox: '0 0 1500 800', preserveAspectRatio: 'xMidYMid meet' });
-    svg.setAttribute('data-state', cfg.state);
-    mapWrap.appendChild(svg);
-    frame.appendChild(mapWrap);
-
+    // Narration on top
     var narr = el('div', 'cd-narration');
     narr.innerHTML =
       '<div class="cd-eyebrow">' + cfg.eyebrow + '</div>' +
       '<h3 class="cd-title">' + cfg.title + '</h3>' +
       '<p class="cd-desc">' + cfg.desc + '</p>';
     frame.appendChild(narr);
+
+    // Map below — the live counter floats over the map's top-right
+    var mapWrap = el('div', 'cd-map-wrap');
+    var svg = svgEl('svg', { class: 'cd-map', viewBox: '0 0 1500 800', preserveAspectRatio: 'xMidYMid meet' });
+    svg.setAttribute('data-state', cfg.state);
+    mapWrap.appendChild(svg);
+    if (cfg.counter) mapWrap.appendChild(buildCounter());
+    frame.appendChild(mapWrap);
 
     return { frame: frame, svg: svg, cfg: cfg };
   }
