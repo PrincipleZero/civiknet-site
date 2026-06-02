@@ -367,12 +367,8 @@
     var scanner = null;
     if (state === 'reliable') {
       var head = svgEl('g', { class: 'cd-scanner' });
-      head.appendChild(svgEl('circle', { r: 13, fill: 'none', stroke: '#ff5102', 'stroke-width': 1.5, opacity: 0.95 }));
-      head.appendChild(svgEl('line', { x1: -19, y1: 0, x2: -7, y2: 0, stroke: '#ff5102', 'stroke-width': 1, opacity: 0.7 }));
-      head.appendChild(svgEl('line', { x1: 7, y1: 0, x2: 19, y2: 0, stroke: '#ff5102', 'stroke-width': 1, opacity: 0.7 }));
-      head.appendChild(svgEl('line', { x1: 0, y1: -19, x2: 0, y2: -7, stroke: '#ff5102', 'stroke-width': 1, opacity: 0.7 }));
-      head.appendChild(svgEl('line', { x1: 0, y1: 7, x2: 0, y2: 19, stroke: '#ff5102', 'stroke-width': 1, opacity: 0.7 }));
-      head.appendChild(svgEl('circle', { r: 2.5, fill: '#ff5102' }));
+      head.appendChild(svgEl('circle', { r: 11, fill: '#ff5102', opacity: 0.22 }));
+      head.appendChild(svgEl('circle', { r: 6.5, fill: '#ff5102', stroke: '#ffb489', 'stroke-width': 1 }));
       nodesLayer.appendChild(head);
       scanner = { idx: 0, phase: 'scan', timer: 0, ringAccum: 0, head: head, rings: [], from: null, to: null, lit: false };
     }
