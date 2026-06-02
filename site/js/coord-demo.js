@@ -35,7 +35,7 @@
     { id: 1, gx: 0,  gy: 5, w: 2.5, d: 2,   h: 2.2, label: 'Sunnyside Resource Center', short: 'INTAKE' },
     { id: 2, gx: 4,  gy: 5, w: 2,   d: 2,   h: 2.8, label: 'DSS Office',                short: 'ASSESS' },
     { id: 3, gx: 7,  gy: 5, w: 2.2, d: 2,   h: 3.4, label: 'County Benefits Office',    short: 'MATCH' },
-    { id: 4, gx: 9,  gy: 9, w: 1.6, d: 1.6, h: 2.0, label: 'Northgate Health Partners', short: 'HANDOFF' },
+    { id: 4, gx: 10, gy: 11, w: 1.6, d: 1.6, h: 2.0, label: 'Northgate Health Partners', short: 'HANDOFF' },
     { id: 5, gx: 13, gy: 7, w: 2,   d: 2,   h: 2.6, label: 'Eastside Family Clinic',    short: 'SERVICE' },
     { id: 6, gx: 16, gy: 4, w: 2,   d: 1.6, h: 2.2, label: 'Case Management Office',     short: 'RESOLVE' }
   ];
