@@ -99,7 +99,7 @@
 .coord-demo .cd-bldg-top { stroke: var(--cd-ink); stroke-width: 0.7; stroke-linejoin: round; }
 .coord-demo .cd-bldg-east { stroke: var(--cd-ink); stroke-width: 0.6; stroke-linejoin: round; opacity: 0.92; }
 .coord-demo .cd-bldg-south { stroke: var(--cd-ink); stroke-width: 0.6; stroke-linejoin: round; opacity: 0.85; }
-.coord-demo .cd-ground-line { stroke: var(--cd-ink); stroke-width: 0.3; opacity: 0.10; fill: none; }
+.coord-demo .cd-ground-line { stroke: var(--cd-ink); stroke-width: 0.8; opacity: 0.22; fill: none; }
 .coord-demo .cd-road { stroke: var(--cd-ink-soft); stroke-width: 1.2; opacity: 0.30; fill: none; stroke-linecap: round; }
 .coord-demo .cd-tree-canopy { fill: #4a5a2a; opacity: 0.55; stroke: #2f3c1a; stroke-width: 0.4; }
 .coord-demo .cd-tree-trunk { fill: #3a281c; opacity: 0.7; }

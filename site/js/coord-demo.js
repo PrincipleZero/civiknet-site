@@ -146,12 +146,12 @@
 
     var gGround = svgEl('g');
     var i, j, p1, p2;
-    for (i = -1; i <= 20; i += 2) {
-      p1 = iso(i, -1); p2 = iso(i, 13);
+    for (i = -1; i <= 21; i += 3) {
+      p1 = iso(i, -1); p2 = iso(i, 14);
       gGround.appendChild(svgEl('line', { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, class: 'cd-ground-line' }));
     }
-    for (j = -1; j <= 13; j += 2) {
-      p1 = iso(-1, j); p2 = iso(20, j);
+    for (j = -1; j <= 14; j += 3) {
+      p1 = iso(-1, j); p2 = iso(21, j);
       gGround.appendChild(svgEl('line', { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, class: 'cd-ground-line' }));
     }
     root.appendChild(gGround);
