@@ -124,13 +124,16 @@
       '<p class="cd-desc">' + cfg.desc + '</p>';
     frame.appendChild(narr);
 
-    // Map below — the live counter floats over the map's top-right
+    // Map below — wrapped in a positioning area so the live counter can
+    // float over it on desktop and drop below it on small screens
+    var mapArea = el('div', 'cd-map-area');
     var mapWrap = el('div', 'cd-map-wrap');
     var svg = svgEl('svg', { class: 'cd-map', viewBox: '0 0 1500 800', preserveAspectRatio: 'xMidYMid meet' });
     svg.setAttribute('data-state', cfg.state);
     mapWrap.appendChild(svg);
-    if (cfg.counter) mapWrap.appendChild(buildCounter());
-    frame.appendChild(mapWrap);
+    mapArea.appendChild(mapWrap);
+    if (cfg.counter) mapArea.appendChild(buildCounter());
+    frame.appendChild(mapArea);
 
     return { frame: frame, svg: svg, cfg: cfg };
   }

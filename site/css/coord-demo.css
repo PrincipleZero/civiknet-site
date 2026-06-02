@@ -72,6 +72,10 @@
 }
 
 /* ====== MAP ====== */
+.coord-demo .cd-map-area {
+  position: relative;
+  width: 100%;
+}
 .coord-demo .cd-map-wrap {
   position: relative;
   width: 100%;
@@ -260,15 +264,38 @@
   color: var(--cd-ink);
 }
 
-/* Responsive */
-@media (max-width: 720px) {
-  .coord-demo .cd-frame { padding: 3rem 2rem 4rem; }
-  .coord-demo .cd-title { font-size: 2.2rem; }
+/* ====== RESPONSIVE ====== */
+
+/* Tablet & below: the live counter drops below the map instead of
+   overlaying it, so it never covers the diagram. */
+@media (max-width: 900px) {
+  .coord-demo .cd-frame { padding: 3.2rem 2.4rem 4rem; }
+  .coord-demo .cd-title { font-size: 2.6rem; }
   .coord-demo .cd-counter {
-    top: 1rem;
-    right: 1rem;
-    min-width: 0;
-    padding: 1rem 1.2rem;
+    position: static;
+    margin: 1.6rem auto 0;
+    width: 100%;
+    max-width: 42rem;
   }
-  .coord-demo .cd-fig-label { font-size: 0.8rem; }
+}
+
+/* Mobile: the wide isometric map becomes a horizontally-scrollable
+   strip at a readable size, with smaller body type. */
+@media (max-width: 720px) {
+  .coord-demo .cd-frame { padding: 2.8rem 1.6rem 3.6rem; }
+  .coord-demo .cd-eyebrow { font-size: 1rem; letter-spacing: 0.16em; }
+  .coord-demo .cd-title { font-size: 2.2rem; }
+  .coord-demo .cd-desc { font-size: 1.4rem; }
+  .coord-demo .cd-map-wrap {
+    aspect-ratio: auto;
+    height: 40rem;
+    max-height: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  .coord-demo .cd-map {
+    width: 75rem;   /* 75 / 40 = 1.875, matches the SVG viewBox ratio */
+    height: 40rem;
+  }
 }
