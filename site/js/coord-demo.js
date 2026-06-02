@@ -58,7 +58,7 @@
     {gx:6,gy:7,scale:0.7},{gx:11,gy:3.5,scale:0.75},{gx:15.5,gy:6.5,scale:0.7}
   ];
   var AMB = { top: '#262626', east: '#1c1c1c', south: '#141414' };
-  var NODE_COLORS = ['#5cc5c5', '#4ab5b5', '#7dd6d6', '#6acaca'];
+  var NODE_COLORS = ['#ff5102', '#ff6b28', '#ff7d40', '#ff8c52'];
 
   var FRAMES = [
     {
@@ -201,7 +201,7 @@
       grp.appendChild(svgEl('path', { d: p.east,  class: 'cd-bldg-east' }));
       grp.appendChild(svgEl('path', { d: p.top,   class: 'cd-bldg-top' }));
       var c = iso(b.gx + b.w/2, b.gy + b.d/2, b.h);
-      grp.appendChild(svgEl('circle', { cx: c.x, cy: c.y, r: 3, fill: '#4cb8b8', opacity: '0.95' }));
+      grp.appendChild(svgEl('circle', { cx: c.x, cy: c.y, r: 3, fill: '#ff5102', opacity: '0.95' }));
       gRouteBld.appendChild(grp);
     });
     root.appendChild(gRouteBld);
@@ -256,8 +256,8 @@
       root.appendChild(gGrid);
 
       var badge = svgEl('g', { transform: 'translate(0, 40)' });
-      badge.appendChild(svgEl('rect', { x: -230, y: 0, width: 460, height: 64, style: 'fill: #1a1a1a; stroke: #4cb8b8; stroke-width: 1.2;', rx: 1 }));
-      var t1 = svgEl('text', { x: 0, y: 24, style: 'font-family: "Geist Mono", ui-monospace, monospace; font-size: 10px; fill: #4cb8b8; letter-spacing: 0.22em; font-weight: 500;', 'text-anchor': 'middle' });
+      badge.appendChild(svgEl('rect', { x: -230, y: 0, width: 460, height: 64, style: 'fill: #1a1a1a; stroke: #ff5102; stroke-width: 1.2;', rx: 1 }));
+      var t1 = svgEl('text', { x: 0, y: 24, style: 'font-family: "Geist Mono", ui-monospace, monospace; font-size: 10px; fill: #ff5102; letter-spacing: 0.22em; font-weight: 500;', 'text-anchor': 'middle' });
       t1.textContent = 'ACCESS RELIABILITY · ESTABLISHED'; badge.appendChild(t1);
       var t2 = svgEl('text', { x: 0, y: 50, style: 'font-family: Georgia, serif; font-size: 20px; fill: #f0eee4; font-style: italic;', 'text-anchor': 'middle' });
       t2.textContent = 'Every pathway visible. Every handoff owned.'; badge.appendChild(t2);

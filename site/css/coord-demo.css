@@ -12,8 +12,9 @@
   --cd-ink-soft: #9a9a9a;
   --cd-ink-faint: rgba(255, 255, 255, 0.15);
   --cd-ink-whisper: rgba(255, 255, 255, 0.06);
-  --cd-teal: #4cb8b8;
-  --cd-teal-deep: #2d8585;
+  /* Diagram accent — matches the section's bg-orange "Learn more" button */
+  --cd-teal: #ff5102;
+  --cd-teal-deep: #c43e02;
   --cd-rust: #e07d4a;
   --cd-rust-deep: #c4663a;
   --cd-olive: #a3b85a;
