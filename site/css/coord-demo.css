@@ -36,6 +36,7 @@
   padding: 4rem 3.2rem 5rem;
   display: grid;
   grid-template-rows: auto auto;
+  grid-template-columns: minmax(0, 1fr);
   gap: 2.4rem;
   border-bottom: 1px solid var(--cd-ink-whisper);
 }
@@ -75,10 +76,14 @@
 .coord-demo .cd-map-area {
   position: relative;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
 }
 .coord-demo .cd-map-wrap {
   position: relative;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
   aspect-ratio: 1500 / 800;
   max-height: 90vh;
 }
