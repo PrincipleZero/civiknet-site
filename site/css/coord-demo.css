@@ -94,6 +94,7 @@
 .coord-demo .cd-road { stroke: var(--cd-ink-soft); stroke-width: 1.2; opacity: 0.30; fill: none; stroke-linecap: round; }
 .coord-demo .cd-tree-canopy { fill: #4a5a2a; opacity: 0.55; stroke: #2f3c1a; stroke-width: 0.4; }
 .coord-demo .cd-tree-trunk { fill: #3a281c; opacity: 0.7; }
+.coord-demo .cd-route-bldg path { transition: stroke 0.45s ease, stroke-width 0.45s ease; }
 .coord-demo .cd-route-bldg .cd-bldg-top { fill: #2a2a26; stroke: var(--cd-ink); stroke-width: 0.9; }
 .coord-demo .cd-route-bldg .cd-bldg-east { fill: #1f1f1c; stroke: var(--cd-ink); stroke-width: 0.7; }
 .coord-demo .cd-route-bldg .cd-bldg-south { fill: #181815; stroke: var(--cd-ink); stroke-width: 0.7; }

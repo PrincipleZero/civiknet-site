@@ -197,7 +197,7 @@
     var gRouteBld = svgEl('g');
     ROUTE_BUILDINGS.slice().sort(depth).forEach(function (b) {
       var p = buildingPath(b.gx, b.gy, b.w, b.d, b.h);
-      var grp = svgEl('g', { class: 'cd-route-bldg' });
+      var grp = svgEl('g', { class: 'cd-route-bldg', 'data-route-id': b.id });
       grp.appendChild(svgEl('path', { d: p.south, class: 'cd-bldg-south' }));
       grp.appendChild(svgEl('path', { d: p.east,  class: 'cd-bldg-east' }));
       grp.appendChild(svgEl('path', { d: p.top,   class: 'cd-bldg-top' }));
@@ -374,7 +374,25 @@
       head.appendChild(svgEl('line', { x1: 0, y1: 7, x2: 0, y2: 19, stroke: '#ff5102', 'stroke-width': 1, opacity: 0.7 }));
       head.appendChild(svgEl('circle', { r: 2.5, fill: '#ff5102' }));
       nodesLayer.appendChild(head);
-      scanner = { idx: 0, phase: 'scan', timer: 0, ringAccum: 0, head: head, rings: [], from: null, to: null };
+      scanner = { idx: 0, phase: 'scan', timer: 0, ringAccum: 0, head: head, rings: [], from: null, to: null, lit: false };
+    }
+
+    // Look up each route building's <g> so the scanner can light its edges
+    var routeBldgs = {};
+    if (state === 'reliable') {
+      var rbs = item.svg.querySelectorAll('.cd-route-bldg');
+      for (var ri = 0; ri < rbs.length; ri++) {
+        routeBldgs[rbs[ri].getAttribute('data-route-id')] = rbs[ri];
+      }
+    }
+    function setBldgEdges(idx, stroke, width) {
+      var g = routeBldgs[ROUTE_BUILDINGS[idx].id];
+      if (!g) return;
+      var paths = g.querySelectorAll('path');
+      for (var i = 0; i < paths.length; i++) {
+        paths[i].style.stroke = stroke;
+        paths[i].style.strokeWidth = width;
+      }
     }
 
     function scanTarget(idx) {
@@ -390,12 +408,17 @@
     function updateScanner(dt) {
       var SCAN_DUR = 1300, MOVE_DUR = 650;
       if (scanner.phase === 'scan') {
+        // Edges light up orange the moment the scanner lands on a step
+        if (!scanner.lit) { setBldgEdges(scanner.idx, '#ff5102', '2.2'); scanner.lit = true; }
         var t = scanTarget(scanner.idx);
         scanner.head.setAttribute('transform', 'translate(' + t.x + ',' + t.y + ')');
         scanner.ringAccum += dt;
         if (scanner.ringAccum > 420) { scanner.ringAccum = 0; spawnScanRing(t.x, t.y); }
         scanner.timer += dt;
         if (scanner.timer > SCAN_DUR) {
+          // Verified — the step turns green and stays green
+          setBldgEdges(scanner.idx, '#5cdb8e', '1.7');
+          scanner.lit = false;
           scanner.phase = 'move'; scanner.timer = 0;
           scanner.from = scanTarget(scanner.idx);
           scanner.to = scanTarget((scanner.idx + 1) % ROUTE_BUILDINGS.length);
