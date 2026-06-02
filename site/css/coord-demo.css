@@ -117,11 +117,15 @@
   font-family: var(--cd-mono); font-size: 16px; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.16em;
   fill: var(--cd-ink); text-anchor: middle;
+  paint-order: stroke fill;
+  stroke: var(--cd-paper-deep); stroke-width: 5px; stroke-linejoin: round;
 }
 .coord-demo .cd-pin-label-sub {
   font-family: var(--cd-mono); font-size: 13px;
   letter-spacing: 0.04em;
   fill: var(--cd-ink-soft); text-anchor: middle;
+  paint-order: stroke fill;
+  stroke: var(--cd-paper-deep); stroke-width: 4px; stroke-linejoin: round;
 }
 
 .coord-demo .cd-route-line {
