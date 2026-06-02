@@ -218,9 +218,14 @@
       // heights so the ~42px-tall label frames clear each other. The
       // high row is lifted hard (148) because pathway buildings climb
       // in the iso projection — a smaller gap let a high tag's wide box
-      // dip into its low diagonal neighbour. The SVG has ample headroom
-      // above, so the taller leader lines stay on-canvas.
+      // dip into its low diagonal neighbour.
       var pinY = c.y - (idx % 2 === 0 ? 148 : 44);
+      // Clamp so the topmost building's label can't ride off the top of
+      // the SVG. The label frame's top edge is at pinY - 56; keep that at
+      // or below MIN_FRAME_TOP (group-space), i.e. ~10px inside the
+      // viewBox once the translate(…, 90) is applied.
+      var MIN_FRAME_TOP = -78;
+      if (pinY - 56 < MIN_FRAME_TOP) pinY = MIN_FRAME_TOP + 56;
       var grp = svgEl('g');
       grp.appendChild(svgEl('line', { x1: c.x, y1: c.y, x2: c.x, y2: pinY + 12, stroke: '#1f1f1c', 'stroke-width': '0.6', opacity: 0.5 }));
       grp.appendChild(svgEl('circle', { cx: c.x, cy: pinY, r: 12, class: 'cd-pin-circle' }));
