@@ -32,12 +32,12 @@
 
   /* ---------- data ---------- */
   var ROUTE_BUILDINGS = [
-    { id: 1, gx: 0,  gy: 5, w: 2.5, d: 2,   h: 2.2, label: 'Family Resource Center', short: 'INTAKE' },
-    { id: 2, gx: 4,  gy: 5, w: 2,   d: 2,   h: 2.8, label: 'Eligibility Office',     short: 'ASSESS' },
-    { id: 3, gx: 7,  gy: 5, w: 2.2, d: 2,   h: 3.4, label: 'Service Match',          short: 'MATCH' },
-    { id: 4, gx: 9,  gy: 9, w: 1.6, d: 1.6, h: 2.0, label: 'Handoff & Confirmation', short: 'HANDOFF' },
-    { id: 5, gx: 13, gy: 7, w: 2,   d: 2,   h: 2.6, label: 'Service Delivery',       short: 'SERVICE' },
-    { id: 6, gx: 16, gy: 4, w: 2,   d: 1.6, h: 2.2, label: 'Resolution & Report',    short: 'RESOLVE' }
+    { id: 1, gx: 0,  gy: 5, w: 2.5, d: 2,   h: 2.2, label: 'Sunnyside Resource Center', short: 'INTAKE' },
+    { id: 2, gx: 4,  gy: 5, w: 2,   d: 2,   h: 2.8, label: 'DSS Office',                short: 'ASSESS' },
+    { id: 3, gx: 7,  gy: 5, w: 2.2, d: 2,   h: 3.4, label: 'County Benefits Office',    short: 'MATCH' },
+    { id: 4, gx: 9,  gy: 9, w: 1.6, d: 1.6, h: 2.0, label: 'Northgate Health Partners', short: 'HANDOFF' },
+    { id: 5, gx: 13, gy: 7, w: 2,   d: 2,   h: 2.6, label: 'Eastside Family Clinic',    short: 'SERVICE' },
+    { id: 6, gx: 16, gy: 4, w: 2,   d: 1.6, h: 2.2, label: 'Case Management Office',     short: 'RESOLVE' }
   ];
   var AMBIENT_BUILDINGS = [
     { gx: 2,gy:1,w:1.2,d:1.2,h:1.4 },{ gx:0,gy:2,w:1.5,d:1,h:1.0 },
@@ -216,9 +216,9 @@
       var num = svgEl('text', { x: c.x, y: pinY, class: 'cd-pin-number' });
       num.textContent = b.id; grp.appendChild(num);
       // Labels sit ABOVE the pin (in open space) so they stay legible
-      var lbl = svgEl('text', { x: c.x, y: pinY - 32, class: 'cd-pin-label' });
+      var lbl = svgEl('text', { x: c.x, y: pinY - 42, class: 'cd-pin-label' });
       lbl.textContent = b.short; grp.appendChild(lbl);
-      var sub = svgEl('text', { x: c.x, y: pinY - 20, class: 'cd-pin-label-sub' });
+      var sub = svgEl('text', { x: c.x, y: pinY - 26, class: 'cd-pin-label-sub' });
       sub.textContent = b.label; grp.appendChild(sub);
       gPins.appendChild(grp);
     });
