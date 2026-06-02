@@ -167,7 +167,7 @@
 
     function depth(a, b) { return (a.gx + a.gy) - (b.gx + b.gy); }
 
-    var gAmb = svgEl('g');
+    var gAmb = svgEl('g', { class: 'cd-ambient' });
     AMBIENT_BUILDINGS.slice().sort(depth).forEach(function (b) {
       var p = buildingPath(b.gx, b.gy, b.w, b.d, b.h);
       gAmb.appendChild(svgEl('path', { d: p.south, fill: AMB.south, class: 'cd-bldg-south' }));

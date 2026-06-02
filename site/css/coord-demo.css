@@ -83,6 +83,9 @@
 }
 
 /* SVG element styles */
+/* Ambient (pin-less) buildings sit back at half opacity so the
+   pinned pathway buildings read as the foreground */
+.coord-demo .cd-ambient { opacity: 0.5; }
 .coord-demo .cd-bldg-top { stroke: var(--cd-ink); stroke-width: 0.7; stroke-linejoin: round; }
 .coord-demo .cd-bldg-east { stroke: var(--cd-ink); stroke-width: 0.6; stroke-linejoin: round; opacity: 0.92; }
 .coord-demo .cd-bldg-south { stroke: var(--cd-ink); stroke-width: 0.6; stroke-linejoin: round; opacity: 0.85; }
