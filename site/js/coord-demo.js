@@ -115,7 +115,6 @@
     ['tl', 'tr', 'bl', 'br'].forEach(function (pos) {
       frame.appendChild(el('div', 'cd-corner ' + pos));
     });
-    frame.appendChild(el('div', 'cd-fig-label', 'SCALE — N.T.S. · DATUM 00 · ' + cfg.sheet));
 
     if (cfg.counter) frame.appendChild(buildCounter());
 
