@@ -84,12 +84,13 @@
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  aspect-ratio: 1500 / 800;
-  max-height: 90vh;
+  overflow: hidden;
 }
 .coord-demo .cd-map {
-  width: 100%; height: 100%;
   display: block;
+  width: 100%;
+  height: auto;       /* derived from the 1500x800 viewBox ratio */
+  max-width: 100%;
 }
 
 /* SVG element styles */
