@@ -113,19 +113,21 @@
   font-family: var(--cd-mono); font-size: 12px; font-weight: 500;
   fill: var(--cd-ink); text-anchor: middle; dominant-baseline: central;
 }
+.coord-demo .cd-pin-frame {
+  fill: var(--cd-paper-deep);
+  stroke: var(--cd-ink);
+  stroke-width: 0.8;
+  opacity: 0.96;
+}
 .coord-demo .cd-pin-label {
   font-family: var(--cd-mono); font-size: 16px; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.16em;
   fill: var(--cd-ink); text-anchor: middle;
-  paint-order: stroke fill;
-  stroke: var(--cd-paper-deep); stroke-width: 5px; stroke-linejoin: round;
 }
 .coord-demo .cd-pin-label-sub {
   font-family: var(--cd-mono); font-size: 13px;
   letter-spacing: 0.04em;
   fill: var(--cd-ink-soft); text-anchor: middle;
-  paint-order: stroke fill;
-  stroke: var(--cd-paper-deep); stroke-width: 4px; stroke-linejoin: round;
 }
 
 .coord-demo .cd-route-line {

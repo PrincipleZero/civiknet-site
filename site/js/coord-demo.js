@@ -222,7 +222,16 @@
       grp.appendChild(svgEl('circle', { cx: c.x, cy: pinY, r: 12, class: 'cd-pin-circle' }));
       var num = svgEl('text', { x: c.x, y: pinY, class: 'cd-pin-number' });
       num.textContent = b.id; grp.appendChild(num);
-      // Labels sit ABOVE the pin (in open space) so they stay legible
+      // Labels sit ABOVE the pin (in open space) so they stay legible.
+      // A framed box (sized to the wider of the two mono strings) sits
+      // behind them so the text reads cleanly over the buildings.
+      var lblW = b.short.length * 11.8;
+      var subW = b.label.length * 8.4;
+      var boxW = Math.max(lblW, subW) + 24;
+      grp.appendChild(svgEl('rect', {
+        x: c.x - boxW / 2, y: pinY - 56, width: boxW, height: 42,
+        rx: 4, class: 'cd-pin-frame'
+      }));
       var lbl = svgEl('text', { x: c.x, y: pinY - 42, class: 'cd-pin-label' });
       lbl.textContent = b.short; grp.appendChild(lbl);
       var sub = svgEl('text', { x: c.x, y: pinY - 26, class: 'cd-pin-label-sub' });
