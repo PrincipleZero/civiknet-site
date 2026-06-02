@@ -291,6 +291,7 @@
 
     var nodes = [], stats = { entered:0, inProgress:0, completed:0, stuck:0, lost:0 };
     var spawnAccum = 0, lastT = 0, rafId = null, running = false, total = 0;
+    var pathwayVerified = false; // set true once the AI completes a full sweep
 
     function updateCounters() {
       cEntered.textContent = stats.entered;
@@ -311,7 +312,7 @@
         segment: 0, t: 0,
         speed: 0.0006 + Math.random() * 0.0008,
         status: 'flowing',
-        color: NODE_COLORS[Math.floor(Math.random() * NODE_COLORS.length)],
+        color: (state === 'reliable' && pathwayVerified) ? '#5cdb8e' : NODE_COLORS[Math.floor(Math.random() * NODE_COLORS.length)],
         radius: 4 + Math.random() * 1.2,
         stuckTimer: 0, el: null, willStick: false, willLose: false
       };
@@ -430,6 +431,17 @@
           (scanner.from.x + (scanner.to.x - scanner.from.x) * e) + ',' +
           (scanner.from.y + (scanner.to.y - scanner.from.y) * e) + ')');
         if (scanner.timer > MOVE_DUR) {
+          // Leaving the last step completes a full sweep — the pathway is
+          // verified, so families now flow green instead of orange.
+          if (!pathwayVerified && scanner.idx === ROUTE_BUILDINGS.length - 1) {
+            pathwayVerified = true;
+            for (var vi = 0; vi < nodes.length; vi++) {
+              if (nodes[vi].status === 'flowing' && nodes[vi].el) {
+                nodes[vi].color = '#5cdb8e';
+                nodes[vi].el.setAttribute('fill', '#5cdb8e');
+              }
+            }
+          }
           scanner.idx = (scanner.idx + 1) % ROUTE_BUILDINGS.length;
           scanner.phase = 'scan'; scanner.timer = 0;
         }
