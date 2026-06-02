@@ -258,14 +258,6 @@
         gGrid.appendChild(svgEl('line', { x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y, class: 'cd-reliable-grid' }));
       }
       root.appendChild(gGrid);
-
-      var badge = svgEl('g', { transform: 'translate(0, 40)' });
-      badge.appendChild(svgEl('rect', { x: -230, y: 0, width: 460, height: 64, style: 'fill: #1a1a1a; stroke: #ff5102; stroke-width: 1.2;', rx: 1 }));
-      var t1 = svgEl('text', { x: 0, y: 24, style: 'font-family: "Geist Mono", ui-monospace, monospace; font-size: 10px; fill: #ff5102; letter-spacing: 0.22em; font-weight: 500;', 'text-anchor': 'middle' });
-      t1.textContent = 'ACCESS RELIABILITY · ESTABLISHED'; badge.appendChild(t1);
-      var t2 = svgEl('text', { x: 0, y: 50, style: 'font-family: Georgia, serif; font-size: 20px; fill: #f0eee4; font-style: italic;', 'text-anchor': 'middle' });
-      t2.textContent = 'Every pathway visible. Every handoff owned.'; badge.appendChild(t2);
-      root.appendChild(badge);
     }
 
     return gNodes;
