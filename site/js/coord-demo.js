@@ -207,9 +207,12 @@
     root.appendChild(gRouteBld);
 
     var gPins = svgEl('g');
-    ROUTE_BUILDINGS.forEach(function (b) {
+    ROUTE_BUILDINGS.forEach(function (b, idx) {
       var c = iso(b.gx + b.w/2, b.gy + b.d/2, b.h);
-      var pinY = c.y - 32;
+      // Lift the pin well above the building so the labels float in
+      // open space; stagger neighbouring pins to two heights so wide
+      // location names never collide horizontally.
+      var pinY = c.y - (idx % 2 === 0 ? 78 : 40);
       var grp = svgEl('g');
       grp.appendChild(svgEl('line', { x1: c.x, y1: c.y, x2: c.x, y2: pinY + 12, stroke: '#f0eee4', 'stroke-width': '0.6', opacity: 0.5 }));
       grp.appendChild(svgEl('circle', { cx: c.x, cy: pinY, r: 12, class: 'cd-pin-circle' }));
