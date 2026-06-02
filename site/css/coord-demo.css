@@ -284,23 +284,11 @@
   }
 }
 
-/* Mobile: the wide isometric map becomes a horizontally-scrollable
-   strip at a readable size, with smaller body type. */
+/* Mobile: the map fits the viewport (contained + centered, nothing
+   cut off) with smaller body type. */
 @media (max-width: 720px) {
   .coord-demo .cd-frame { padding: 2.8rem 1.6rem 3.6rem; }
   .coord-demo .cd-eyebrow { font-size: 1rem; letter-spacing: 0.16em; }
   .coord-demo .cd-title { font-size: 2.2rem; }
   .coord-demo .cd-desc { font-size: 1.4rem; }
-  .coord-demo .cd-map-wrap {
-    aspect-ratio: auto;
-    height: 40rem;
-    max-height: none;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-  }
-  .coord-demo .cd-map {
-    width: 75rem;   /* 75 / 40 = 1.875, matches the SVG viewBox ratio */
-    height: 40rem;
-  }
 }
