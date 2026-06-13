@@ -1356,6 +1356,37 @@
     padding: 0.1rem 0.4rem;
     border-radius: 0.3rem;
   }
+  /* Mobile: let the table scroll horizontally instead of crushing 6 columns.
+     The feature-name column stays sticky so rows remain readable while scrolling. */
+  @media all and (max-width: 760px) {
+    .feature-table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 0.8rem;
+    }
+    .feature-table {
+      min-width: 54rem;
+      table-layout: auto;
+    }
+    .feature-table thead th,
+    .feature-table tbody td {
+      padding: 1rem 0.9rem;
+      white-space: nowrap;
+    }
+    .feature-table thead th:first-child,
+    .feature-table tbody td:first-child {
+      width: auto;
+      white-space: normal;
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      background: var(--white, #fff);
+      box-shadow: 1px 0 0 rgba(0,0,0,0.08);
+    }
+    .feature-table thead th:not(:first-child),
+    .feature-table tbody td:not(:first-child) { width: auto; }
+  }
 
   /* FAQ — inherits existing details/summary styles below */
   details {

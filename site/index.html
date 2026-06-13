@@ -918,7 +918,14 @@
     @media all and (max-width: 950px) {
       .home-product-card { padding: 4.2rem 2.4rem; margin-inline: 2.4rem; }
       .home-product-card.active { padding-inline: 4.8rem; }
-      .home-product-card-icons { grid-template-columns: repeat(2, 1fr); }
+      /* match the bg-sand specificity so the 5-tile card also collapses on tablet/mobile */
+      .home-product-card-icons,
+      .home-product-card.bg-sand .home-product-card-icons { grid-template-columns: repeat(3, 1fr); column-gap: 1.6rem; margin-block: 3.2rem; }
+    }
+    @media all and (max-width: 600px) {
+      .home-product-card.active { padding-inline: 2.4rem; }
+      .home-product-card-icons,
+      .home-product-card.bg-sand .home-product-card-icons { grid-template-columns: repeat(2, 1fr); column-gap: 1.2rem; row-gap: 2.4rem; }
     }
   </style>
 </section>
