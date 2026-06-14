@@ -1,0 +1,8 @@
+{
+  "name": "civikaccess-site",
+  "private": true,
+  "description": "CivikAccess marketing site (static) + form-to-email serverless function",
+  "dependencies": {
+    "nodemailer": "^6.9.16"
+  }
+}

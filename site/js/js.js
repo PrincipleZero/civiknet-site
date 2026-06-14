@@ -54,12 +54,12 @@ $(".open-platform-contact").click(function() {
   $("#platform-contact-popup").addClass("visible");
   $("body").addClass("noscroll");
 });
-$(".open-sana-ai-contact").click(function() {
-  $("#sana-ai-contact-popup").addClass("visible");
+$(".open-civik-contact").click(function() {
+  $("#civik-contact-popup").addClass("visible");
   $("body").addClass("noscroll");
 });
-$(".open-sana-ai-entrprice").click(function() {
-  $("#sana-ai-enterprice").addClass("visible");
+$(".open-civik-consult").click(function() {
+  $("#civik-consult-popup").addClass("visible");
   $("body").addClass("noscroll");
 });
 $(".open-core-popup").click(function() {

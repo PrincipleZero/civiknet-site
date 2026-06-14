@@ -96,20 +96,17 @@ body.noscroll {
 
 @font-face {
   font-family: "Geist";
-  src: url("../fonts/SanaSans-Variable.woff2") format("woff2-variations");
-  font-weight: 400 700;
-  /* ascent-override: 100%; */
+  src: url("../fonts/Geist-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
-  font-family: "Geist";
-  src: url("../fonts/SanaSerifTestligatur-Regular.woff2") format("woff2");
-  font-weight: 400;
-}
-@font-face {
-  font-family: "Geist";
-  src: url("../fonts/SanaSerif05-Italic.woff2") format("woff2");
-  font-weight: 400;
-  font-style: italic;
+  font-family: "Geist Mono";
+  src: url("../fonts/GeistMono-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "JetBrainsMono";
@@ -602,175 +599,175 @@ details p {
   }
 }
 
-.sana-sans-vf-regular-product {
+.geist-vf-regular-product {
   font-variation-settings:
     "wght" 400,
     "opsz" 14,
     "ital" 0;
 }
 
-.sana-sans-vf-book-product {
+.geist-vf-book-product {
   font-variation-settings:
     "wght" 450,
     "opsz" 14,
     "ital" 0;
 }
 
-.sana-sans-vf-medium-product {
+.geist-vf-medium-product {
   font-variation-settings:
     "wght" 500,
     "opsz" 14,
     "ital" 0;
 }
 
-.sana-sans-vf-semibold-product {
+.geist-vf-semibold-product {
   font-variation-settings:
     "wght" 600,
     "opsz" 14,
     "ital" 0;
 }
 
-.sana-sans-vf-bold-product {
+.geist-vf-bold-product {
   font-variation-settings:
     "wght" 700,
     "opsz" 14,
     "ital" 0;
 }
 
-.sana-sans-vf-regular-product-italic {
+.geist-vf-regular-product-italic {
   font-variation-settings:
     "wght" 400,
     "opsz" 14,
     "ital" 1;
 }
 
-.sana-sans-vf-book-product-italic {
+.geist-vf-book-product-italic {
   font-variation-settings:
     "wght" 450,
     "opsz" 14,
     "ital" 1;
 }
 
-.sana-sans-vf-medium-product-italic {
+.geist-vf-medium-product-italic {
   font-variation-settings:
     "wght" 500,
     "opsz" 14,
     "ital" 1;
 }
 
-.sana-sans-vf-semibold-product-italic {
+.geist-vf-semibold-product-italic {
   font-variation-settings:
     "wght" 600,
     "opsz" 14,
     "ital" 1;
 }
 
-.sana-sans-vf-bold-product-italic {
+.geist-vf-bold-product-italic {
   font-variation-settings:
     "wght" 700,
     "opsz" 14,
     "ital" 1;
 }
 
-.sana-sans-vf-regular {
+.geist-vf-regular {
   font-variation-settings:
     "wght" 400,
     "opsz" 18,
     "ital" 0;
 }
 
-.sana-sans-vf-book {
+.geist-vf-book {
   font-variation-settings:
     "wght" 450,
     "opsz" 18,
     "ital" 0;
 }
 
-.sana-sans-vf-medium {
+.geist-vf-medium {
   font-variation-settings:
     "wght" 500,
     "opsz" 18,
     "ital" 0;
 }
 
-.sana-sans-vf-semibold {
+.geist-vf-semibold {
   font-variation-settings:
     "wght" 600,
     "opsz" 18,
     "ital" 0;
 }
 
-.sana-sans-vf-bold {
+.geist-vf-bold {
   font-variation-settings:
     "wght" 700,
     "opsz" 18,
     "ital" 0;
 }
 
-.sana-sans-vf-regular-italic {
+.geist-vf-regular-italic {
   font-variation-settings:
     "wght" 400,
     "opsz" 18,
     "ital" 1;
 }
 
-.sana-sans-vf-book-italic {
+.geist-vf-book-italic {
   font-variation-settings:
     "wght" 450,
     "opsz" 18,
     "ital" 1;
 }
 
-.sana-sans-vf-medium-italic {
+.geist-vf-medium-italic {
   font-variation-settings:
     "wght" 500,
     "opsz" 18,
     "ital" 1;
 }
 
-.sana-sans-vf-semibold-italic {
+.geist-vf-semibold-italic {
   font-variation-settings:
     "wght" 600,
     "opsz" 18,
     "ital" 1;
 }
 
-.sana-sans-vf-bold-italic {
+.geist-vf-bold-italic {
   font-variation-settings:
     "wght" 700,
     "opsz" 18,
     "ital" 1;
 }
 
-.sana-sans-vf-regular-display {
+.geist-vf-regular-display {
   font-variation-settings:
     "wght" 400,
     "opsz" 24,
     "ital" 0;
 }
 
-.sana-sans-vf-book-display {
+.geist-vf-book-display {
   font-variation-settings:
     "wght" 450,
     "opsz" 24,
     "ital" 0;
 }
 
-.sana-sans-vf-medium-display {
+.geist-vf-medium-display {
   font-variation-settings:
     "wght" 500,
     "opsz" 24,
     "ital" 0;
 }
 
-.sana-sans-vf-semibold-display {
+.geist-vf-semibold-display {
   font-variation-settings:
     "wght" 600,
     "opsz" 24,
     "ital" 0;
 }
 
-.sana-sans-vf-bold-display {
+.geist-vf-bold-display {
   font-variation-settings:
     "wght" 700,
     "opsz" 24,
@@ -1960,7 +1957,7 @@ section .wrap ul:not([class]) li:before {
   }
 }
 
-.features-list-row .inline-icon-sana-symbol {
+.features-list-row .inline-icon-civik-symbol {
   font-size: 3.4rem;
 }
 
@@ -2896,7 +2893,7 @@ a.h3:hover {
 .form-wrap form .field.hs_lastname,
 .form-wrap form .field.hs_company,
 .form-wrap form .field.hs_jobtitle,
-.form-wrap form .field.hs_platform_users_sana_ai,
+.form-wrap form .field.hs_platform_users_x,
 .form-wrap form .field.hs_company_hq,
 .hs_platform_users.hs-platform_users.hs-fieldtype-select.hs-form-field {
   grid-column: auto / span 1;
@@ -2906,7 +2903,7 @@ a.h3:hover {
 .form-wrap form .field.hs_lastname .hs-error-msgs,
 .form-wrap form .field.hs_company .hs-error-msgs,
 .form-wrap form .field.hs_jobtitle .hs-error-msgs,
-.form-wrap form .field.hs_platform_users_sana_ai .hs-error-msgs,
+.form-wrap form .field.hs_platform_users_x .hs-error-msgs,
 .form-wrap form .field.hs_company_hq .hs-error-msgs {
   position: static;
   text-align: left;
@@ -2917,7 +2914,7 @@ a.h3:hover {
 .form-wrap form .field.hs_lastname .hs-error-msgs label,
 .form-wrap form .field.hs_company .hs-error-msgs label,
 .form-wrap form .field.hs_jobtitle .hs-error-msgs label,
-.form-wrap form .field.hs_platform_users_sana_ai .hs-error-msgs label,
+.form-wrap form .field.hs_platform_users_x .hs-error-msgs label,
 .form-wrap form .field.hs_company_hq .hs-error-msgs label {
   margin-bottom: 0;
 }
@@ -2927,7 +2924,7 @@ a.h3:hover {
   .form-wrap form .field.hs_lastname,
   .form-wrap form .field.hs_company,
   .form-wrap form .field.hs_jobtitle,
-  .form-wrap form .field.hs_platform_users_sana_ai,
+  .form-wrap form .field.hs_platform_users_x,
   .form-wrap form .field.hs_company_hq,
   .form-wrap form .hs-dependent-field {
     grid-column: auto / span 2;
@@ -2936,7 +2933,7 @@ a.h3:hover {
   .form-wrap form .field.hs_lastname,
   .form-wrap form .field.hs_company,
   .form-wrap form .field.hs_jobtitle,
-  .form-wrap form .field.hs_platform_users_sana_ai,
+  .form-wrap form .field.hs_platform_users_x,
   .form-wrap form .field.hs_company_hq,
   .hs_platform_users.hs-platform_users.hs-fieldtype-select.hs-form-field {
     grid-column: auto / span 2;
@@ -6861,7 +6858,7 @@ body:has(.podcast-grid .grid-block:hover) .podcast-header {
 
 /* New Index 03/11/25 */
 
-.workday-sana {
+.workday-quote {
   display: block;
   padding-inline: 4rem;
   padding-block: 4rem 2.4rem;
@@ -6870,24 +6867,24 @@ body:has(.podcast-grid .grid-block:hover) .podcast-header {
 }
 
 @media all and (max-width: 950px) {
-  .workday-sana {
+  .workday-quote {
     padding-inline: 3.2rem;
     padding-block: 3.2rem 2.4rem;
     background: linear-gradient(360deg, #e7c1db -29.36%, #8b7bd0 20.56%, #3458b8 71.14%, #004c9a 107.27%);
   }
 }
 
-.workday-sana .columns {
+.workday-quote .columns {
   padding-inline: 0;
 }
 
 @media all and (max-width: 950px) {
-  .workday-sana .columns {
+  .workday-quote .columns {
     row-gap: 5.6rem;
   }
 }
 
-.workday-sana p {
+.workday-quote p {
   font-weight: 450;
   font-variation-settings:
     "opsz" 14,
@@ -6898,13 +6895,25 @@ body:has(.podcast-grid .grid-block:hover) .podcast-header {
   max-width: 58.8rem;
 }
 
-.workday-sana .joel-signature {
+.workday-quote .joel-signature {
   max-width: 12.3rem;
   transform: translateX(-13%);
   margin-block-start: 4rem;
   margin-block-end: 1.6rem;
 }
 
-.workday-sana .joel-signature + p {
+.workday-quote .joel-signature + p {
   margin-bottom: 0;
 }
+
+/* Native lead-capture forms (replaced the former third-party embeds) */
+.lead-form { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1.6rem; text-align: left; }
+.lead-form label { display: flex; flex-direction: column; gap: 0.4rem; font-size: 1.3rem; font-weight: 500; }
+.lead-form input, .lead-form select, .lead-form textarea {
+  font: inherit; font-size: 1.5rem; padding: 1rem 1.2rem; border: 1px solid rgba(0,0,0,0.18);
+  border-radius: 0.8rem; background: #fff; color: inherit; width: 100%;
+}
+.lead-form textarea { resize: vertical; min-height: 8rem; }
+.lead-form input:focus, .lead-form select:focus, .lead-form textarea:focus { outline: 2px solid var(--blue, #2f5bff); outline-offset: 1px; }
+.lead-form button { margin-top: 0.8rem; cursor: pointer; }
+.lead-form-thanks { font-size: 1.6rem; padding: 1.6rem 0; }

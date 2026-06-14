@@ -1,35 +1,35 @@
 html{font-size: 10px;margin: 0;scroll-behavior: smooth;}
-body {font-size: 1.8rem; line-height: 1.4em; font-family:"SanaSans", sans-serif; margin: 0; width: 100%; min-height: 100%; -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; -moz-font-feature-settings: "kern" 1; -ms-font-feature-settings: "kern" 1; -o-font-feature-settings: "kern" 1; -webkit-font-feature-settings: "kern" 1; font-feature-settings: "kern" 1; font-kerning: normal; transition: background-color .6s ease, color .6s ease; will-change: background-color, color;}
+body {font-size: 1.8rem; line-height: 1.4em; font-family:"Geist", sans-serif; margin: 0; width: 100%; min-height: 100%; -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; -moz-font-feature-settings: "kern" 1; -ms-font-feature-settings: "kern" 1; -o-font-feature-settings: "kern" 1; -webkit-font-feature-settings: "kern" 1; font-feature-settings: "kern" 1; font-kerning: normal; transition: background-color .6s ease, color .6s ease; will-change: background-color, color;}
 body.noscroll{height: 100vh;overflow-y: hidden;}
 @media screen and (max-width: 990px) {html{font-size: 10px;}}
 @media screen and (max-width: 370px) {html{font-size: 2.6vw;}}
 
-@font-face {font-family: 'SanaSans'; src: local("â˜º"), url("../fonts/SanaSans-Regular420.woff2") format("woff2"); font-weight: 400}
-@font-face {font-family: 'SanaSans'; src: local("â˜º"), url("../fonts/SanaSans-Regular440.woff2") format("woff2"); font-weight: 440}
-@font-face {font-family: 'SanaSans'; src: local("â˜º"), url("../fonts/SanaSans-Regular480.woff2") format("woff2"); font-weight: 500}
-@font-face {font-family: 'SanaSansDisplay'; src: local("â˜º"), url("../fonts/SanaSans-RegularDisplay.woff2") format("woff2"); font-weight: 400}
-@font-face {font-family: 'SanaSansDisplay'; src: local("â˜º"), url("../fonts/SanaSans-MediumDisplay.woff2") format("woff2"); font-weight: 500}
+@font-face {font-family: 'Geist'; src: local("â˜º"), url("../fonts/Geist-Variable.woff2") format("woff2"); font-weight: 400}
+@font-face {font-family: 'Geist'; src: local("â˜º"), url("../fonts/Geist-Variable.woff2") format("woff2"); font-weight: 440}
+@font-face {font-family: 'Geist'; src: local("â˜º"), url("../fonts/Geist-Variable.woff2") format("woff2"); font-weight: 500}
+@font-face {font-family: 'Geist'; src: local("â˜º"), url("../fonts/Geist-Variable.woff2") format("woff2"); font-weight: 400}
+@font-face {font-family: 'Geist'; src: local("â˜º"), url("../fonts/Geist-Variable.woff2") format("woff2"); font-weight: 500}
 
 @font-face {
-  font-family: 'SanaSerif';
-  src: url('../fonts/SanaSerifTestligatur-Regular.woff2') format('woff2');
+  font-family: 'Geist';
+  src: url('../fonts/Geist-Variable.woff2') format('woff2');
   font-weight: 400;
 }
 @font-face {
-  font-family: 'SanaSerif';
-  src: url('../fonts/SanaSerif05-Italic.woff2') format('woff2');
+  font-family: 'Geist';
+  src: url('../fonts/Geist-Variable.woff2') format('woff2');
   font-weight: 400;
   font-style: italic;
 }
 
   @font-face {
-    font-family: 'SanaSerif-new';
-    src: url('../fonts/SanaSerifTestligatur-Regular.woff2') format('woff2');
+    font-family: 'Geist';
+    src: url('../fonts/Geist-Variable.woff2') format('woff2');
     font-weight: 400;
   }
   @font-face {
-    font-family: 'SanaSerif-new';
-    src: url('../fonts/SanaSerif05-Italic.woff2') format('woff2');
+    font-family: 'Geist';
+    src: url('../fonts/Geist-Variable.woff2') format('woff2');
     font-weight: 400;
     font-style: italic;
   }
@@ -38,8 +38,8 @@ body.noscroll{height: 100vh;overflow-y: hidden;}
 *, *:after, *:before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; position: relative;}
 a{color:inherit; text-decoration: none; cursor: pointer;}
 :root {   
-  --text:'SanaSans';
-  --display:'SanaSansDisplay';
+  --text:'Geist';
+  --display:'Geist';
   --mono-font:'mono-font';
   --black-100:#000000;
   --black:#0E0E0E;
@@ -163,7 +163,7 @@ img, .video {
   font-size: 7.2rem;
   line-height: 1em;
   letter-spacing: -0.02em;
-  font-family: 'SanaSerif', serif;
+  font-family: 'Geist', serif;
 }
 
 .sub-title{
@@ -227,7 +227,7 @@ img, .video {
   line-height: 1.3em;
 }
 .serif{
-  font-family: 'SanaSerif';
+  font-family: 'Geist';
   font-variant-ligatures:  discretionary-ligatures;
 }
 .p.serif{
@@ -1183,37 +1183,37 @@ grid-template-columns: 1fr 1fr;
 column-gap: 1rem;
 }
 form.hsForm_be4f058f-0301-49d0-ad42-fbbd572bd46f .hs_email, 
-form.hsForm_be4f058f-0301-49d0-ad42-fbbd572bd46f .hs_tell_us_more_about_how_you_want_to_use_sana,
+form.hsForm_be4f058f-0301-49d0-ad42-fbbd572bd46f .hs_tell_us_more_about_how_you_want_to_use_x,
 form.hsForm_be4f058f-0301-49d0-ad42-fbbd572bd46f .hs_how_did_you_hear_about_us,
 form.hsForm_be4f058f-0301-49d0-ad42-fbbd572bd46f .legal-consent-container,
 form.hsForm_be4f058f-0301-49d0-ad42-fbbd572bd46f .hs_submit,
-form.hsForm_be4f058f-0301-49d0-ad42-fbbd572bd46f .hs-how_to_use_sana,
+form.hsForm_be4f058f-0301-49d0-ad42-fbbd572bd46f .hs-how_to_use_x,
 
 form.hsForm_85255ff3-d07f-497f-970e-30c91239c8e8 .hs_email, 
-form.hsForm_85255ff3-d07f-497f-970e-30c91239c8e8 .hs_tell_us_more_about_how_you_want_to_use_sana,
+form.hsForm_85255ff3-d07f-497f-970e-30c91239c8e8 .hs_tell_us_more_about_how_you_want_to_use_x,
 form.hsForm_85255ff3-d07f-497f-970e-30c91239c8e8 .hs_how_did_you_hear_about_us,
 form.hsForm_85255ff3-d07f-497f-970e-30c91239c8e8 .legal-consent-container,
 form.hsForm_85255ff3-d07f-497f-970e-30c91239c8e8 .hs_submit,
 
 
 form.hsForm_f40d721e-9635-4e7d-af7d-d66222de1c9d .hs_email, 
-form.hsForm_f40d721e-9635-4e7d-af7d-d66222de1c9d .hs_tell_us_more_about_how_you_want_to_use_sana,
+form.hsForm_f40d721e-9635-4e7d-af7d-d66222de1c9d .hs_tell_us_more_about_how_you_want_to_use_x,
 form.hsForm_f40d721e-9635-4e7d-af7d-d66222de1c9d .hs_how_did_you_hear_about_us,
 form.hsForm_f40d721e-9635-4e7d-af7d-d66222de1c9d .legal-consent-container,
 form.hsForm_f40d721e-9635-4e7d-af7d-d66222de1c9d .hs_submit,
 
 form.hsForm_efb21c02-9290-4ea5-9267-9faf4ad8b6e8 .hs_email, 
-form.hsForm_efb21c02-9290-4ea5-9267-9faf4ad8b6e8 .hs_tell_us_more_about_how_you_want_to_use_sana,
+form.hsForm_efb21c02-9290-4ea5-9267-9faf4ad8b6e8 .hs_tell_us_more_about_how_you_want_to_use_x,
 form.hsForm_efb21c02-9290-4ea5-9267-9faf4ad8b6e8 .hs_how_did_you_hear_about_us,
 form.hsForm_efb21c02-9290-4ea5-9267-9faf4ad8b6e8 .legal-consent-container,
 form.hsForm_efb21c02-9290-4ea5-9267-9faf4ad8b6e8 .hs_submit,
 
 form.hsForm_0ee0e265-922d-4207-b828-6bcd4e164bc0 .hs_email, 
-form.hsForm_0ee0e265-922d-4207-b828-6bcd4e164bc0 .hs_tell_us_more_about_how_you_want_to_use_sana,
+form.hsForm_0ee0e265-922d-4207-b828-6bcd4e164bc0 .hs_tell_us_more_about_how_you_want_to_use_x,
 form.hsForm_0ee0e265-922d-4207-b828-6bcd4e164bc0 .hs_how_did_you_hear_about_us,
 form.hsForm_0ee0e265-922d-4207-b828-6bcd4e164bc0 .legal-consent-container,
 form.hsForm_0ee0e265-922d-4207-b828-6bcd4e164bc0 .hs_submit,
-form.hsForm_0ee0e265-922d-4207-b828-6bcd4e164bc0 .hs_tell_us_more_about_how_you_want_to_use_sana_ai
+form.hsForm_0ee0e265-922d-4207-b828-6bcd4e164bc0 .hs_tell_us_more_about_how_you_want_to_use_x
 {
 grid-column: span 2;
 }
@@ -1224,26 +1224,26 @@ form.hsForm_85255ff3-d07f-497f-970e-30c91239c8e8,.hsForm_f40d721e-9635-4e7d-af7d
   column-gap: 0;
 }
 form.hsForm_85255ff3-d07f-497f-970e-30c91239c8e8 .hs_email, 
-form.hsForm_85255ff3-d07f-497f-970e-30c91239c8e8 .hs_tell_us_more_about_how_you_want_to_use_sana,
+form.hsForm_85255ff3-d07f-497f-970e-30c91239c8e8 .hs_tell_us_more_about_how_you_want_to_use_x,
 form.hsForm_85255ff3-d07f-497f-970e-30c91239c8e8 .hs_how_did_you_hear_about_us,
 form.hsForm_85255ff3-d07f-497f-970e-30c91239c8e8 .legal-consent-container,
 form.hsForm_85255ff3-d07f-497f-970e-30c91239c8e8 .hs_submit,
 form.hsForm_f40d721e-9635-4e7d-af7d-d66222de1c9d .hs_email, 
-form.hsForm_f40d721e-9635-4e7d-af7d-d66222de1c9d .hs_tell_us_more_about_how_you_want_to_use_sana,
+form.hsForm_f40d721e-9635-4e7d-af7d-d66222de1c9d .hs_tell_us_more_about_how_you_want_to_use_x,
 form.hsForm_f40d721e-9635-4e7d-af7d-d66222de1c9d .hs_how_did_you_hear_about_us,
 form.hsForm_f40d721e-9635-4e7d-af7d-d66222de1c9d .legal-consent-container,
 form.hsForm_f40d721e-9635-4e7d-af7d-d66222de1c9d .hs_submit,
 form.hsForm_efb21c02-9290-4ea5-9267-9faf4ad8b6e8 .hs_email, 
-form.hsForm_efb21c02-9290-4ea5-9267-9faf4ad8b6e8 .hs_tell_us_more_about_how_you_want_to_use_sana,
+form.hsForm_efb21c02-9290-4ea5-9267-9faf4ad8b6e8 .hs_tell_us_more_about_how_you_want_to_use_x,
 form.hsForm_efb21c02-9290-4ea5-9267-9faf4ad8b6e8 .hs_how_did_you_hear_about_us,
 form.hsForm_efb21c02-9290-4ea5-9267-9faf4ad8b6e8 .legal-consent-container,
 form.hsForm_efb21c02-9290-4ea5-9267-9faf4ad8b6e8 .hs_submit
 form.hsForm_0ee0e265-922d-4207-b828-6bcd4e164bc0 .hs_email, 
-form.hsForm_0ee0e265-922d-4207-b828-6bcd4e164bc0 .hs_tell_us_more_about_how_you_want_to_use_sana,
+form.hsForm_0ee0e265-922d-4207-b828-6bcd4e164bc0 .hs_tell_us_more_about_how_you_want_to_use_x,
 form.hsForm_0ee0e265-922d-4207-b828-6bcd4e164bc0 .hs_how_did_you_hear_about_us,
 form.hsForm_0ee0e265-922d-4207-b828-6bcd4e164bc0 .legal-consent-container,
 form.hsForm_0ee0e265-922d-4207-b828-6bcd4e164bc0 .hs_submit,
-form.hsForm_0ee0e265-922d-4207-b828-6bcd4e164bc0 .hs_tell_us_more_about_how_you_want_to_use_sana_ai
+form.hsForm_0ee0e265-922d-4207-b828-6bcd4e164bc0 .hs_tell_us_more_about_how_you_want_to_use_x
 
 {
   grid-column: span 1;
